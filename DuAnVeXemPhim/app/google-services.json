@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "145352755224",
+    "firebase_url": "https://movieticketapp-d1248-default-rtdb.firebaseio.com",
+    "project_id": "movieticketapp-d1248",
+    "storage_bucket": "movieticketapp-d1248.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145352755224:android:9a76bb4f0d645702ecdb6d",
+        "android_client_info": {
+          "package_name": "com.example.duanvexemphim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF2Fj-aFZWjX7nEVj1s-1QpolVrGdr_fY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

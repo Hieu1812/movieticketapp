@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorgreen">#4CAF50</color> <!-- Màu xanh lá cho ghế trống -->
+    <color name="colorblue">#2196F3</color> <!-- Màu xanh dương cho ghế đã chọn -->
+    <color name="colorred">#F44336</color> <!-- Màu đỏ cho ghế đã bán -->
+    <color name="colororange">#fcba03</color> <!-- Màu đỏ cho ghế đã bán -->
+
+</resources>

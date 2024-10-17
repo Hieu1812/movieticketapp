@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Màu nền của SearchView -->
+    <solid android:color="#FFFFFF" /> <!-- Màu trắng bên trong -->
+
+    <!-- Tạo viền (stroke) cho khung -->
+    <stroke
+        android:width="2dp"
+        android:color="#d5dedb" /> <!-- Màu đỏ cho khung -->
+
+    <!-- Bo tròn các góc -->
+    <corners android:radius="8dp" />
+
+    <padding android:top="5dp"/>
+
+</shape>
