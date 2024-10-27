@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,13 +51,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (email=="admin@gmail.com" && password=="123456"){
-                    Intent intent = new Intent(LoginActivity.this, DangKiTaiKhoan.class);
+//                if (email.equals("admin@gmail.com") && password.equals("123456")){
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                }
+                if (email.equals("user@gmail.com") && password.equals("123456")) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                }
-                if (email=="user@gmail.com" && password=="123456"){
-                    Intent intent = new Intent(LoginActivity.this, DangKiTaiKhoan.class);
-                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Thông tin đăng nhập không chính xác!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
