@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     EditText email_input, password_input;
 
-    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

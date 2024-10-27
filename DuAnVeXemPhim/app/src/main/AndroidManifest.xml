@@ -7,28 +7,27 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="App Đặt Vé Xem Phim"
+        android:label="App Xem Phim"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAnVeXemPhim"
         tools:targetApi="31">
-
+        <activity
+            android:name="com.example.YeuThich"
+            android:exported="false" />
         <!-- Activity Đăng Ký -->
         <activity
             android:name="com.example.DangKiTaiKhoan"
-            android:exported="false" />
-
-        <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
+            android:exported="false" /> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
         <activity
             android:name="com.example.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Các Activity khác -->
+        </activity> <!-- Các Activity khác -->
         <activity
             android:name="com.example.PhimYeuThich"
             android:exported="false" />
@@ -48,9 +47,8 @@
             android:name="com.example.ThongTinPhim"
             android:exported="false" />
         <activity
-            android:name="com.example.duanvexemphim.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>

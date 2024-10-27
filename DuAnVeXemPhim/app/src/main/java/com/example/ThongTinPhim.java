@@ -38,30 +38,24 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
 
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-        onCreategetdata();
+//        onCreategetdata();
         named = findViewById(R.id.tvTenPhim);
     }
-    private void onCreategetdata(){
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("CheckoutFilmModel/film1/name").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = snapshot.getValue(String.class);
-                named.append(name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-
-
-
-
+//    private void onCreategetdata(){
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference databaseReference = firebaseDatabase.getReference();
+//        databaseReference.child("CheckoutFilmModel/film1/name").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String name = snapshot.getValue(String.class);
+//                named.append(name);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
 }
