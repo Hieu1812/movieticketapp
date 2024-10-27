@@ -1,8 +1,10 @@
 package com.example;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +14,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
 
     private EditText etUsername, etEmail, etPassword, etConfirmPassword;
     private Button btnRegister;
+    TextView tvLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,14 @@ public class DangKiTaiKhoan extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
+        tvLogin = findViewById(R.id.tvLogin);
+
+        // Khi nhấn vào TextView Đăng Ký
+        tvLogin.setOnClickListener(v -> {
+            // Chuyển sang màn hình đăng ký
+            Intent intent = new Intent(DangKiTaiKhoan.this, LoginActivity.class);
+            startActivity(intent);
+        });
 
         // Xử lý sự kiện khi nhấn nút Đăng Ký
         btnRegister.setOnClickListener(v -> {
