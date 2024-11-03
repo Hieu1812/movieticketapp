@@ -15,11 +15,19 @@
         android:theme="@style/Theme.DuAnVeXemPhim"
         tools:targetApi="31">
         <activity
-            android:name="com.example.chi_tiet_giao_dich"
+            android:name="com.example.ThemPhimActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name="com.example.LoginActivity"-->
-<!--            android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt;-->
+        <activity
+            android:name="com.example.QuanTriAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.QuanTriActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.chi_tiet_giao_dich"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name="com.example.LoginActivity" -->
+        <!-- android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt; -->
         <activity
             android:name="com.example.DangKiTaiKhoan"
             android:exported="false" /> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->

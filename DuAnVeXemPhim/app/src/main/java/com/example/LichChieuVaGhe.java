@@ -15,6 +15,8 @@ import com.example.duanvexemphim.R;
 
 public class LichChieuVaGhe extends AppCompatActivity {
 
+    Button btnThoat, btnThanhToan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,24 @@ public class LichChieuVaGhe extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        btnThoat = findViewById(R.id.btnThoat);
+        btnThanhToan = findViewById(R.id.btnThanhToan);
+        //
+        btnThoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentThoat = new Intent(LichChieuVaGhe.this, ThongTinPhim.class);
+                startActivity(intentThoat);
+            }
+        });
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentThanhToan = new Intent(LichChieuVaGhe.this, ChiTietGiaoDich.class);
+                startActivity(intentThanhToan);
+            }
         });
     }
 

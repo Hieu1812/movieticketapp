@@ -31,7 +31,7 @@
 
     <!-- Số điện thoai -->
     <EditText
-        android:id="@+id/etPhoneNumber"
+        android:id="@+id/etSDT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Số điện thoại"
@@ -82,7 +82,7 @@
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account? Login"
+        android:text="Bạn đã có tài khoản? Đăng nhập"
         android:textColor="#3F51B5"
         android:layout_gravity="center_horizontal" />
 

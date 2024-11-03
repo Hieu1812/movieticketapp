@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Trang chủ"
+        android:icon="@drawable/home"
+        android:id="@+id/homeAdmin"/>
+    <item
+        android:title="Doanh thu"
+        android:icon="@drawable/baseline_favorite_24"
+        android:id="@+id/revenueAdmin"/>
+    <item
+        android:title="Tài Khoản"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:id="@+id/accountAdmin"/>
+
+</menu>

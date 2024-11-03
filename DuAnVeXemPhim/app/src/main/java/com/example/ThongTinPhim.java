@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 import com.google.firebase.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 
 public class ThongTinPhim extends AppCompatActivity implements Serializable {
+
     TextView named;
+    Button btnThoat, btnDatVe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +39,30 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        //
+        named = findViewById(R.id.tvTenPhim);
+        btnThoat = findViewById(R.id.btnThoat);
+        btnDatVe = findViewById(R.id.btnDatVe);
+        //
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-//        onCreategetdata();
-        named = findViewById(R.id.tvTenPhim);
+        //onCreategetdata();
+        //
+        btnThoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentThoat = new Intent(ThongTinPhim.this, MainActivity.class);
+                startActivity(intentThoat);
+            }
+        });
+        btnDatVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentDatVe = new Intent(ThongTinPhim.this, LichChieuVaGhe.class);
+                startActivity(intentDatVe);
+            }
+        });
+
     }
 //    private void onCreategetdata(){
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
