@@ -1,3 +1,4 @@
+
 package com.example.duanvexemphim.Adapter;
 
 import android.app.Activity;
@@ -109,4 +110,3 @@ public class ListPhimAdapter extends ArrayAdapter implements Filterable {
         };
     }
 }
-

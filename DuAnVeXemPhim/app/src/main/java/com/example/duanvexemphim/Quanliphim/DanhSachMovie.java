@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duanvexemphim.Models.Movie;
+import com.example.duanvexemphim.Models.Movies;
 import com.example.duanvexemphim.R;
 
 import java.util.ArrayList;

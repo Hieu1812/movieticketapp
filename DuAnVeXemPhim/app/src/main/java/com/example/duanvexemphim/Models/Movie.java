@@ -1,3 +1,4 @@
+
 package com.example.duanvexemphim.Models;
 
 
@@ -14,7 +15,7 @@ public class Movie {
 
     public Movie(String title,  String genre ) {
         this.title = title;
-//        this.description = description;
+//         this.description = description;
         this.genre = genre;
 //        this.releaseDate = releaseDate;
 //        this.status = status;
@@ -23,10 +24,10 @@ public class Movie {
 //        this.trailerUrl = trailerUrl;
 //        this.cast = cast;
     }
-//
+    //
     // Getter methods
     public String getTitle() { return title; }
-//    public String getDescription() { return description; }
+    //    public String getDescription() { return description; }
     public String getGenre() { return genre; }
 //    public String getReleaseDate() { return releaseDate; }
 //    public String getStatus() { return status; }
@@ -40,4 +41,3 @@ public class Movie {
 //        return title + " - " + status; // Hiển thị thông tin phim trong ListView
 //    }
 }
-

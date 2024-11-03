@@ -1,3 +1,4 @@
+
 package com.example.duanvexemphim.Models;
 
 import java.io.Serializable;
@@ -7,11 +8,11 @@ public class ListPhim implements Serializable {
     String theLoai;
     double giaVe;
     int posterPhim;
-//Hàm tạo ko tham số
+    //Hàm tạo ko tham số
     public ListPhim(){
 
     }
-//Hàm tạo có tham số
+    //Hàm tạo có tham số
     public ListPhim(String theLoai, String tenPhim, double giaVe, int posterPhim) {
         this.theLoai = theLoai;
         this.tenPhim = tenPhim;
