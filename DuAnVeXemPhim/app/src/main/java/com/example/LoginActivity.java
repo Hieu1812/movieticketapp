@@ -50,11 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                if (email.equals("admin@gmail.com") && password.equals("123456")){
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                }
-                if (email.equals("user@gmail.com") && password.equals("123456")) {
+                if (email.equals("admin@gmail.com") && password.equals("123456")){
+                    Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
+                    startActivity(intent);
+                } else if (email.equals("user@gmail.com") && password.equals("123456")) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {

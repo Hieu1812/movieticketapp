@@ -11,31 +11,30 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 
-public class chi_tiet_giao_dich extends AppCompatActivity {
+public class ThemPhimActivity extends AppCompatActivity {
 
-    Button btnTrangChu;
+    Button btnThoat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_chi_tiet_giao_dich2);
+        setContentView(R.layout.activity_them_phim);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        btnTrangChu = findViewById(R.id.btnTrangChu);
         //
-        btnTrangChu.setOnClickListener(new View.OnClickListener() {
+        btnThoat = findViewById(R.id.btnThoat);
+        //
+        btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentTrangChu = new Intent(chi_tiet_giao_dich.this, MainActivity.class);
-                startActivity(intentTrangChu);
+                Intent intentThoat = new Intent(ThemPhimActivity.this, QuanTriAdminActivity.class);
+                startActivity(intentThoat);
             }
         });
     }
