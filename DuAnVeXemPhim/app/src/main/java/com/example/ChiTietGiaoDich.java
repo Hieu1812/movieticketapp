@@ -26,7 +26,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentThoat = new Intent(ChiTietGiaoDich.this, ThongTinPhim.class);
+                Intent intentThoat = new Intent(ChiTietGiaoDich.this, LichChieuVaGhe.class);
                 startActivity(intentThoat);
             }
         });

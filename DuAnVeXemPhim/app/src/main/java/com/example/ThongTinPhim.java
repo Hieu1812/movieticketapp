@@ -58,7 +58,7 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDatVe = new Intent(ThongTinPhim.this, ChiTietGiaoDich.class);
+                Intent intentDatVe = new Intent(ThongTinPhim.this, LichChieuVaGhe.class);
                 startActivity(intentDatVe);
             }
         });
