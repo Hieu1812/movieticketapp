@@ -7,7 +7,7 @@
         android:id="@+id/homeAdmin"/>
     <item
         android:title="Doanh thu"
-        android:icon="@drawable/baseline_favorite_24"
+        android:icon="@drawable/money_24"
         android:id="@+id/revenueAdmin"/>
     <item
         android:title="Tài Khoản"

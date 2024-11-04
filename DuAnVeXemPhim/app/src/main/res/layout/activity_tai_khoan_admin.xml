@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.TaiKhoanAdminActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_gravity="bottom|end">
+            <Button
+                android:id="@+id/btnThoat"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:drawableTop="@drawable/back"
+                android:gravity="center"
+                android:backgroundTint="#d5dedb"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/tvTaiKhoanCuaToi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tài khoản của tôi"
+                    android:textSize="23dp"
+                    android:padding="3dp"
+                    android:layout_marginLeft="7dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d5dedb"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <!--Tên tài khoản-->
+            <TextView
+                android:id="@+id/tvTenTK"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Tên tài khoản: Admin"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:background="@drawable/search_view_bg" />
+            <!--Số điện thoại-->
+            <TextView
+                android:id="@+id/tvSĐT"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Số điện thoại: 0987654321"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:background="@drawable/search_view_bg" />
+            <!--Giới tính-->
+            <TextView
+                android:id="@+id/tvGioiTinh"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Giới tính: Nam"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:background="@drawable/search_view_bg" />
+            <!--Email-->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Email: admin@gmail.com"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:background="@drawable/search_view_bg" />
+
+        </LinearLayout>
+        <!--đăng xuất-->
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="175dp"
+            android:layout_marginLeft="130dp">
+            <Button
+                android:id="@+id/btnDangXuat"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="Đăng xuất"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

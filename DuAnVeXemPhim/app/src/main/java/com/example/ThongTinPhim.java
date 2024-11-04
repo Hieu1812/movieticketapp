@@ -1,10 +1,12 @@
 package com.example;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,7 +29,9 @@ import java.io.Serializable;
 public class ThongTinPhim extends AppCompatActivity implements Serializable {
 
     TextView named;
-    Button btnThoat, btnDatVe;
+    Button btnThoat, btnDatVe, btnThich, btnTrailer;
+    VideoView videoTrailer;
+    private boolean clicktym = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
         named = findViewById(R.id.tvTenPhim);
         btnThoat = findViewById(R.id.btnThoat);
         btnDatVe = findViewById(R.id.btnDatVe);
+        btnThich = findViewById(R.id.btnThich);
+        btnTrailer = findViewById(R.id.btnTrailer);
+        videoTrailer = findViewById(R.id.videoTrailer);
         //
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
@@ -62,23 +69,34 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
                 startActivity(intentDatVe);
             }
         });
-
+        btnTrailer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=_8qUFEmPQbc";
+                // Mở video trong ứng dụng YouTube hoặc trình duyệt
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                intent.putExtra("force_fullscreen", true);  // Bật chế độ toàn màn hình
+                // Kiểm tra nếu có ứng dụng YouTube để phát video, nếu không mở bằng trình duyệt
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                    startActivity(browserIntent);
+                }
+            }
+        });
+        //
+        btnThich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (clicktym) {
+                    btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.white));
+                    clicktym = false;
+                } else {
+                    btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.colorred));
+                    clicktym = true;
+                }
+            }
+        });
     }
-//    private void onCreategetdata(){
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = firebaseDatabase.getReference();
-//        databaseReference.child("CheckoutFilmModel/film1/name").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String name = snapshot.getValue(String.class);
-//                named.append(name);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-
 }

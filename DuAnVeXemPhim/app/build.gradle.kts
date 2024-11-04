@@ -41,10 +41,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.activity:activity:1.9.3")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.firebase:firebase-auth")
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
 }

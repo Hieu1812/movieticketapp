@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ChinhSuaPhimActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnThoat"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:drawableTop="@drawable/back"
+                android:gravity="center"
+                android:backgroundTint="#d5dedb"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chỉnh Sửa Thông Tin Phim"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="-8sp"/>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/etMovieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tiêu đề phim"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả phim"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine"
+            android:minLines="3" />
+
+        <EditText
+            android:id="@+id/etMovieGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Thể loại phim"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ngày phát hành (yyyy-MM-dd)"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Trạng thái phim"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieImageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL hình ảnh"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Thời gian chiếu (phút)"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieTrailerUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL trailer"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etMovieCast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Diễn viên nổi bật"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnUpdateMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cập Nhật Thông Tin"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

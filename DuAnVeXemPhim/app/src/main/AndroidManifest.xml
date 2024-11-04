@@ -15,6 +15,15 @@
         android:theme="@style/Theme.DuAnVeXemPhim"
         tools:targetApi="31">
         <activity
+            android:name="com.example.DoanhThuActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.TaiKhoanAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.ChinhSuaPhimActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ThemPhimActivity"
             android:exported="false" />
         <activity

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -26,9 +27,7 @@ public class QuanTriAdminActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationViewAdmin;
     FloatingActionButton themPhim;
-    ListView lvPhim;
-    ArrayList<ListPhim> listPhim;
-    ListPhimAdapter adapterPhim;
+    Button btnSua;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +43,8 @@ public class QuanTriAdminActivity extends AppCompatActivity {
         //
         bottomNavigationViewAdmin = findViewById(R.id.bottomNavigationViewAdmin);
         themPhim = findViewById(R.id.themPhim);
-        lvPhim = findViewById(R.id.lvPhim);
+        btnSua = findViewById(R.id.btnSua);
         //
-        listPhim = new ArrayList<>();
-        listPhim.add(new ListPhim("Kinh dị", "Cám", 70000.0, R.drawable.cam));
-        listPhim.add(new ListPhim("Hài, Hình sự, Hành động ", "Đố Anh Còng Được Tôi", 65000.0, R.drawable.phim2));
-        listPhim.add(new ListPhim("Bí ẩn, Trinh thám, Hình Sự", "Conan", 70000.0, R.drawable.conan));
-        listPhim.add(new ListPhim("Tình cảm gia đình", "Hai muối", 65000.0, R.drawable.hai_muoi));
-        listPhim.add(new ListPhim("Kinh dị, Hài", "Làm giàu với ma", 60000.0, R.drawable.lam_giau_voi_ma));
-        adapterPhim = new ListPhimAdapter(QuanTriAdminActivity.this, R.layout.lv_phim, listPhim);
-        lvPhim.setAdapter(adapterPhim);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -68,6 +59,13 @@ public class QuanTriAdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QuanTriAdminActivity.this, ChinhSuaPhimActivity.class);
+                startActivity(intent);
+            }
+        });
 
         bottomNavigationViewAdmin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -77,11 +75,11 @@ public class QuanTriAdminActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.revenueAdmin) {
-                    Intent intent = new Intent(QuanTriAdminActivity.this, QuanTriAdminActivity.class);
+                    Intent intent = new Intent(QuanTriAdminActivity.this, DoanhThuActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.accountAdmin) {
-                    Intent intent = new Intent(QuanTriAdminActivity.this, QuanTriAdminActivity.class);
+                    Intent intent = new Intent(QuanTriAdminActivity.this, TaiKhoanAdminActivity.class);
                     startActivity(intent);
                     return true;
                 }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.ChinhSuaPhimActivity;
 import com.example.ThongTinPhim;
 import com.example.duanvexemphim.Models.ListPhim;
 import com.example.duanvexemphim.R;
@@ -72,8 +73,6 @@ public class ListPhimAdapter extends ArrayAdapter implements Filterable {
                 intent.putExtras(data);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-
-
             }
         });
 
