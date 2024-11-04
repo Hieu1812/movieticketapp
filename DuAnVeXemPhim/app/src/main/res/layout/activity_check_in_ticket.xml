@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Nhập Mã Vé"
         android:textSize="18sp"
+        android:layout_marginTop="50dp"
         android:textStyle="bold"/>
 
     <EditText
