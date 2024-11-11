@@ -11,17 +11,20 @@ public class User {
     private String email;
     private String role;
     private int wallet;
+    private String phonenumber;
     private List<String> likeFilms;
 
     public User() {};
 
-    public User(String userID, String name, String avatar, String email, String role, int wallet, List<String> likeFilms) {
+
+    public User(String userID, String name, String avatar, String email, String role, int wallet, String phonenumber, List<String> likeFilms) {
         this.userID = userID;
         this.name = name;
         this.avatar = avatar;
         this.email = email;
         this.role = role;
         this.wallet = wallet;
+        this.phonenumber = phonenumber;
         this.likeFilms = likeFilms;
     }
 
@@ -79,5 +82,13 @@ public class User {
 
     public void setLikeFilms(List<String> likeFilms) {
         this.likeFilms = likeFilms;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }
