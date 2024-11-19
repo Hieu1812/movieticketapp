@@ -2,6 +2,7 @@ package com.example.duanvexemphim.models;
 
 import java.util.List;
 
+
 public class Movie {
     private String movieID;
     private String name;

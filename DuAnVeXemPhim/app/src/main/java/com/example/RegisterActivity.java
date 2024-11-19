@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class DangKiTaiKhoan extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText etUsername, etEmail, etPassword, etConfirmPassword, etPhoneNumber;
     private Button btnRegister;
@@ -31,7 +31,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dangki);
+        setContentView(R.layout.activity_register);
 
         // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
@@ -50,7 +50,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
         // Khi nhấn vào TextView Đăng Nhập
         tvLogin.setOnClickListener(v -> {
             // Chuyển sang màn hình đăng nhập
-            Intent intent = new Intent(DangKiTaiKhoan.this, LoginActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
@@ -63,12 +63,12 @@ public class DangKiTaiKhoan extends AppCompatActivity {
             String confirmPassword = etConfirmPassword.getText().toString().trim();
             // Kiểm tra thông tin đăng ký
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || sdt.isEmpty()) {
-                Toast.makeText(DangKiTaiKhoan.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(DangKiTaiKhoan.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -83,17 +83,17 @@ public class DangKiTaiKhoan extends AppCompatActivity {
                             User newUser = new User(userID, username, "", email, "user", 0, sdt, new ArrayList<>());
                             database.child(userID).setValue(newUser) // Lưu thông tin người dùng
                                     .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(DangKiTaiKhoan.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                                         // Chuyển sang màn hình đăng nhập
-                                        Intent intent = new Intent(DangKiTaiKhoan.this, LoginActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                         finish();// Đóng màn hình đăng ký
                                         });
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(DangKiTaiKhoan.this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(DangKiTaiKhoan.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });

@@ -39,7 +39,7 @@
         <!-- android:name="com.example.LoginActivity" -->
         <!-- android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt; -->
         <activity
-            android:name="com.example.DangKiTaiKhoan"
+            android:name="com.example.RegisterActivity"
             android:exported="false" /> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
         <activity
             android:name="com.example.LoginActivity"

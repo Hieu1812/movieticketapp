@@ -1,7 +1,6 @@
 package com.example;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
 
         // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
@@ -48,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         // Khi nhấn vào TextView Đăng Ký
         tvRegister.setOnClickListener(v -> {
             // Chuyển sang màn hình đăng ký
-            Intent intent = new Intent(LoginActivity.this, DangKiTaiKhoan.class);
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
