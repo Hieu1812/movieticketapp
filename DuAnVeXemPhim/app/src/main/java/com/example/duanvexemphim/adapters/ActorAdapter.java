@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.R;
+import com.example.duanvexemphim.models.Actor;
 
 import java.util.List;
 
