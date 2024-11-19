@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duanvexemphim.MainActivity;
+import com.example.duanvexemphim.Models.Movie;
 import com.example.duanvexemphim.R;
 import com.google.firebase.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -27,11 +28,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 
 public class ThongTinPhim extends AppCompatActivity implements Serializable {
-
+    Movie movie;
     TextView named;
     Button btnThoat, btnDatVe, btnThich, btnTrailer;
     VideoView videoTrailer;
     private boolean clicktym = false;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,19 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
             return insets;
         });
         //
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child();
+//        ValueEventListener eventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+        //
         named = findViewById(R.id.tvTenPhim);
         btnThoat = findViewById(R.id.btnThoat);
         btnDatVe = findViewById(R.id.btnDatVe);
@@ -53,7 +68,6 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
         //
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-        //onCreategetdata();
         //
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override

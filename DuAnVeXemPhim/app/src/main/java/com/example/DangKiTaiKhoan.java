@@ -58,10 +58,11 @@ public class DangKiTaiKhoan extends AppCompatActivity {
         btnRegister.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
+            String sdt = etPhoneNumber.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
             String confirmPassword = etConfirmPassword.getText().toString().trim();
             // Kiểm tra thông tin đăng ký
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || sdt.isEmpty()) {
                 Toast.makeText(DangKiTaiKhoan.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -79,7 +80,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
                             String userID = firebaseUser.getUid(); // Lấy UID của người dùng
 
                             // Tạo đối tượng User và lưu vào Realtime Database
-                            User newUser = new User(userID, username, "", email, "user", 0, new ArrayList<>());
+                            User newUser = new User(userID, username, "", email, "user", 0, sdt, new ArrayList<>());
                             database.child(userID).setValue(newUser) // Lưu thông tin người dùng
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(DangKiTaiKhoan.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
@@ -92,7 +93,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                                 Toast.makeText(DangKiTaiKhoan.this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(DangKiTaiKhoan.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DangKiTaiKhoan.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });

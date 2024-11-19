@@ -16,6 +16,9 @@
         android:theme="@style/Theme.DuAnVeXemPhim"
         tools:targetApi="31">
         <activity
+            android:name=".rap_va_lich_chieu"
+            android:exported="false" />
+        <activity
             android:name="com.example.DoanhThuActivity"
             android:exported="false" />
         <activity
@@ -67,7 +70,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 </manifest>
