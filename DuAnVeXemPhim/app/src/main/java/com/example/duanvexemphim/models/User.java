@@ -1,8 +1,6 @@
-package com.example.duanvexemphim.Models;
+package com.example.duanvexemphim.models;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class User {
     private String userID;
@@ -13,7 +11,7 @@ public class User {
     private int wallet;
     private List<String> likeFilms;
 
-    public User() {};
+    public User() {}
 
     public User(String userID, String name, String avatar, String email, String role, int wallet, List<String> likeFilms) {
         this.userID = userID;

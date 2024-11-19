@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,21 +14,27 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.duanvexemphim.Adapter.ListPhimAdapter;
-import com.example.duanvexemphim.MainActivity;
-import com.example.duanvexemphim.Models.ListPhim;
+import com.example.duanvexemphim.adapters.ListMovieAdminAdapter;
 import com.example.duanvexemphim.R;
+import com.example.duanvexemphim.models.Movie;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class QuanTriAdminActivity extends AppCompatActivity {
 
+    private ListView lvMovieAdmin;
+    private ListMovieAdminAdapter adapter;
+    private ArrayList<Movie> listMovies;
+    private DatabaseReference moviesRef;
     BottomNavigationView bottomNavigationViewAdmin;
-    FloatingActionButton themPhim;
-    Button btnSua;
-
+    FloatingActionButton btnThemPhim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +46,17 @@ public class QuanTriAdminActivity extends AppCompatActivity {
             return insets;
         });
 
-        //
+        lvMovieAdmin = findViewById(R.id.lvMovieAdmin);
+        listMovies = new ArrayList<>();
+        adapter = new ListMovieAdminAdapter(this, R.layout.lv_phim_admin, listMovies);
+        lvMovieAdmin.setAdapter(adapter);
         bottomNavigationViewAdmin = findViewById(R.id.bottomNavigationViewAdmin);
-        themPhim = findViewById(R.id.themPhim);
-        btnSua = findViewById(R.id.btnSua);
-        //
+        btnThemPhim = findViewById(R.id.btnThemPhim);
+
+        moviesRef = FirebaseDatabase.getInstance().getReference("Movies");
+
+        // Tải dữ liệu từ Firebase
+        loadMoviesFromFirebase();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -52,17 +64,10 @@ public class QuanTriAdminActivity extends AppCompatActivity {
             return insets;
         });
 
-        themPhim.setOnClickListener(new View.OnClickListener() {
+        btnThemPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(QuanTriAdminActivity.this, ThemPhimActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(QuanTriAdminActivity.this, ChinhSuaPhimActivity.class);
                 startActivity(intent);
             }
         });
@@ -84,6 +89,28 @@ public class QuanTriAdminActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+    }
+    private void loadMoviesFromFirebase() {
+        moviesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listMovies.clear(); // Xóa danh sách cũ để tránh trùng lặp
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Movie movie = dataSnapshot.getValue(Movie.class);
+                    if (movie != null) {
+                        listMovies.add(movie);
+                    }
+                }
+
+                // Thông báo cho adapter rằng dữ liệu đã thay đổi
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(QuanTriAdminActivity.this, "Lỗi khi tải dữ liệu từ Firebase!", Toast.LENGTH_SHORT).show();
             }
         });
     }

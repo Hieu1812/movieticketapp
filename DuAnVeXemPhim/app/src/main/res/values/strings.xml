@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Tìm kiếm phim</string>
+    <string-array name="the_loai_list">
+        <item>Chọn thể loại</item>
+        <item>Hành động</item>
+        <item>Hài</item>
+        <item>Kinh dị</item>
+        <item>Tình cảm</item>
+        <item>Khoa học viễn tưởng</item>
+        <item>Hoạt hình</item>
+        <item>Phiêu lưu</item>
+    </string-array>
 </resources>

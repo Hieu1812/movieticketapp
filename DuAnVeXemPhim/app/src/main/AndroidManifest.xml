@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name="com.example.QuanTriAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.QuanTriActivity"
             android:exported="false" />
         <activity
             android:name="com.example.chi_tiet_giao_dich"

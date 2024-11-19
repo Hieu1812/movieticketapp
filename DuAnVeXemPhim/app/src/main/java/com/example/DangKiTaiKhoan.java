@@ -2,15 +2,14 @@ package com.example;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.duanvexemphim.Models.User;
+import com.example.duanvexemphim.models.User;
 import com.example.duanvexemphim.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +25,7 @@ public class DangKiTaiKhoan extends AppCompatActivity {
     private Button btnRegister;
     private TextView tvLogin;
     private FirebaseAuth auth;
+    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference database;
 
     @Override
@@ -35,8 +35,8 @@ public class DangKiTaiKhoan extends AppCompatActivity {
 
         // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
-        // Khởi tạo FirebaseDatabase reference
-        database = FirebaseDatabase.getInstance().getReference("Users");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        database = firebaseDatabase.getReference("Users");
 
         // Khởi tạo các thành phần UI
         etUsername = findViewById(R.id.etUsername);

@@ -7,109 +7,152 @@
     android:layout_height="match_parent"
     tools:context="com.example.ThemPhimActivity">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <!-- nút quay trở lại-->
-            <Button
-                android:id="@+id/btnThoat"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:drawableTop="@drawable/back"
-                android:gravity="center"
-                android:backgroundTint="#d5dedb"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_gravity="start|center_vertical">
+                <Button
+                    android:id="@+id/btnThoat"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:drawableTop="@drawable/back"
+                    android:gravity="center"
+                    android:backgroundTint="#d5dedb"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d5dedb" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+                <ImageView
+                    android:id="@+id/imgPhim"
+                    android:layout_width="150dp"
+                    android:layout_height="210dp"
+                    android:src="@drawable/baseline_add_box_24"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/etTenPhim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tên phim"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:id="@+id/spinnerTheLoai"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:entries="@array/the_loai_list" />
+                    <EditText
+                        android:id="@+id/etThoiLuong"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Thời lượng (phút)"
+                        android:textSize="18dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="5dp">
+                        <TextView
+                            android:id="@+id/tvDoTuoi"
+                            android:layout_width="25dp"
+                            android:layout_height="23dp"
+                            android:text="18+"
+                            android:textColor="#FFFFFF"
+                            android:background="@color/design_default_color_error"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Phim được phổ biến đến người xem từ 18 tuổi trở lên"
+                            android:layout_marginLeft="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thêm Phim Mới"
-                android:textSize="24sp"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"
+                android:text="Thêm nội dung phim"
+                android:textSize="18dp"
                 android:textStyle="bold"
-                android:paddingLeft="10sp"/>
+                android:layout_marginBottom="5dp" />
+            <EditText
+                android:id="@+id/etNDPhim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nội dung phim"
+                android:textSize="20dp"
+                android:gravity="top"
+                android:minHeight="100dp"
+                android:layout_marginTop="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm trailer"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp" />
+                <EditText
+                    android:id="@+id/etTrailerLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Link youtube"
+                    android:textSize="18dp"
+                    android:inputType="textUri" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm thông tin diễn viên"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dienVienRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" />
+                <Button
+                    android:id="@+id/btnThemDienVien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm diễn viên"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnLuuPhim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lưu phim"
+                android:backgroundTint="#fc0313"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="15dp"/>
         </LinearLayout>
-        <EditText
-            android:id="@+id/etMovieTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tiêu đề phim"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/etMovieDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mô tả phim"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textMultiLine"
-            android:minLines="3" />
-
-        <EditText
-            android:id="@+id/etMovieGenre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Thể loại phim"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/etMovieReleaseDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ngày phát hành (yyyy-MM-dd)"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-
-        <EditText
-            android:id="@+id/etMovieImageUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL hình ảnh"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/etMovieDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Thời gian chiếu (phút)"
-            android:padding="12dp"
-            android:inputType="number"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/etMovieTrailerUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL trailer"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/etMovieCast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Diễn viên nổi bật"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/btnAddMovie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thêm Mới"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

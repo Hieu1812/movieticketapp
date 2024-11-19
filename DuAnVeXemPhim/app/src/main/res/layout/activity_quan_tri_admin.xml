@@ -16,84 +16,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="5dp">
-<!--        <ListView-->
-<!--            android:id="@+id/lvPhimAdmin"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:padding="10dp"/>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp"
             android:background="#ABEAF2">
-            <ImageView
-                android:id="@+id/imgPoster"
-                android:src="@drawable/cam"
-                android:layout_width="120dp"
-                android:layout_height="150dp"/>
-            <LinearLayout
+            <ListView
+                android:id="@+id/lvMovieAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_weight="2">
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Phim: Cám"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:padding="1dp"/>
-                <TextView
-                    android:id="@+id/tvTheLoai"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Thể loại: Kinh dị"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:padding="1dp"/>
-                <TextView
-                    android:id="@+id/tvGia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Giá: 70.000 VNĐ"
-                    android:textColor="#fa0707"
-                    android:textStyle="bold"
-                    android:padding="1dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/btnXem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Xem"
-                    android:textSize="10sp"/>
-                <Button
-                    android:id="@+id/btnSua"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Sửa"
-                    android:textSize="10sp"/>
-                <Button
-                    android:id="@+id/btnXoa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Xóa"
-                    android:textSize="10sp"/>
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
     <!--add-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/themPhim"
+        android:id="@+id/btnThemPhim"
         android:clickable="true"
         android:src="@drawable/add_24"
         android:layout_width="wrap_content"

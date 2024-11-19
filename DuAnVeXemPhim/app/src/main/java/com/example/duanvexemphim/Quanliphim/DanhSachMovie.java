@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanvexemphim.Models.Movie;
-import com.example.duanvexemphim.Models.Movies;
+import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
 
 import java.util.ArrayList;
@@ -27,16 +26,6 @@ public class DanhSachMovie extends AppCompatActivity {
 
         recyclerViewMovies = findViewById(R.id.tvMovieTitle);
         movies = new ArrayList<>();
-
-        // Thêm một số phim giả mạo vào danh sách
-        movies.add(new Movie("Avengers: Endgame", "Hành Động"));
-        movies.add(new Movie("The Lion King", "Hoạt Hình"));
-        movies.add(new Movie("Joker", "Tâm Lý"));
-        movies.add(new Movie("Spider-Man: No Way Home", "Hành Động"));
-        movies.add(new Movie("Frozen II", "Hoạt Hình"));
-        movies.add(new Movie("Inception", "Khoa Học Viễn Tưởng"));
-
-//        movieAdapter = new MovieAdapter(this, movies);
         recyclerViewMovies.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewMovies.setAdapter(movieAdapter);
     }

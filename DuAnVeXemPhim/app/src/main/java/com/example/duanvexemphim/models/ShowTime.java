@@ -1,4 +1,4 @@
-package com.example.duanvexemphim.Models;
+package com.example.duanvexemphim.models;
 
 import java.time.LocalTime;
 

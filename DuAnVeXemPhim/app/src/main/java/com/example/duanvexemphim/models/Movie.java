@@ -1,34 +1,32 @@
-package com.example.duanvexemphim.Models;
+package com.example.duanvexemphim.models;
 
 import java.util.List;
 
-public class Movies {
+public class Movie {
     private String movieID;
     private String name;
-    private String backgroundImage;
     private String posterImage;
-    private String primaryImage;
     private String description;
-    private String durationTime;
     private String genre;
+    private String durationTime;
     private List<User> listReact;
-    private List<String> trailer;
+    private String trailer;
     private double vote;
+    private List<Actor> actorList;
 
-    public Movies() {}
+    public Movie() {}
 
-    public Movies(String movieID, String name, String backgroundImage, String posterImage, String primaryImage, String description, String genre, String durationTime, List<User> listReact, List<String> trailer, double vote) {
+    public Movie(String movieID, String name, String posterImage, String description, String genre, String durationTime, List<User> listReact, String trailer, double vote, List<Actor> actorList) {
         this.movieID = movieID;
         this.name = name;
-        this.backgroundImage = backgroundImage;
         this.posterImage = posterImage;
-        this.primaryImage = primaryImage;
         this.description = description;
         this.genre = genre;
         this.durationTime = durationTime;
         this.listReact = listReact;
         this.trailer = trailer;
         this.vote = vote;
+        this.actorList = actorList;
     }
 
     public String getMovieID() {
@@ -45,22 +43,6 @@ public class Movies {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getBackgroundImage() {
-        return backgroundImage;
-    }
-
-    public void setBackgroundImage(String backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
-
-    public String getPrimaryImage() {
-        return primaryImage;
-    }
-
-    public void setPrimaryImage(String primaryImage) {
-        this.primaryImage = primaryImage;
     }
 
     public String getPosterImage() {
@@ -103,11 +85,11 @@ public class Movies {
         this.listReact = listReact;
     }
 
-    public List<String> getTrailer() {
+    public String getTrailer() {
         return trailer;
     }
 
-    public void setTrailer(List<String> trailer) {
+    public void setTrailer(String trailer) {
         this.trailer = trailer;
     }
 
@@ -117,5 +99,13 @@ public class Movies {
 
     public void setVote(double vote) {
         this.vote = vote;
+    }
+
+    public List<Actor> getActorList() {
+        return actorList;
+    }
+
+    public void setActorList(List<Actor> actorList) {
+        this.actorList = actorList;
     }
 }

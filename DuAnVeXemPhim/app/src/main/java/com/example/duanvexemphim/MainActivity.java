@@ -17,8 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.PhimYeuThich;
 import com.example.TaiKhoanCuaToi;
 import com.example.VeCuaToi;
-import com.example.duanvexemphim.Adapter.ListPhimAdapter;
-import com.example.duanvexemphim.Models.ListPhim;
+import com.example.duanvexemphim.models.Movie;
+import com.example.duanvexemphim.adapters.ListMovieAdminAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -29,8 +29,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     ListView lvPhim;
-    ArrayList<ListPhim> listPhim;
-    ListPhimAdapter adapterPhim;
+    ArrayList<Movie> listMovies;
+    ListMovieAdminAdapter adapterPhim;
     BottomNavigationView bottomNavigationView;
 
 
@@ -44,17 +44,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference myRef = database.getReference("message");
 //        myRef.setValue("Hello, World!");
-
-        lvPhim = findViewById(R.id.lvPhim);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        listPhim = new ArrayList<>();
-        listPhim.add(new ListPhim("Kinh dị", "Cám", 70000.0, R.drawable.cam));
-        listPhim.add(new ListPhim("Hài, Hình sự, Hành động ", "Đố Anh Còng Được Tôi", 65000.0, R.drawable.phim2));
-        listPhim.add(new ListPhim("Bí ẩn, Trinh thám, Hình Sự", "Conan", 70000.0, R.drawable.conan));
-        listPhim.add(new ListPhim("Tình cảm gia đình", "Hai muối", 65000.0, R.drawable.hai_muoi));
-        listPhim.add(new ListPhim("Kinh dị, Hài", "Làm giàu với ma", 60000.0, R.drawable.lam_giau_voi_ma));
-        adapterPhim = new ListPhimAdapter(MainActivity.this, R.layout.lv_phim, listPhim);
-        lvPhim.setAdapter(adapterPhim);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

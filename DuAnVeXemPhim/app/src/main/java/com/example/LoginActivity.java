@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                                     if (roleTask.isSuccessful()) {
                                         DataSnapshot dataSnapshot = roleTask.getResult();
                                         String role = dataSnapshot.getValue(String.class);
-                                        Log.e("Role", role);
                                         // Kiểm tra vai trò và điều hướng đến trang thích hợp
                                         if ("admin".equals(role)) {
                                             // Nếu là admin, chuyển đến trang Admin
