@@ -6,21 +6,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="106dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp">
-        <ListView
-            android:id="@+id/lvPhim"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <!--            tìm kiếm phim-->
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/edittext_background"
+                android:drawableEnd="@drawable/search"
+                android:drawablePadding="8dp"
+                android:padding="10dp"
+                android:ems="10"
+                android:hint="Tìm kiếm phim"
+                android:inputType="text" />
+            <!--            Phim sắp chiếu-->
+            <TextView
+                android:id="@+id/tvPhimSapChieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:text="Phim sắp chiếu"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_page2"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:paddingStart="80dp"
+                android:paddingEnd="80dp" />
+
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/cicle_indicator_3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                app:ci_drawable="@drawable/bg_indicator"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_TheLoai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!--menu-->
     <com.google.android.material.bottomnavigation.BottomNavigationView

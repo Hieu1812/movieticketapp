@@ -3,10 +3,15 @@ package com.example;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -26,10 +31,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+
 public class TaiKhoanCuaToi extends AppCompatActivity {
 
     Button btnThoat, btnDangXuat;
     TextView tvTenTK, tvSdt, tvEmail, tvTienDaTieu;
+    ImageView imgAvatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,7 @@ public class TaiKhoanCuaToi extends AppCompatActivity {
         tvSdt = findViewById(R.id.tvSĐT);
         tvEmail = findViewById(R.id.tvEmail);
         tvTienDaTieu = findViewById(R.id.tvTienDaTieu);
+        imgAvatar = findViewById(R.id.imgAvatar);
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
@@ -77,7 +86,7 @@ public class TaiKhoanCuaToi extends AppCompatActivity {
             }
         });
         // Hiển thị sdt
-        db.child("Users").child(id).child("").addValueEventListener(new ValueEventListener() {
+        db.child("Users").child(id).child("phonenumber").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String phone = snapshot.getValue(String.class);
@@ -86,9 +95,10 @@ public class TaiKhoanCuaToi extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(TaiKhoanCuaToi.this,"Loi " + error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+
 
         btnThoat = findViewById(R.id.btnThoat);
         btnDangXuat = findViewById(R.id.btnDangXuat);
