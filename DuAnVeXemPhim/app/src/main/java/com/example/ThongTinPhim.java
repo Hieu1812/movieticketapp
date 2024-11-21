@@ -40,19 +40,6 @@ public class ThongTinPhim extends AppCompatActivity implements Serializable {
             return insets;
         });
         //
-//        mDatabase = FirebaseDatabase.getInstance().getReference().child();
-//        ValueEventListener eventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        };
-        //
         named = findViewById(R.id.tvTenPhim);
         btnThoat = findViewById(R.id.btnThoat);
         btnDatVe = findViewById(R.id.btnDatVe);

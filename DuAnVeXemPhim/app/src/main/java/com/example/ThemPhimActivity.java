@@ -146,8 +146,11 @@ public class ThemPhimActivity extends AppCompatActivity {
 
                             // Tải lên ảnh cho từng diễn viên
                             for (Actor actor : actorList) {
-                                String actorID = movieRef.child("actors").push().getKey();
-                                StorageReference actorImageRef = storageReference.child("actorImages/" + actorID + ".jpg");
+//                                String actorID = movieRef.child("actors").push().getKey();
+//                                StorageReference actorImageRef = storageReference.child("actorImages/" + actorID + ".jpg");
+                                // Lấy tên gốc của ảnh diễn viên từ URI
+                                String actorImageName = getFileNameFromUri(Uri.parse(actor.getActorImage()));
+                                StorageReference actorImageRef = storageReference.child("actorImages/" + actorImageName + ".jpg");
 
                                 // Tải ảnh diễn viên lên Firebase Storage
                                 actorImageRef.putFile(Uri.parse(actor.getActorImage())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -184,6 +187,19 @@ public class ThemPhimActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    // Hàm giúp lấy tên tệp từ URI
+    private String getFileNameFromUri(Uri uri) {
+        String fileName = "";
+        String path = uri.getPath();
+        if (path != null) {
+            int lastSlash = path.lastIndexOf('/');
+            if (lastSlash != -1) {
+                fileName = path.substring(lastSlash + 1);
+            }
+        }
+        return fileName; // trả về tên tệp gốc
     }
 
     private void openPosterImageChooser() {

@@ -96,16 +96,22 @@ public class QuanTriAdminActivity extends AppCompatActivity {
         moviesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listMovies.clear(); // Xóa danh sách cũ để tránh trùng lặp
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Movie movie = dataSnapshot.getValue(Movie.class);
                     if (movie != null) {
-                        listMovies.add(movie);
+                        // Kiểm tra nếu movieID chưa có trong danh sách thì mới thêm
+                        boolean isExist = false;
+                        for (Movie existingMovie : listMovies) {
+                            if (existingMovie.getMovieID().equals(movie.getMovieID())) {
+                                isExist = true;
+                                break;
+                            }
+                        }
+                        if (!isExist) {
+                            listMovies.add(movie);
+                        }
                     }
                 }
-
-                // Thông báo cho adapter rằng dữ liệu đã thay đổi
                 adapter.notifyDataSetChanged();
             }
             @Override
