@@ -167,14 +167,14 @@
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:text="A"
-                android:backgroundTint="@color/colorred"
+                android:backgroundTint="@color/colorgreen"
                 android:layout_marginLeft="20dp"/>
             <Button
                 android:id="@+id/btnH3B"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:text="B"
-                android:backgroundTint="@color/colorred"
+                android:backgroundTint="@color/colorgreen"
                 android:layout_marginLeft="20dp"/>
             <Button
                 android:id="@+id/btnH3C"
@@ -242,15 +242,16 @@
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:text="B"
-                android:backgroundTint="@color/colorblue"
+                android:backgroundTint="@color/colorgreen"
                 android:layout_marginLeft="20dp"/>
+
             <Button
                 android:id="@+id/btnH5C"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:text="C"
-                android:backgroundTint="@color/colorblue"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/colorgreen"
+                android:text="C" />
         </LinearLayout>
 
         <LinearLayout
@@ -338,7 +339,7 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/nuoc_cam"
                     android:gravity="center"
-                    android:backgroundTint="#d5dedb"
+                    android:backgroundTint="@color/colorgreen"
                     android:layout_marginLeft="40dp"/>
                 <TextView
                     android:id="@+id/tvNuocCam"
@@ -365,7 +366,7 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/pepsi"
                     android:gravity="center"
-                    android:backgroundTint="#d5dedb"
+                    android:backgroundTint="@color/colorgreen"
                     android:layout_marginLeft="50dp"/>
                 <TextView
                     android:id="@+id/tvPepsi"
@@ -405,7 +406,7 @@
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/popcorn"
                 android:gravity="center"
-                android:backgroundTint="#d5dedb"
+                android:backgroundTint="@color/colorgreen"
                 android:layout_marginLeft="40dp"/>
             <TextView
                 android:id="@+id/tvBong"
