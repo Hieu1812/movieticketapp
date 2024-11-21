@@ -1,4 +1,4 @@
-package com.example.duanvexemphim;
+package com.example.duanvexemphim.models;
 
 import java.util.List;
 

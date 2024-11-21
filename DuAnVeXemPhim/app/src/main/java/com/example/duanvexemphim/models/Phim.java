@@ -1,19 +1,22 @@
-package com.example.duanvexemphim;
+package com.example.duanvexemphim.models;
+
+import android.net.Uri;
 
 public class Phim {
-    private int resourceId;
+    private String resourceId;
     private String title;
 
-    public Phim(int resourceId, String title) {
+
+    public Phim(String resourceId, String title) {
         this.resourceId = resourceId;
         this.title = title;
     }
 
-    public int getResourceId() {
+    public String getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(String resourceId) {
         this.resourceId = resourceId;
     }
 

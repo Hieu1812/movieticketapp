@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -17,12 +18,25 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.example.PhimYeuThich;
 import com.example.TaiKhoanCuaToi;
+import com.example.ThongTinPhim;
 import com.example.VeCuaToi;
+import com.example.duanvexemphim.Adapter.PhimAdapter;
 import com.example.duanvexemphim.Adapter.PhotoAdapter;
 import com.example.duanvexemphim.Adapter.TheLoaiAdapter;
+import com.example.duanvexemphim.models.Phim;
+import com.example.duanvexemphim.models.Photo;
+import com.example.duanvexemphim.models.TheLoai;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private List<Photo> mListPhoto;
     private RecyclerView rcvTheLoai;
     private TheLoaiAdapter theLoaiAdapter;
+    private PhotoAdapter photoAdapter;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
     BottomNavigationView bottomNavigationView;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -68,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         rcvTheLoai.setLayoutManager(linearLayoutManager);
 
         theLoaiAdapter.setData(getListTheLoai());
+
         rcvTheLoai.setAdapter(theLoaiAdapter);
 
         //setting viewPager2
@@ -87,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         mListPhoto = getListPhpto();
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(mListPhoto);
+        photoAdapter = new PhotoAdapter(mListPhoto);
         mViewPager2.setAdapter(photoAdapter);
 
         mCircleIndicator3.setViewPager(mViewPager2);
@@ -129,47 +147,96 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<TheLoai> getListTheLoai(){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");
+
         List<TheLoai> listTheLoai = new ArrayList<>();
 
         //phim nổi bật
         List<Phim> listPhim1 = new ArrayList<>();
-        listPhim1.add(new Phim(R.drawable.cam, "Cám"));
-        listPhim1.add(new Phim(R.drawable.phim2, "Đố anh còng được tôi"));
-        listPhim1.add(new Phim(R.drawable.hai_muoi, "Hai muối"));
-        listPhim1.add(new Phim(R.drawable.minh_hon, "Minh hôn"));
-        listPhim1.add(new Phim(R.drawable.lam_giau_voi_ma, "Làm giàu với ma"));
+//        listPhim1.add(new Phim(R.drawable.cam, "Cám"));
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String title =  dataSnapshot.child("name").getValue(String.class);
+                    String img = dataSnapshot.child("posterImage").getValue(String.class);
+                    listPhim1.add(new Phim(img, title));
+                }
+                theLoaiAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         listTheLoai.add(new TheLoai("Phim nổi bật", listPhim1));
 
+
         //phim kinh dị
         List<Phim> listPhim2 = new ArrayList<>();
-        listPhim2.add(new Phim(R.drawable.cam, "Cám"));
-        listPhim2.add(new Phim(R.drawable.lam_giau_voi_ma, "Làm giàu với ma"));
+        filter("Kinh dị", listPhim2);
 
         listTheLoai.add(new TheLoai("Phim kinh dị", listPhim2));
 
         //phim hành động
         List<Phim> listPhim3 = new ArrayList<>();
-        listPhim3.add(new Phim(R.drawable.phim2, "Đố anh còng được tôi"));
+        filter("Hành động", listPhim3);
 
         listTheLoai.add(new TheLoai("Phim hành động", listPhim3));
 
         //phim tình cảm
         List<Phim> listPhim4 = new ArrayList<>();
-        listPhim4.add(new Phim(R.drawable.hai_muoi, "Đố anh còng được tôi"));
+        filter("Tình cảm", listPhim4);
 
         listTheLoai.add(new TheLoai("Phim tình cảm", listPhim4));
 
         return listTheLoai;
     }
 
+    public void filter(String name, List<Phim> listPhim){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String gernes =  dataSnapshot.child("genre").getValue(String.class);
+                    if (gernes.equals(name)){
+                        String title =  dataSnapshot.child("name").getValue(String.class);
+                        String img = dataSnapshot.child("posterImage").getValue(String.class);
+                        listPhim.add(new Phim(img, title));
+                    }
+                }
+                theLoaiAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
     private List<Photo> getListPhpto(){
         List<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.cam));
-        list.add(new Photo(R.drawable.hai_muoi));
-        list.add(new Photo(R.drawable.phim2));
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                    String img = dataSnapshot.child("posterImage").getValue(String.class);
+                    list.add(new Photo(img));
+                }
+                photoAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         return list;
     }

@@ -37,5 +37,6 @@ public class VeCuaToi extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

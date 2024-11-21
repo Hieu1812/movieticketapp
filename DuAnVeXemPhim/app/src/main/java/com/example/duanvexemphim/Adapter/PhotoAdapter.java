@@ -8,7 +8,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanvexemphim.Photo;
+import com.bumptech.glide.Glide;
+import com.example.duanvexemphim.models.Photo;
 import com.example.duanvexemphim.R;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
         if (photo == null){
             return;
         }
-        holder.imgPhoto.setImageResource(photo.getResourceId());
+        Glide.with(holder.imgPhoto.getContext()).load(photo.getResourceId()).into(holder.imgPhoto);
     }
 
     @Override

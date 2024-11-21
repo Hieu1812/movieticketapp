@@ -1,7 +1,11 @@
 package com.example.duanvexemphim.Adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ThongTinPhim;
+import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.TheLoai;
+import com.example.duanvexemphim.models.TheLoai;
 
 import java.util.List;
 
@@ -61,7 +67,7 @@ public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiV
         return 0;
     }
 
-    public class TheLoaiViewHolder extends RecyclerView.ViewHolder{
+    public class TheLoaiViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTenTheLoai;
         private RecyclerView rcvPhim;
@@ -71,7 +77,6 @@ public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiV
 
             tvTenTheLoai = itemView.findViewById(R.id.tv_ten_the_loai);
             rcvPhim = itemView.findViewById(R.id.rcv_Phim);
-
         }
     }
 }
