@@ -1,11 +1,7 @@
 package com.example.duanvexemphim.Adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ThongTinPhim;
-import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.models.TheLoai;
 

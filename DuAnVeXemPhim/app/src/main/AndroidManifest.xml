@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -43,16 +44,16 @@
         <!-- android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt; -->
         <activity
             android:name="com.example.RegisterActivity"
-            android:exported="false" /> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
+            android:exported="false" />
         <activity
             android:name="com.example.LoginActivity"
-            android:exported="true">
+            android:exported="true"> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Các Activity khác -->
+        </activity>
         <activity
             android:name="com.example.PhimYeuThich"
             android:exported="false" />
@@ -69,8 +70,8 @@
             android:name="com.example.LichChieuVaGhe"
             android:exported="false" />
         <activity
-            android:name="com.example.ThongTinPhim"
-            android:exported="false" />
+            android:name="com.example.ThongTinPhimActivity"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="false"

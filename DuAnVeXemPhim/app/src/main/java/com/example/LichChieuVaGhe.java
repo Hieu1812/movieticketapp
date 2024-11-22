@@ -54,7 +54,7 @@ public class LichChieuVaGhe extends AppCompatActivity {
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentThoat = new Intent(LichChieuVaGhe.this, ThongTinPhim.class);
+                Intent intentThoat = new Intent(LichChieuVaGhe.this, ThongTinPhimActivity.class);
                 startActivity(intentThoat);
             }
         });

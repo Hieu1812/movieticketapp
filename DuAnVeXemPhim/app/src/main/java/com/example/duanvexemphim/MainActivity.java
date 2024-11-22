@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -18,15 +17,12 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
 import com.example.PhimYeuThich;
 import com.example.TaiKhoanCuaToi;
-import com.example.ThongTinPhim;
 import com.example.VeCuaToi;
-import com.example.duanvexemphim.Adapter.PhimAdapter;
 import com.example.duanvexemphim.Adapter.PhotoAdapter;
 import com.example.duanvexemphim.Adapter.TheLoaiAdapter;
-import com.example.duanvexemphim.models.Phim;
+import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.models.Photo;
 import com.example.duanvexemphim.models.TheLoai;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -152,15 +148,21 @@ public class MainActivity extends AppCompatActivity {
         List<TheLoai> listTheLoai = new ArrayList<>();
 
         //phim nổi bật
-        List<Phim> listPhim1 = new ArrayList<>();
+        List<Movie> listMovie1 = new ArrayList<>();
 //        listPhim1.add(new Phim(R.drawable.cam, "Cám"));
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String title =  dataSnapshot.child("name").getValue(String.class);
+                    String movieID = dataSnapshot.child("movieID").getValue(String.class);
+                    String name =  dataSnapshot.child("name").getValue(String.class);
                     String img = dataSnapshot.child("posterImage").getValue(String.class);
-                    listPhim1.add(new Phim(img, title));
+                    String description = dataSnapshot.child("description").getValue(String.class);
+                    String durationTime = dataSnapshot.child("durationTime").getValue(String.class);
+                    String genre = dataSnapshot.child("genre").getValue(String.class);
+                    String trailer = dataSnapshot.child("trailer").getValue(String.class);
+                    Double vote = dataSnapshot.child("vote").getValue(Double.class);
+                    listMovie1.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, new ArrayList<>()));
                 }
                 theLoaiAdapter.notifyDataSetChanged();
             }
@@ -171,31 +173,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listTheLoai.add(new TheLoai("Phim nổi bật", listPhim1));
+        listTheLoai.add(new TheLoai("Phim nổi bật", listMovie1));
 
 
         //phim kinh dị
-        List<Phim> listPhim2 = new ArrayList<>();
-        filter("Kinh dị", listPhim2);
+        List<Movie> listMovie2 = new ArrayList<>();
+        filter("Kinh dị", listMovie2);
 
-        listTheLoai.add(new TheLoai("Phim kinh dị", listPhim2));
+        listTheLoai.add(new TheLoai("Phim kinh dị", listMovie2));
 
         //phim hành động
-        List<Phim> listPhim3 = new ArrayList<>();
-        filter("Hành động", listPhim3);
+        List<Movie> listMovie3 = new ArrayList<>();
+        filter("Hành động", listMovie3);
 
-        listTheLoai.add(new TheLoai("Phim hành động", listPhim3));
+        listTheLoai.add(new TheLoai("Phim hành động", listMovie3));
 
         //phim tình cảm
-        List<Phim> listPhim4 = new ArrayList<>();
-        filter("Tình cảm", listPhim4);
+        List<Movie> listMovie4 = new ArrayList<>();
+        filter("Tình cảm", listMovie4);
 
-        listTheLoai.add(new TheLoai("Phim tình cảm", listPhim4));
+        listTheLoai.add(new TheLoai("Phim tình cảm", listMovie4));
 
         return listTheLoai;
     }
 
-    public void filter(String name, List<Phim> listPhim){
+    public void filter(String name, List<Movie> listPhim){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");
         db.addValueEventListener(new ValueEventListener() {
             @Override
@@ -203,9 +205,15 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String gernes =  dataSnapshot.child("genre").getValue(String.class);
                     if (gernes.equals(name)){
-                        String title =  dataSnapshot.child("name").getValue(String.class);
+                        String movieID = dataSnapshot.child("movieID").getValue(String.class);
+                        String name =  dataSnapshot.child("name").getValue(String.class);
                         String img = dataSnapshot.child("posterImage").getValue(String.class);
-                        listPhim.add(new Phim(img, title));
+                        String description = dataSnapshot.child("description").getValue(String.class);
+                        String durationTime = dataSnapshot.child("durationTime").getValue(String.class);
+                        String genre = dataSnapshot.child("genre").getValue(String.class);
+                        String trailer = dataSnapshot.child("trailer").getValue(String.class);
+                        Double vote = dataSnapshot.child("vote").getValue(Double.class);
+                        listPhim.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, new ArrayList<>()));
                     }
                 }
                 theLoaiAdapter.notifyDataSetChanged();

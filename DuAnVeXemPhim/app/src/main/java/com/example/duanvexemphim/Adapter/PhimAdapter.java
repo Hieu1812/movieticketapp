@@ -1,30 +1,28 @@
 package com.example.duanvexemphim.Adapter;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ThongTinPhim;
-import com.example.duanvexemphim.models.Phim;
+import com.example.ThongTinPhimActivity;
+import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
 
 import java.util.List;
 
 public class PhimAdapter extends  RecyclerView.Adapter<PhimAdapter.PhimViewHolder> {
 
-    private List<Phim> mPhim;
+    private List<Movie> mPhim;
 
 
-    public void setData(List<Phim> list){
+    public void setData(List<Movie> list){
         this.mPhim = list;
         notifyDataSetChanged();
     }
@@ -38,16 +36,22 @@ public class PhimAdapter extends  RecyclerView.Adapter<PhimAdapter.PhimViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull PhimViewHolder holder, int position) {
-        Phim phim = mPhim.get(position);
-        if (phim == null){
+        Movie movie = mPhim.get(position);
+        if (movie == null){
             return;
         }
 
-        Glide.with(holder.imgPhim.getContext()).load(phim.getResourceId()).into(holder.imgPhim);
-        holder.tvTitle.setText(phim.getTitle());
+        Glide.with(holder.imgPhim.getContext()).load(movie.getPosterImage()).into(holder.imgPhim);
+        holder.tvTitle.setText(movie.getName());
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), ThongTinPhim.class);
-            intent.putExtra("name", phim.getTitle());
+            Intent intent = new Intent(view.getContext(), ThongTinPhimActivity.class);
+            intent.putExtra("movieID", movie.getMovieID());
+            intent.putExtra("movieName", movie.getName());
+            intent.putExtra("movieGenre", movie.getGenre());
+            intent.putExtra("movieDuration", movie.getDurationTime());
+            intent.putExtra("movieDescription", movie.getDescription());
+            intent.putExtra("movieTrailer", movie.getTrailer());
+            intent.putExtra("moviePoster", movie.getPosterImage());
             view.getContext().startActivity(intent);
         });
     }

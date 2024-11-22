@@ -4,11 +4,11 @@ import java.util.List;
 
 public class TheLoai {
     private String tenTheLoai;
-    private List<Phim> phims;
+    private List<Movie> movies;
 
-    public TheLoai(String tenTheLoai, List<Phim> phims) {
+    public TheLoai(String tenTheLoai, List<Movie> movies) {
         this.tenTheLoai = tenTheLoai;
-        this.phims = phims;
+        this.movies = movies;
     }
 
     public String getTenTheLoai() {
@@ -19,11 +19,11 @@ public class TheLoai {
         this.tenTheLoai = tenTheLoai;
     }
 
-    public List<Phim> getPhims() {
-        return phims;
+    public List<Movie> getPhims() {
+        return movies;
     }
 
-    public void setPhims(List<Phim> phims) {
-        this.phims = phims;
+    public void setPhims(List<Movie> phims) {
+        this.movies = movies;
     }
 }
