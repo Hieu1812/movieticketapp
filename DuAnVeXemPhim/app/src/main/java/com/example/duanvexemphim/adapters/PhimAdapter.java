@@ -1,4 +1,4 @@
-package com.example.duanvexemphim.Adapter;
+package com.example.duanvexemphim.adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ThongTinPhimActivity;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
 

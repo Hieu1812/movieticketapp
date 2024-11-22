@@ -70,7 +70,7 @@
             android:name="com.example.LichChieuVaGhe"
             android:exported="false" />
         <activity
-            android:name="com.example.ThongTinPhimActivity"
+            android:name=".adapters.ThongTinPhimActivity"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

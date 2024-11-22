@@ -1,4 +1,4 @@
-package com.example.duanvexemphim.Adapter;
+package com.example.duanvexemphim.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.duanvexemphim.adapters;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.LichChieuVaGhe;
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
