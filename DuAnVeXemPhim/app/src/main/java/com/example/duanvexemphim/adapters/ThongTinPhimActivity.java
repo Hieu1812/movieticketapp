@@ -22,6 +22,7 @@ import com.example.LichChieuVaGhe;
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
+import com.example.duanvexemphim.rap_va_lich_chieu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -116,7 +117,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, LichChieuVaGhe.class);
+                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, rap_va_lich_chieu.class);
                 startActivity(intentDatVe);
             }
         });

@@ -52,6 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:src="@drawable/avtadmin"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+            </LinearLayout>
             <!--Tên tài khoản-->
             <TextView
                 android:id="@+id/tvTenTK"
@@ -72,16 +81,6 @@
                 android:textStyle="bold"
                 android:layout_margin="16dp"
                 android:background="@drawable/search_view_bg" />
-            <!--Giới tính-->
-            <TextView
-                android:id="@+id/tvGioiTinh"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Giới tính: Nam"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:layout_margin="16dp"
-                android:background="@drawable/search_view_bg" />
             <!--Email-->
             <TextView
                 android:id="@+id/tvEmail"
@@ -98,7 +97,7 @@
         <LinearLayout
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginTop="175dp"
+            android:layout_marginTop="105dp"
             android:layout_marginLeft="130dp">
             <Button
                 android:id="@+id/btnDangXuat"

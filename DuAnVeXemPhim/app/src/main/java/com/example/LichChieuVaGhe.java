@@ -13,12 +13,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.adapters.ThongTinPhimActivity;
+import com.example.duanvexemphim.rap_va_lich_chieu;
 
 public class LichChieuVaGhe extends AppCompatActivity {
 
     Button btnThoat, btnThanhToan, btnNuocCam, btnPepsi, btnBong;
     Button  btnH1A, btnH1B, btnH1C, btnH2A, btnH2B, btnH2C, btnH3A, btnH3B, btnH3C, btnH4A, btnH4B, btnH4C, btnH5A, btnH5B, btnH5C;
-    private boolean click = false;
+    private boolean clickNuocCam, clickPepsi, clickBong = false;
+    private boolean clickH1A, clickH1B, clickH1C, clickH2A, clickH2B, clickH2C,
+            clickH3A, clickH3B, clickH3C, clickH4A, clickH4B, clickH4C, clickH5A, clickH5B, clickH5C = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class LichChieuVaGhe extends AppCompatActivity {
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentThoat = new Intent(LichChieuVaGhe.this, ThongTinPhimActivity.class);
+                Intent intentThoat = new Intent(LichChieuVaGhe.this, rap_va_lich_chieu.class);
                 startActivity(intentThoat);
             }
         });
@@ -70,216 +73,216 @@ public class LichChieuVaGhe extends AppCompatActivity {
         btnH1A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH1A) {
                     btnH1A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH1A = false;
                 } else {
                     btnH1A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH1A = true;
                 }
             }
         });
         btnH1B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH1B) {
                     btnH1B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH1B = false;
                 } else {
                     btnH1B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH1B = true;
                 }
             }
         });
         btnH1C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH1C) {
                     btnH1C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH1C = false;
                 } else {
                     btnH1C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH1C = true;
                 }
             }
         });
         btnH2A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH2A) {
                     btnH2A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH2A = false;
                 } else {
                     btnH2A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH2A = true;
                 }
             }
         });
         btnH2B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH2B) {
                     btnH2B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH2B = false;
                 } else {
                     btnH2B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH2B = true;
                 }
             }
         });
         btnH2C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH2C) {
                     btnH2C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH2C = false;
                 } else {
                     btnH2C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH2C = true;
                 }
             }
         });
         btnH3A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH3A) {
                     btnH3A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH3A = false;
                 } else {
                     btnH3A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH3A = true;
                 }
             }
         });
         btnH3B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH3B) {
                     btnH3B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH3B = false;
                 } else {
                     btnH3B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH3B = true;
                 }
             }
         });
         btnH3C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH3C) {
                     btnH3C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH3C = false;
                 } else {
                     btnH3C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH3C = true;
                 }
             }
         });
         btnH4A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH4A) {
                     btnH4A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH4A = false;
                 } else {
                     btnH4A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH4A = true;
                 }
             }
         });
         btnH4B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH4B) {
                     btnH4B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH4B = false;
                 } else {
                     btnH4B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH4B = true;
                 }
             }
         });
         btnH4C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH4C) {
                     btnH4C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH4C = false;
                 } else {
                     btnH4C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH4C = true;
                 }
             }
         });
         btnH5A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH5A) {
                     btnH5A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH5A = false;
                 } else {
                     btnH5A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH5A = true;
                 }
             }
         });
         btnH5B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH5B) {
                     btnH5B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH5B = false;
                 } else {
                     btnH5B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH5B = true;
                 }
             }
         });
         btnH5C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
+                if (clickH5C) {
                     btnH5C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
-                    click = false;
+                    clickH5C = false;
                 } else {
                     btnH5C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickH5C = true;
                 }
             }
         });
         btnNuocCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
-                    btnNuocCam.setBackgroundTintList(getResources().getColorStateList(R.color.colororange));
-                    click = false;
+                if (clickNuocCam) {
+                    btnNuocCam.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
+                    clickNuocCam = false;
                 } else {
                     btnNuocCam.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickNuocCam = true;
                 }
             }
         });
         btnPepsi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
-                    btnPepsi.setBackgroundTintList(getResources().getColorStateList(R.color.colororange));
-                    click = false;
+                if (clickPepsi) {
+                    btnPepsi.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
+                    clickPepsi = false;
                 } else {
                     btnPepsi.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickPepsi = true;
                 }
             }
         });
         btnBong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click) {
-                    btnBong.setBackgroundTintList(getResources().getColorStateList(R.color.colororange));
-                    click = false;
+                if (clickBong) {
+                    btnBong.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
+                    clickBong = false;
                 } else {
                     btnBong.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
-                    click = true;
+                    clickBong = true;
                 }
             }
         });

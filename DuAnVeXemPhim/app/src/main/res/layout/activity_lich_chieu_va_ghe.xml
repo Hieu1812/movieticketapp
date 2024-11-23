@@ -176,13 +176,14 @@
                 android:text="B"
                 android:backgroundTint="@color/colorgreen"
                 android:layout_marginLeft="20dp"/>
+
             <Button
                 android:id="@+id/btnH3C"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:text="C"
+                android:layout_marginLeft="20dp"
                 android:backgroundTint="@color/colorgreen"
-                android:layout_marginLeft="20dp"/>
+                android:text="C" />
         </LinearLayout>
         <!--        Hàng4-->
         <LinearLayout
