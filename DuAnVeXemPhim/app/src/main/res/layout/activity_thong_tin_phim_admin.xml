@@ -172,11 +172,6 @@
                     android:textStyle="bold"
                     android:textSize="18dp"
                     android:paddingBottom="5dp"/>
-                <EditText
-                    android:text="Đang xử lý ( không ảnh hưởng đến các phần sau )"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewActors"
                     android:layout_width="match_parent"

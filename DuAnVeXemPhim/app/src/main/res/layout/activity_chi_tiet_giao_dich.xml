@@ -80,7 +80,7 @@
                 android:id="@+id/tvTenRap"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Tên rạp: CGV Vincom"
+                android:text="Tên rạp: Lotte Tây Hồ"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
@@ -91,7 +91,7 @@
             <TextView
                 android:id="@+id/tvSoGhe"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:text="Số ghế: "
                 android:layout_marginTop="8dp"
                 android:textSize="20dp"

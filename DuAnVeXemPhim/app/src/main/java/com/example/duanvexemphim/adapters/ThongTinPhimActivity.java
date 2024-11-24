@@ -118,6 +118,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             @Override
             public void onClick(View view) {
                 Intent intentDatVe = new Intent(ThongTinPhimActivity.this, rap_va_lich_chieu.class);
+                intentDatVe.putExtra("movieNameNo1", movieName);
                 startActivity(intentDatVe);
             }
         });

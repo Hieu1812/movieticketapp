@@ -57,15 +57,16 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:gravity="center"
-                android:text="Thời gian:"
+                android:text="Suất chiếu:"
                 android:textStyle="bold"
                 android:textSize="17dp" />
             <!-- button đặt vé-->
-            <Button
-                android:id="@+id/btnGioChieu"
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tvGioChieu"
                 android:layout_width="90dp"
                 android:layout_height="35dp"
-                android:text="20:00"
+                android:text="00:00"
                 android:layout_marginLeft="20dp"
                 android:background="#d5dfed" />
         </LinearLayout>

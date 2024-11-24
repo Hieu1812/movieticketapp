@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +18,7 @@ import com.example.duanvexemphim.adapters.ThongTinPhimActivity;
 public class rap_va_lich_chieu extends AppCompatActivity {
 
     Button btnThoat;
-    Button btn1_TH, btn2_TH, btn3_TH, btn4_TH, btn5_TH, btn1_HD, btn2_HD, btn3_HD, btn4_HD, btn1_TL, btn2_TL, btn3_TL, btn4_TL;
-
+    Button btn1_TH, btn2_TH, btn3_TH, btn4_TH, btn5_TH;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +36,9 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn3_TH = findViewById(R.id.btn3_TH);
         btn4_TH = findViewById(R.id.btn4_TH);
         btn5_TH = findViewById(R.id.btn5_TH);
-        btn1_HD = findViewById(R.id.btn1_HD);
-        btn2_HD = findViewById(R.id.btn2_HD);
-        btn3_HD = findViewById(R.id.btn3_HD);
-        btn4_HD = findViewById(R.id.btn4_HD);
-        btn1_TL = findViewById(R.id.btn1_TL);
-        btn2_TL = findViewById(R.id.btn2_TL);
-        btn3_TL = findViewById(R.id.btn3_TL);
-        btn4_TL = findViewById(R.id.btn4_TL);
+        //
+        Intent intent = getIntent();
+        String movieNameNo1 = intent.getStringExtra("movieNameNo1");
         //
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,92 +50,50 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn1_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentbtn1_TH = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn1_TH);
+                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                intent.putExtra("GioChieu", "9:15");
+                intent.putExtra("movieNameNo2", movieNameNo1);
+                startActivity(intent);
             }
         });
+
         btn2_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentbtn2_TH = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn2_TH);
+                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                intent.putExtra("GioChieu", "13:15");
+                intent.putExtra("movieNameNo2", movieNameNo1);
+                startActivity(intent);
             }
         });
+
         btn3_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentbtn3_TH = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn3_TH);
+                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                intent.putExtra("GioChieu", "16:35");
+                intent.putExtra("movieNameNo2", movieNameNo1);
+                startActivity(intent);
             }
         });
+
         btn4_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentbtn4_TH = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn4_TH);
+                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                intent.putExtra("GioChieu", "20:45");
+                intent.putExtra("movieNameNo2", movieNameNo1);
+                startActivity(intent);
             }
         });
+
         btn5_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentbtn5_TH = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn5_TH);
-            }
-        });
-        btn1_HD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn1_HD = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn1_HD);
-            }
-        });
-        btn2_HD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn2_HD = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn2_HD);
-            }
-        });
-        btn3_HD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn3_HD = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn3_HD);
-            }
-        });
-        btn4_HD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn4_HD = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn4_HD);
-            }
-        });
-        btn1_TL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn1_TL = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn1_TL);
-            }
-        });
-        btn2_TL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn2_TL = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn2_TL);
-            }
-        });
-        btn3_TL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn3_TL = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn3_TL);
-            }
-        });
-        btn4_TL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentbtn4_TL = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
-                startActivity(intentbtn4_TL);
+                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                intent.putExtra("GioChieu", "23:05");
+                intent.putExtra("movieNameNo2", movieNameNo1);
+                startActivity(intent);
             }
         });
     }
