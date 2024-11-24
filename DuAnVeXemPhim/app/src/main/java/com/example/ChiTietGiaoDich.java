@@ -44,9 +44,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         } else {
             tvdoan.setText("Đồ ăn: Bạn không mua đồ ăn");
         }
-        if (ghe != null) {
-            tvSoGhe.setText("Số ghế: " + ghe);
-        }
+        tvSoGhe.setText("Số ghế: " + ghe);
         tvSuatChieu.setText("Suất chiếu: " + gioChieu2);
         tvTongTien.setText("Tổng tiền: " + tongTien + " VNĐ");
         tvTenPhim.setText("Tên phim: " + movieNameNo3);
@@ -54,8 +52,14 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentThoat = new Intent(ChiTietGiaoDich.this, LichChieuVaGhe.class);
-                startActivity(intentThoat);
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("movieNameNo3", tvTenPhim.getText().toString());
+                returnIntent.putExtra("gioChieu2", tvSuatChieu.getText().toString());
+                returnIntent.putExtra("ghe", tvSoGhe.getText().toString());
+                returnIntent.putExtra("doAn", tvdoan.getText().toString());
+                returnIntent.putExtra("tongTien", tvTongTien.getText().toString());
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         });
         //

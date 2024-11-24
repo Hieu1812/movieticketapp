@@ -38,13 +38,27 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn5_TH = findViewById(R.id.btn5_TH);
         //
         Intent intent = getIntent();
+        String movieID1 = intent.getStringExtra("movieID1");
         String movieNameNo1 = intent.getStringExtra("movieNameNo1");
+        String movieGenre1 = intent.getStringExtra("movieGenre1");
+        String movieDuration1 = intent.getStringExtra("movieDuration1");
+        String movieDescription1 = intent.getStringExtra("movieDescription1");
+        String moviePoster1 = intent.getStringExtra("moviePoster1");
+        String movieTrailer1 = intent.getStringExtra("movieTrailer1");
         //
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentThoat = new Intent(rap_va_lich_chieu.this, ThongTinPhimActivity.class);
-                startActivity(intentThoat);
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("movieID1", movieID1.toString());
+                returnIntent.putExtra("movieNameNo1", movieNameNo1.toString());
+                returnIntent.putExtra("movieGenre1", movieGenre1.toString());
+                returnIntent.putExtra("movieDuration1", movieDuration1.toString());
+                returnIntent.putExtra("movieDescription1", movieDescription1.toString());
+                returnIntent.putExtra("moviePoster1", moviePoster1.toString());
+                returnIntent.putExtra("movieTrailer1", movieTrailer1.toString());
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         });
         btn1_TH.setOnClickListener(new View.OnClickListener() {
