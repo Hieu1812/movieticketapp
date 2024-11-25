@@ -106,22 +106,22 @@
                             android:text="Phim được phổ biến đến người xem từ 18 tuổi trở lên"
                             android:layout_marginLeft="10dp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvTinhTrang"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="Tình trạng: Đã chiếu"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
+                            android:textColor="#fc0313"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tvTinhTrang"
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Tình trạng: Đã chiếu"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:textColor="#fc0313"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

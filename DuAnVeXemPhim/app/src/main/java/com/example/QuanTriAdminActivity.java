@@ -79,10 +79,6 @@ public class QuanTriAdminActivity extends AppCompatActivity {
                     Intent intent = new Intent(QuanTriAdminActivity.this, QuanTriAdminActivity.class);
                     startActivity(intent);
                     return true;
-                } else if (item.getItemId() == R.id.revenueAdmin) {
-                    Intent intent = new Intent(QuanTriAdminActivity.this, DoanhThuActivity.class);
-                    startActivity(intent);
-                    return true;
                 } else if (item.getItemId() == R.id.accountAdmin) {
                     Intent intent = new Intent(QuanTriAdminActivity.this, TaiKhoanAdminActivity.class);
                     startActivity(intent);
