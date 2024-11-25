@@ -1,10 +1,9 @@
-package com.example.duanvexemphim;
+package com.example;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.LichChieuVaGhe;
-import com.example.duanvexemphim.adapters.ThongTinPhimActivity;
+import com.example.duanvexemphim.R;
 
-public class rap_va_lich_chieu extends AppCompatActivity {
+public class RapVaLichChieuActivity extends AppCompatActivity {
 
     Button btnThoat;
     Button btn1_TH, btn2_TH, btn3_TH, btn4_TH, btn5_TH;
@@ -64,7 +62,7 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn1_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "9:15");
                 intent.putExtra("movieNameNo2", movieNameNo1);
                 startActivity(intent);
@@ -74,7 +72,7 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn2_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "13:15");
                 intent.putExtra("movieNameNo2", movieNameNo1);
                 startActivity(intent);
@@ -84,7 +82,7 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn3_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "16:35");
                 intent.putExtra("movieNameNo2", movieNameNo1);
                 startActivity(intent);
@@ -94,7 +92,7 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn4_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "20:45");
                 intent.putExtra("movieNameNo2", movieNameNo1);
                 startActivity(intent);
@@ -104,7 +102,7 @@ public class rap_va_lich_chieu extends AppCompatActivity {
         btn5_TH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rap_va_lich_chieu.this, LichChieuVaGhe.class);
+                Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "23:05");
                 intent.putExtra("movieNameNo2", movieNameNo1);
                 startActivity(intent);

@@ -1,4 +1,4 @@
-package com.example.duanvexemphim.adapters;
+package com.example;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +18,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.LichChieuVaGhe;
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.rap_va_lich_chieu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -117,14 +115,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, rap_va_lich_chieu.class);
-                intentDatVe.putExtra("movieID1", movieID);
-                intentDatVe.putExtra("movieNameNo1", movieName);
-                intentDatVe.putExtra("movieGenre1", movieGenre);
-                intentDatVe.putExtra("movieDuration1", movieDuration);
-                intentDatVe.putExtra("movieDescription1", movieDescription);
-                intentDatVe.putExtra("moviePoster1", moviePoster);
-                intentDatVe.putExtra("movieTrailer1", movieTrailerUrl);
+                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, RapVaLichChieuActivity.class);
                 startActivity(intentDatVe);
             }
         });

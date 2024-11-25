@@ -73,7 +73,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                 dialogDongY.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(ChiTietGiaoDich.this, chi_tiet_giao_dich.class);
+                        Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
                         startActivity(intent);
                         finish();
                     }

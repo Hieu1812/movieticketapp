@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 
-public class chi_tiet_giao_dich extends AppCompatActivity {
+public class ChiTietGiaoDich2Activity extends AppCompatActivity {
 
     Button btnTrangChu;
 
@@ -34,7 +34,7 @@ public class chi_tiet_giao_dich extends AppCompatActivity {
         btnTrangChu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentTrangChu = new Intent(chi_tiet_giao_dich.this, MainActivity.class);
+                Intent intentTrangChu = new Intent(ChiTietGiaoDich2Activity.this, MainActivity.class);
                 startActivity(intentTrangChu);
             }
         });

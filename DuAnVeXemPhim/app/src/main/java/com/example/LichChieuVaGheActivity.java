@@ -1,3 +1,4 @@
+
 package com.example;
 
 import android.content.Intent;
@@ -14,10 +15,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.adapters.ThongTinPhimActivity;
-import com.example.duanvexemphim.rap_va_lich_chieu;
+import com.example.ThongTinPhimActivity;
+import com.example.RapVaLichChieuActivity;
 
-public class LichChieuVaGhe extends AppCompatActivity {
+public class LichChieuVaGheActivity extends AppCompatActivity {
 
     TextView tvGioChieu;
     Button btnThoat, btnThanhToan;
@@ -82,7 +83,7 @@ public class LichChieuVaGhe extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (gheDaChon != null && !gheDaChon.isEmpty()) {
-                    Intent intent = new Intent(LichChieuVaGhe.this, ChiTietGiaoDich.class);
+                    Intent intent = new Intent(LichChieuVaGheActivity.this, ChiTietGiaoDich.class);
                     intent.putExtra("doAn", doAnDaChon);
                     intent.putExtra("ghe", gheDaChon);
                     intent.putExtra("tongTien", tongTien);
@@ -90,7 +91,7 @@ public class LichChieuVaGhe extends AppCompatActivity {
                     intent.putExtra("movieNameNo3", movieNameNo2);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LichChieuVaGhe.this, "Vui lòng chọn ghế ngồi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Vui lòng chọn ghế ngồi", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -101,13 +102,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH1A) {
                     gheDaChon = gheDaChon.replace("H1A, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H1A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H1A", Toast.LENGTH_SHORT).show();
                     btnH1A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH1A = false;
                 } else {
                     gheDaChon += "H1A, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H1A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H1A", Toast.LENGTH_SHORT).show();
                     btnH1A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH1A = true;
                 }
@@ -119,13 +120,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH1B) {
                     gheDaChon = gheDaChon.replace("H1B, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H1B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H1B", Toast.LENGTH_SHORT).show();
                     btnH1B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH1B = false;
                 } else {
                     gheDaChon += "H1B, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H1B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H1B", Toast.LENGTH_SHORT).show();
                     btnH1B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH1B = true;
                 }
@@ -137,13 +138,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH1C) {
                     gheDaChon = gheDaChon.replace("H1C, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H1C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H1C", Toast.LENGTH_SHORT).show();
                     btnH1C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH1C = false;
                 } else {
                     gheDaChon += "H1C, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H1C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H1C", Toast.LENGTH_SHORT).show();
                     btnH1C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH1C = true;
                 }
@@ -155,13 +156,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH2A) {
                     gheDaChon = gheDaChon.replace("H2A, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H2A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H2A", Toast.LENGTH_SHORT).show();
                     btnH2A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH2A = false;
                 } else {
                     gheDaChon += "H2A, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H2A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H2A", Toast.LENGTH_SHORT).show();
                     btnH2A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH2A = true;
                 }
@@ -173,13 +174,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH2B) {
                     gheDaChon = gheDaChon.replace("H2B, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H2B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H2B", Toast.LENGTH_SHORT).show();
                     btnH2B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH2B = false;
                 } else {
                     gheDaChon += "H2B, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H2B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H2B", Toast.LENGTH_SHORT).show();
                     btnH2B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH2B = true;
                 }
@@ -191,13 +192,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH2C) {
                     gheDaChon = gheDaChon.replace("H2C, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H2C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H2C", Toast.LENGTH_SHORT).show();
                     btnH2C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH2C = false;
                 } else {
                     gheDaChon += "H2C, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H2C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H2C", Toast.LENGTH_SHORT).show();
                     btnH2C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH2C = true;
                 }
@@ -209,13 +210,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH3A) {
                     gheDaChon = gheDaChon.replace("H3A, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H3A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H3A", Toast.LENGTH_SHORT).show();
                     btnH3A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH3A = false;
                 } else {
                     gheDaChon += "H3A, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H3A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H3A", Toast.LENGTH_SHORT).show();
                     btnH3A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH3A = true;
                 }
@@ -227,13 +228,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH3B) {
                     gheDaChon = gheDaChon.replace("H3B, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H3B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H3B", Toast.LENGTH_SHORT).show();
                     btnH3B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH3B = false;
                 } else {
                     gheDaChon += "H3B, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H3B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H3B", Toast.LENGTH_SHORT).show();
                     btnH3B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH3B = true;
                 }
@@ -245,13 +246,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH3C) {
                     gheDaChon = gheDaChon.replace("H3C, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H3C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H3C", Toast.LENGTH_SHORT).show();
                     btnH3C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH3C = false;
                 } else {
                     gheDaChon += "H3C, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H3C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H3C", Toast.LENGTH_SHORT).show();
                     btnH3C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH3C = true;
                 }
@@ -263,13 +264,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH4A) {
                     gheDaChon = gheDaChon.replace("H4A, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H4A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H4A", Toast.LENGTH_SHORT).show();
                     btnH4A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH4A = false;
                 } else {
                     gheDaChon += "H4A, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H4A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H4A", Toast.LENGTH_SHORT).show();
                     btnH4A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH4A = true;
                 }
@@ -281,13 +282,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH4B) {
                     gheDaChon = gheDaChon.replace("H4B, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H4B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H4B", Toast.LENGTH_SHORT).show();
                     btnH4B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH4B = false;
                 } else {
                     gheDaChon += "H4B, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H4B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H4B", Toast.LENGTH_SHORT).show();
                     btnH4B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH4B = true;
                 }
@@ -299,13 +300,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH4C) {
                     gheDaChon = gheDaChon.replace("H4C, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H4C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H4C", Toast.LENGTH_SHORT).show();
                     btnH4C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH4C = false;
                 } else {
                     gheDaChon += "H4C, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H4C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H4C", Toast.LENGTH_SHORT).show();
                     btnH4C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH4C = true;
                 }
@@ -317,13 +318,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH5A) {
                     gheDaChon = gheDaChon.replace("H5A, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H5A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H5A", Toast.LENGTH_SHORT).show();
                     btnH5A.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH5A = false;
                 } else {
                     gheDaChon += "H5A, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H5A", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H5A", Toast.LENGTH_SHORT).show();
                     btnH5A.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH5A = true;
                 }
@@ -335,13 +336,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH5B) {
                     gheDaChon = gheDaChon.replace("H5B, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H5B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H5B", Toast.LENGTH_SHORT).show();
                     btnH5B.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH5B = false;
                 } else {
                     gheDaChon += "H5B, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H5B", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H5B", Toast.LENGTH_SHORT).show();
                     btnH5B.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH5B = true;
                 }
@@ -353,13 +354,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickH5C) {
                     gheDaChon = gheDaChon.replace("H5C, ", "");
                     tongTien -= 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn ghế H5C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn ghế H5C", Toast.LENGTH_SHORT).show();
                     btnH5C.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickH5C = false;
                 } else {
                     gheDaChon += "H5C, ";
                     tongTien += 50000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn ghế H5C", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn ghế H5C", Toast.LENGTH_SHORT).show();
                     btnH5C.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickH5C = true;
                 }
@@ -371,13 +372,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickNuocCam) {
                     doAnDaChon = doAnDaChon.replace("Nước cam, ", "");
                     tongTien -= 30000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn Nước cam", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn Nước cam", Toast.LENGTH_SHORT).show();
                     btnNuocCam.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickNuocCam = false;
                 } else {
                     doAnDaChon += "Nước cam, ";
                     tongTien += 30000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn Nước cam", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn Nước cam", Toast.LENGTH_SHORT).show();
                     btnNuocCam.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickNuocCam = true;
                 }
@@ -389,13 +390,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickPepsi) {
                     doAnDaChon = doAnDaChon.replace("Pepsi, ", "");
                     tongTien -= 30000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn Pepsi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn Pepsi", Toast.LENGTH_SHORT).show();
                     btnPepsi.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickPepsi = false;
                 } else {
                     doAnDaChon += "Pepsi, ";
                     tongTien += 30000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn Pepsi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn Pepsi", Toast.LENGTH_SHORT).show();
                     btnPepsi.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickPepsi = true;
                 }
@@ -408,13 +409,13 @@ public class LichChieuVaGhe extends AppCompatActivity {
                 if (clickBong) {
                     doAnDaChon = doAnDaChon.replace("Bỏng, ", "");
                     tongTien -= 40000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã bỏ chọn Bỏng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã bỏ chọn Bỏng", Toast.LENGTH_SHORT).show();
                     btnBong.setBackgroundTintList(getResources().getColorStateList(R.color.colorgreen));
                     clickBong = false;
                 } else {
                     doAnDaChon += "Bỏng, ";
                     tongTien += 40000;
-                    Toast.makeText(LichChieuVaGhe.this, "Bạn đã chọn Bỏng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LichChieuVaGheActivity.this, "Bạn đã chọn Bỏng", Toast.LENGTH_SHORT).show();
                     btnBong.setBackgroundTintList(getResources().getColorStateList(R.color.colorblue));
                     clickBong = true;
                 }
