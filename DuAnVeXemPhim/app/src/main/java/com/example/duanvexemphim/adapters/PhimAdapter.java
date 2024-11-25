@@ -1,6 +1,8 @@
 package com.example.duanvexemphim.adapters;
 
 import android.content.Intent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ThongTinPhimActivity;
+import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhimAdapter extends  RecyclerView.Adapter<PhimAdapter.PhimViewHolder> {
@@ -52,6 +56,12 @@ public class PhimAdapter extends  RecyclerView.Adapter<PhimAdapter.PhimViewHolde
             intent.putExtra("movieDescription", movie.getDescription());
             intent.putExtra("movieTrailer", movie.getTrailer());
             intent.putExtra("moviePoster", movie.getPosterImage());
+            // Gửi thông tin các diễn viên qua Intent
+            ArrayList<Actor> actorArrayList = new ArrayList<>();
+            for (Actor actor : movie.getActorList()) {
+                actorArrayList.add(new Actor(actor.getActorName(), actor.getActorImage()));
+            }
+            intent.putExtra("actorList", actorArrayList);
             view.getContext().startActivity(intent);
         });
     }

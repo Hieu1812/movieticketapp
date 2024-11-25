@@ -18,12 +18,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.duanvexemphim.R;
+import com.example.duanvexemphim.models.Actor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +66,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
         String movieDescription = intent.getStringExtra("movieDescription");
         String moviePoster = intent.getStringExtra("moviePoster");
         String movieTrailerUrl = intent.getStringExtra("movieTrailer");
+        ArrayList<Actor> actorArrayList = (ArrayList<Actor>) getIntent().getSerializableExtra("actorList");
 
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +79,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                 returnIntent.putExtra("movieDescription", movieDescription);
                 returnIntent.putExtra("moviePoster", moviePoster);
                 returnIntent.putExtra("movieTrailer", movieTrailerUrl);
+                returnIntent.putExtra("actorList", actorArrayList);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
