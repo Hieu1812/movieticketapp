@@ -16,14 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.adapters.ActorAdapter;
+import com.example.duanvexemphim.adapters.ActorThongTinPhimAdapter;
 import com.example.duanvexemphim.models.Actor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThongTinPhimAdminActivity extends AppCompatActivity {
@@ -32,9 +35,8 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
     TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvND, tvActorList;
     ImageView imgPoster;
     WebView webViewTrailer;
-    RecyclerView recyclerViewActors;
-    ActorAdapter actorAdapter;
-    List<Actor> actorList;
+    ActorThongTinPhimAdapter actorThongTinPhimAdapter;
+    RecyclerView rvActors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         tvND = findViewById(R.id.tvND);
         imgPoster = findViewById(R.id.imgCam);
         webViewTrailer = findViewById(R.id.webViewTrailer);
-        recyclerViewActors = findViewById(R.id.recyclerViewActors);
+        rvActors = findViewById(R.id.rvActors);
 
         // Bật JavaScript trong WebView
         webViewTrailer.getSettings().setJavaScriptEnabled(true);
@@ -76,6 +78,11 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         String movieDescription = intent.getStringExtra("movieDescription");
         String moviePoster = intent.getStringExtra("moviePoster");
         String movieTrailerUrl = intent.getStringExtra("movieTrailer");
+        ArrayList<Actor> actorArrayList = (ArrayList<Actor>) getIntent().getSerializableExtra("actorList");
+        actorThongTinPhimAdapter = new ActorThongTinPhimAdapter(this, actorArrayList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        rvActors.setLayoutManager(gridLayoutManager);
+        rvActors.setAdapter(actorThongTinPhimAdapter);
 
         // Hiển thị các thông tin phim lên giao diện
         tvTenPhim.setText("Phim: " + movieName);
