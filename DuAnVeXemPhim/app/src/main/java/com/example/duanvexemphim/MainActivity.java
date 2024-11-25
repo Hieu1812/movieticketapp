@@ -22,6 +22,7 @@ import com.example.TaiKhoanCuaToi;
 import com.example.VeCuaToi;
 import com.example.duanvexemphim.adapters.PhotoAdapter;
 import com.example.duanvexemphim.adapters.TheLoaiAdapter;
+import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.models.Photo;
 import com.example.duanvexemphim.models.TheLoai;
@@ -162,7 +163,17 @@ public class MainActivity extends AppCompatActivity {
                     String genre = dataSnapshot.child("genre").getValue(String.class);
                     String trailer = dataSnapshot.child("trailer").getValue(String.class);
                     Double vote = dataSnapshot.child("vote").getValue(Double.class);
-                    listMovie1.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, new ArrayList<>()));
+                    ArrayList<Actor> actorList = new ArrayList<>();
+                    DataSnapshot actorsSnapshot = dataSnapshot.child("actorList");
+                    if (actorsSnapshot.exists()) {
+                        for (DataSnapshot actorSnapshot : actorsSnapshot.getChildren()) {
+                            String actorName = actorSnapshot.child("actorName").getValue(String.class);
+                            String actorImage = actorSnapshot.child("actorImage").getValue(String.class);
+                            Actor actor = new Actor(actorName, actorImage);
+                            actorList.add(actor);
+                        }
+                    }
+                    listMovie1.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, actorList));
                 }
                 theLoaiAdapter.notifyDataSetChanged();
             }

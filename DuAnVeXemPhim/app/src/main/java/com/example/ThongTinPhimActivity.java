@@ -1,7 +1,8 @@
-package com.example.duanvexemphim.adapters;
+package com.example;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -16,13 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.LichChieuVaGhe;
 import com.example.duanvexemphim.MainActivity;
+import com.example.duanvexemphim.adapters.ActorAdapter;
+import com.example.duanvexemphim.adapters.ActorThongTinPhimAdapter;
+import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.rap_va_lich_chieu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,15 +35,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ThongTinPhimActivity extends AppCompatActivity implements Serializable {
+    ActorThongTinPhimAdapter actorThongTinPhimAdapter;
+    RecyclerView rvActors;
     Movie movie;
     ImageView imgPoster, imgActor;
     TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvNDPhim, tvActorName;
     Button btnThoat, btnDatVe, btnThich;
     WebView webViewTrailer;
     private boolean clicktym = false;
-    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +58,6 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             return insets;
         });
         imgPoster = findViewById(R.id.imgPhim);
-        imgActor = findViewById(R.id.imgActor);
         tvTenPhim = findViewById(R.id.tvTenPhim);
         tvTheLoai = findViewById(R.id.tvTheLoai);
         tvNDPhim = findViewById(R.id.tvNDPhim);
@@ -60,10 +66,9 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         btnDatVe = findViewById(R.id.btnDatVe);
         btnThich = findViewById(R.id.btnThich);
         webViewTrailer = findViewById(R.id.webViewTrailer);
+        rvActors = findViewById(R.id.rvActors);
 
         Intent intent = getIntent();
-        Bundle data = intent.getExtras();
-        //
 
         // Bật JavaScript trong WebView
         webViewTrailer.getSettings().setJavaScriptEnabled(true);
@@ -84,6 +89,11 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         String movieDescription = intent.getStringExtra("movieDescription");
         String moviePoster = intent.getStringExtra("moviePoster");
         String movieTrailerUrl = intent.getStringExtra("movieTrailer");
+        ArrayList<Actor> actorArrayList = (ArrayList<Actor>) getIntent().getSerializableExtra("actorList");
+        actorThongTinPhimAdapter = new ActorThongTinPhimAdapter(this, actorArrayList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        rvActors.setLayoutManager(gridLayoutManager);
+        rvActors.setAdapter(actorThongTinPhimAdapter);
 
         // Hiển thị các thông tin phim lên giao diện
         tvTenPhim.setText("Phim: " + movieName);
@@ -105,7 +115,6 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             // Đưa nội dung HTML vào WebView
             webViewTrailer.loadData(htmlContent, "text/html", "UTF-8");
         }
-        //
 
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,14 +126,15 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, rap_va_lich_chieu.class);
-                intentDatVe.putExtra("movieID1", movieID);
-                intentDatVe.putExtra("movieNameNo1", movieName);
-                intentDatVe.putExtra("movieGenre1", movieGenre);
-                intentDatVe.putExtra("movieDuration1", movieDuration);
-                intentDatVe.putExtra("movieDescription1", movieDescription);
-                intentDatVe.putExtra("moviePoster1", moviePoster);
-                intentDatVe.putExtra("movieTrailer1", movieTrailerUrl);
+                Intent intentDatVe = new Intent(ThongTinPhimActivity.this, RapVaLichChieuActivity.class);
+                intentDatVe.putExtra("movieID", movieID);
+                intentDatVe.putExtra("movieName", movieName);
+                intentDatVe.putExtra("movieGenre", movieGenre);
+                intentDatVe.putExtra("movieDuration", movieDuration);
+                intentDatVe.putExtra("movieDescription", movieDescription);
+                intentDatVe.putExtra("moviePoster", moviePoster);
+                intentDatVe.putExtra("movieTrailer", movieTrailerUrl);
+                intentDatVe.putExtra("actorList", actorArrayList);
                 startActivity(intentDatVe);
             }
         });

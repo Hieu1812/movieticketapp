@@ -133,10 +133,6 @@
                 android:hint="Link YouTube"
                 android:textSize="18dp"
                 android:inputType="textUri" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewActors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
             <!-- Nút lưu -->
             <Button
                 android:id="@+id/btnCapNhat"
@@ -146,6 +142,10 @@
                 android:backgroundTint="#fc0313"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="15dp" />
+            <TextView
+                android:id="@+id/tvAn"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"/>
         </LinearLayout>
     </ScrollView>
 

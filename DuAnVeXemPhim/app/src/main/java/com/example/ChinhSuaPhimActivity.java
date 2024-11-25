@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,7 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
     EditText edtTenPhim, edtThoiLuong, edtNDPhim, edtTrailerLink;
     Spinner spinnerTheLoai;
     ImageView imgPhim;
+    TextView tvAn;
     String movieId, movieName, movieGenre, movieDuration, movieDescription, movieTrailer, moviePoster;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
@@ -60,6 +62,7 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
         edtTrailerLink = findViewById(R.id.edtTrailerLink);
         spinnerTheLoai = findViewById(R.id.spinnerTheLoai);
         imgPhim = findViewById(R.id.imgPhim);
+        tvAn = findViewById(R.id.tvAn);
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
@@ -85,6 +88,18 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
         spinnerTheLoai.setAdapter(adapter);
         int genrePosition = adapter.getPosition(movieGenre);
         spinnerTheLoai.setSelection(genrePosition);
+
+        // Hàm thay đổi chiều cao của TextView tvAn
+        View.OnFocusChangeListener focusChangeListener = (view, hasFocus) -> {
+            if (hasFocus) {
+                tvAn.getLayoutParams().height = (int) getResources().getDisplayMetrics().density * 600;
+            } else {
+                tvAn.getLayoutParams().height = 0;
+            }
+            tvAn.requestLayout();
+        };
+        edtNDPhim.setOnFocusChangeListener(focusChangeListener);
+        edtTrailerLink.setOnFocusChangeListener(focusChangeListener);
 
 
         // Xử lý nút Thoát

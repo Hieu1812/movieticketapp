@@ -23,7 +23,7 @@
             android:name="com.example.ThongTinPhimAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".rap_va_lich_chieu"
+            android:name="com.example.RapVaLichChieuActivity"
             android:exported="false" />
         <activity
             android:name="com.example.DoanhThuActivity"
@@ -41,7 +41,7 @@
             android:name="com.example.QuanTriAdminActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.chi_tiet_giao_dich"
+            android:name="com.example.ChiTietGiaoDich2Activity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name="com.example.LoginActivity" -->
         <!-- android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt; -->
@@ -70,11 +70,16 @@
             android:name="com.example.ChiTietGiaoDich"
             android:exported="false" />
         <activity
-            android:name="com.example.LichChieuVaGhe"
+            android:name="com.example.LichChieuVaGheActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".adapters.ThongTinPhimActivity"
             android:exported="false" />
+=======
+            android:name="com.example.ThongTinPhimActivity"
+            android:exported="false"/>
+>>>>>>> bf892d6351f3f00e15114dde0971269b91822cc3
         <activity
             android:name=".MainActivity"
             android:exported="false"

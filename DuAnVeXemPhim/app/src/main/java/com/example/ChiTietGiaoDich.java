@@ -90,6 +90,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                 dialogDongY.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+<<<<<<< HEAD
                         isSeatSold(ghe, new OnSeatCheckListener() {
                             @Override
                             public void onSeatChecked(boolean isSold) {
@@ -119,6 +120,11 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                 }
                             }
                         });
+=======
+                        Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
+                        startActivity(intent);
+                        finish();
+>>>>>>> bf892d6351f3f00e15114dde0971269b91822cc3
                     }
                 });
 

@@ -1,7 +1,9 @@
 package com.example.duanvexemphim.models;
 
 
-public class Actor {
+import java.io.Serializable;
+
+public class Actor implements Serializable {
     private String actorName;
     private String actorImage;
 

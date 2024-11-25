@@ -6,10 +6,6 @@
         android:icon="@drawable/home"
         android:id="@+id/homeAdmin"/>
     <item
-        android:title="Doanh thu"
-        android:icon="@drawable/money_24"
-        android:id="@+id/revenueAdmin"/>
-    <item
         android:title="Tài Khoản"
         android:icon="@drawable/baseline_account_circle_24"
         android:id="@+id/accountAdmin"/>

@@ -16,7 +16,7 @@ import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.gui_mail;
 
-public class chi_tiet_giao_dich extends AppCompatActivity {
+public class ChiTietGiaoDich2Activity extends AppCompatActivity {
 
     TextView tvTenPhim, tvSuatChieu, tvTenRap, tvSoGhe, tvPTThanhToan, tvSoTien;
     Button btnTrangChu, btnGuiEmail;
@@ -58,7 +58,7 @@ public class chi_tiet_giao_dich extends AppCompatActivity {
         btnTrangChu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentTrangChu = new Intent(chi_tiet_giao_dich.this, MainActivity.class);
+                Intent intentTrangChu = new Intent(ChiTietGiaoDich2Activity.this, MainActivity.class);
                 startActivity(intentTrangChu);
             }
         });
