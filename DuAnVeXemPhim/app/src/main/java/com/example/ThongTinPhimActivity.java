@@ -60,8 +60,6 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         webViewTrailer = findViewById(R.id.webViewTrailer);
 
         Intent intent = getIntent();
-        Bundle data = intent.getExtras();
-        //
 
         // Bật JavaScript trong WebView
         webViewTrailer.getSettings().setJavaScriptEnabled(true);
@@ -116,6 +114,13 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             @Override
             public void onClick(View view) {
                 Intent intentDatVe = new Intent(ThongTinPhimActivity.this, RapVaLichChieuActivity.class);
+                intentDatVe.putExtra("movieID", movieID);
+                intentDatVe.putExtra("movieName", movieName);
+                intentDatVe.putExtra("movieGenre", movieGenre);
+                intentDatVe.putExtra("movieDuration", movieDuration);
+                intentDatVe.putExtra("movieDescription", movieDescription);
+                intentDatVe.putExtra("moviePoster", moviePoster);
+                intentDatVe.putExtra("movieTrailer", movieTrailerUrl);
                 startActivity(intentDatVe);
             }
         });

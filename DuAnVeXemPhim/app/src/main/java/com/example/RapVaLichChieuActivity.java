@@ -4,17 +4,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.duanvexemphim.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RapVaLichChieuActivity extends AppCompatActivity {
-
+    TextView tvNameTheater, tvAddress, tvHotline;
+    ImageButton imgTheater;
     Button btnThoat;
     Button btn1_TH, btn2_TH, btn3_TH, btn4_TH, btn5_TH;
     @Override
@@ -28,33 +43,39 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             return insets;
         });
         //
+        tvNameTheater = findViewById(R.id.tvNameTheater);
+        tvAddress = findViewById(R.id.tvAddress);
+        tvHotline = findViewById(R.id.tvHotline);
+        imgTheater = findViewById(R.id.imgTheater);
         btnThoat = findViewById(R.id.btnThoat);
         btn1_TH = findViewById(R.id.btn1_TH);
         btn2_TH = findViewById(R.id.btn2_TH);
         btn3_TH = findViewById(R.id.btn3_TH);
         btn4_TH = findViewById(R.id.btn4_TH);
         btn5_TH = findViewById(R.id.btn5_TH);
-        //
+
+        fetchTheaterInfoFromFirebase();
+
         Intent intent = getIntent();
-        String movieID1 = intent.getStringExtra("movieID1");
-        String movieNameNo1 = intent.getStringExtra("movieNameNo1");
-        String movieGenre1 = intent.getStringExtra("movieGenre1");
-        String movieDuration1 = intent.getStringExtra("movieDuration1");
-        String movieDescription1 = intent.getStringExtra("movieDescription1");
-        String moviePoster1 = intent.getStringExtra("moviePoster1");
-        String movieTrailer1 = intent.getStringExtra("movieTrailer1");
-        //
+        String movieID = intent.getStringExtra("movieID");
+        String movieName = intent.getStringExtra("movieName");
+        String movieGenre = intent.getStringExtra("movieGenre");
+        String movieDuration = intent.getStringExtra("movieDuration");
+        String movieDescription = intent.getStringExtra("movieDescription");
+        String moviePoster = intent.getStringExtra("moviePoster");
+        String movieTrailerUrl = intent.getStringExtra("movieTrailer");
+
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("movieID1", movieID1.toString());
-                returnIntent.putExtra("movieNameNo1", movieNameNo1.toString());
-                returnIntent.putExtra("movieGenre1", movieGenre1.toString());
-                returnIntent.putExtra("movieDuration1", movieDuration1.toString());
-                returnIntent.putExtra("movieDescription1", movieDescription1.toString());
-                returnIntent.putExtra("moviePoster1", moviePoster1.toString());
-                returnIntent.putExtra("movieTrailer1", movieTrailer1.toString());
+                returnIntent.putExtra("movieID", movieID);
+                returnIntent.putExtra("movieName", movieName);
+                returnIntent.putExtra("movieGenre", movieGenre);
+                returnIntent.putExtra("movieDuration", movieDuration);
+                returnIntent.putExtra("movieDescription", movieDescription);
+                returnIntent.putExtra("moviePoster", moviePoster);
+                returnIntent.putExtra("movieTrailer", movieTrailerUrl);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -64,7 +85,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "9:15");
-                intent.putExtra("movieNameNo2", movieNameNo1);
+                intent.putExtra("movieNameNo2", movieName);
                 startActivity(intent);
             }
         });
@@ -74,7 +95,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "13:15");
-                intent.putExtra("movieNameNo2", movieNameNo1);
+                intent.putExtra("movieNameNo2", movieName);
                 startActivity(intent);
             }
         });
@@ -84,7 +105,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "16:35");
-                intent.putExtra("movieNameNo2", movieNameNo1);
+                intent.putExtra("movieNameNo2", movieName);
                 startActivity(intent);
             }
         });
@@ -94,7 +115,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "20:45");
-                intent.putExtra("movieNameNo2", movieNameNo1);
+                intent.putExtra("movieNameNo2", movieName);
                 startActivity(intent);
             }
         });
@@ -104,9 +125,37 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
                 intent.putExtra("GioChieu", "23:05");
-                intent.putExtra("movieNameNo2", movieNameNo1);
+                intent.putExtra("movieNameNo2", movieName);
                 startActivity(intent);
             }
         });
     }
+    private void fetchTheaterInfoFromFirebase() {
+        DatabaseReference theaterRef = FirebaseDatabase.getInstance().getReference("Theaters").child("-OCXs03BSPCM809x38-r");
+
+        theaterRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    String address = snapshot.child("address").getValue(String.class);
+                    String hotline = snapshot.child("hotline").getValue(String.class);
+                    String imageURL = snapshot.child("imageURL").getValue(String.class);
+
+                    tvNameTheater.setText(name);
+                    tvAddress.setText(address);
+                    tvHotline.setText(hotline);
+                    Glide.with(RapVaLichChieuActivity.this)
+                            .load(imageURL)
+                            .into(imgTheater);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(RapVaLichChieuActivity.this, "Không thể tải thông tin rạp.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }
