@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="App Xem Phim"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/avtapp"
+        android:label="Cinemas Việt Nam"
+        android:roundIcon="@drawable/avtapp"
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAnVeXemPhim"
         tools:targetApi="31">
@@ -21,9 +21,6 @@
             android:exported="false" />
         <activity
             android:name="com.example.RapVaLichChieuActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.DoanhThuActivity"
             android:exported="false" />
         <activity
             android:name="com.example.TaiKhoanAdminActivity"
@@ -39,9 +36,7 @@
             android:exported="false" />
         <activity
             android:name="com.example.ChiTietGiaoDich2Activity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name="com.example.LoginActivity" -->
-        <!-- android:exported="false" /> &lt;!&ndash; Activity Đăng Ký &ndash;&gt; -->
+            android:exported="false" />
         <activity
             android:name="com.example.RegisterActivity"
             android:exported="false" />
@@ -50,7 +45,6 @@
             android:exported="true"> <!-- Activity Đăng Nhập (LoginActivity) sẽ là màn hình đầu tiên khi mở ứng dụng -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
