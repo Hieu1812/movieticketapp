@@ -88,14 +88,11 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                     intent.putExtra("movieTrailer", movie.getTrailer());
                     intent.putExtra("moviePoster", movie.getPosterImage());
                     // Gửi thông tin các diễn viên qua Intent
-                    ArrayList<String> actorNames = new ArrayList<>();
-                    ArrayList<String> actorImages = new ArrayList<>();
+                    ArrayList<Actor> actorArrayList = new ArrayList<>();
                     for (Actor actor : movie.getActorList()) {
-                        actorNames.add(actor.getActorName());
-                        actorImages.add(actor.getActorImage());
+                        actorArrayList.add(new Actor(actor.getActorName(), actor.getActorImage()));
                     }
-                    intent.putStringArrayListExtra("actorNames", actorNames);
-                    intent.putStringArrayListExtra("actorImages", actorImages);
+                    intent.putExtra("actorList", actorArrayList);
                     // Gửi các thông tin về bộ phim qua Intent
                     context.startActivity(intent);
                 }

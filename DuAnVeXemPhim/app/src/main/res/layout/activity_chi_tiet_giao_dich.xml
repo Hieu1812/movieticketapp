@@ -91,7 +91,7 @@
             <TextView
                 android:id="@+id/tvSoGhe"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:text="Số ghế: "
                 android:layout_marginTop="8dp"
                 android:textSize="20dp"
@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/tvPTThanhToan"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="70dp"
                 android:text="PT thanh toán: Thanh toán bằng momo"
                 android:layout_marginTop="8dp"
                 android:textSize="20dp"
