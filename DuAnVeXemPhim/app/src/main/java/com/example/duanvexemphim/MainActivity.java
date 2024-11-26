@@ -224,7 +224,17 @@ public class MainActivity extends AppCompatActivity {
                         String genre = dataSnapshot.child("genre").getValue(String.class);
                         String trailer = dataSnapshot.child("trailer").getValue(String.class);
                         Double vote = dataSnapshot.child("vote").getValue(Double.class);
-                        listPhim.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, new ArrayList<>()));
+                        ArrayList<Actor> actorList = new ArrayList<>();
+                        DataSnapshot actorsSnapshot = dataSnapshot.child("actorList");
+                        if (actorsSnapshot.exists()) {
+                            for (DataSnapshot actorSnapshot : actorsSnapshot.getChildren()) {
+                                String actorName = actorSnapshot.child("actorName").getValue(String.class);
+                                String actorImage = actorSnapshot.child("actorImage").getValue(String.class);
+                                Actor actor = new Actor(actorName, actorImage);
+                                actorList.add(actor);
+                            }
+                        }
+                        listPhim.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, actorList));
                     }
                 }
                 theLoaiAdapter.notifyDataSetChanged();
