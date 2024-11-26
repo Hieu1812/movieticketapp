@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvTheLoai;
     private TheLoaiAdapter theLoaiAdapter;
     private PhotoAdapter photoAdapter;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
     BottomNavigationView bottomNavigationView;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -115,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
                 mHandler.postDelayed(mRunnable, 3000);
             }
         });
+        photoAdapter.registerAdapterDataObserver(mCircleIndicator3.getAdapterDataObserver());
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
         //phim nổi bật
         List<Movie> listMovie1 = new ArrayList<>();
-//        listPhim1.add(new Phim(R.drawable.cam, "Cám"));
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

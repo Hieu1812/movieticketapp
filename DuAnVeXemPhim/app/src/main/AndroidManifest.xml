@@ -26,9 +26,6 @@
             android:name="com.example.RapVaLichChieuActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.DoanhThuActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.TaiKhoanAdminActivity"
             android:exported="false" />
         <activity
@@ -73,13 +70,8 @@
             android:name="com.example.LichChieuVaGheActivity"
             android:exported="false" />
         <activity
-<<<<<<< HEAD
-            android:name=".adapters.ThongTinPhimActivity"
-            android:exported="false" />
-=======
             android:name="com.example.ThongTinPhimActivity"
-            android:exported="false"/>
->>>>>>> bf892d6351f3f00e15114dde0971269b91822cc3
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false"

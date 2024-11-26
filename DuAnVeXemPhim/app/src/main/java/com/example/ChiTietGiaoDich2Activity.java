@@ -67,7 +67,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Gửi email xác nhận giao dịch
-                Intent emailIntent = new Intent(chi_tiet_giao_dich.this, gui_mail.class);
+                Intent emailIntent = new Intent(ChiTietGiaoDich2Activity.this, gui_mail.class);
                 startActivity(emailIntent);
             }
         });
