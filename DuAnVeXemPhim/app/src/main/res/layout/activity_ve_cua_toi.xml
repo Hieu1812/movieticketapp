@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.VeCuaToi">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +50,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,38 +70,9 @@
                     android:textSize="20dp"
                     android:textStyle="bold"/>
             </LinearLayout>
-<!--            hiển thị vé đã xem-->
+            <!--            hiển thị vé đã xem-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewViewed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/close"/>
-                <TextView
-                    android:id="@+id/tvVeChuaXem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Vé chưa xem:"
-                    android:textSize="20dp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
-            <!--            hiển thị vé chưa xem-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewUnviewed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp" />

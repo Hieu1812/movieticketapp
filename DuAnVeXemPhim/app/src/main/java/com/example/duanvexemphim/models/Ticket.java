@@ -7,23 +7,19 @@ public class Ticket {
     private String ticketID;
     private String userID;
     private String showTimeID;
-    private List<String> bookedSeat;
-    private LocalTime purchaseTime;
-    private int ticketPrice;
-    private int totalAmount;
+    private Integer ticketPrice;
     private String paymentStatus;
+    private List<String> seats;
 
     public Ticket() {};
 
-    public Ticket(String ticketID, String userID, String showTimeID, List<String> bookedSeat, LocalTime purchaseTime, int ticketPrice, int totalAmount, String paymentStatus) {
+    public Ticket(String ticketID, String userID, String showTimeID, Integer ticketPrice, String paymentStatus, List<String> seats) {
         this.ticketID = ticketID;
         this.userID = userID;
         this.showTimeID = showTimeID;
-        this.bookedSeat = bookedSeat;
-        this.purchaseTime = purchaseTime;
         this.ticketPrice = ticketPrice;
-        this.totalAmount = totalAmount;
         this.paymentStatus = paymentStatus;
+        this.seats = seats;
     }
 
     public String getTicketID() {
@@ -50,21 +46,6 @@ public class Ticket {
         this.showTimeID = showTimeID;
     }
 
-    public List<String> getBookedSeat() {
-        return bookedSeat;
-    }
-
-    public void setBookedSeat(List<String> bookedSeat) {
-        this.bookedSeat = bookedSeat;
-    }
-
-    public LocalTime getPurchaseTime() {
-        return purchaseTime;
-    }
-
-    public void setPurchaseTime(LocalTime purchaseTime) {
-        this.purchaseTime = purchaseTime;
-    }
 
     public int getTicketPrice() {
         return ticketPrice;
@@ -74,13 +55,6 @@ public class Ticket {
         this.ticketPrice = ticketPrice;
     }
 
-    public int getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
-    }
 
     public String getPaymentStatus() {
         return paymentStatus;
@@ -88,5 +62,17 @@ public class Ticket {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public void setTicketPrice(Integer ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public List<String> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<String> seats) {
+        this.seats = seats;
     }
 }

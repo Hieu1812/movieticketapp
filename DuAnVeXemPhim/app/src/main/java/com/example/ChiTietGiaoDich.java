@@ -90,7 +90,6 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                 dialogDongY.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-<<<<<<< HEAD
                         isSeatSold(ghe, new OnSeatCheckListener() {
                             @Override
                             public void onSeatChecked(boolean isSold) {
@@ -105,7 +104,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                                 }
                                             }).show();
                                 } else {
-                                    Intent intent = new Intent(ChiTietGiaoDich.this, chi_tiet_giao_dich.class);
+                                    Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich.class);
                                     intent.putExtra("movieNameNo3", movieNameNo3);
                                     intent.putExtra("gioChieu2", gioChieu2);
                                     intent.putExtra("ghe", ghe);
@@ -120,11 +119,9 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                 }
                             }
                         });
-=======
                         Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
                         startActivity(intent);
                         finish();
->>>>>>> bf892d6351f3f00e15114dde0971269b91822cc3
                     }
                 });
 
@@ -169,7 +166,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         }
         int ticketPrice = totalAmount / bookedSeats.size();
 
-        Ticket ticket = new Ticket(ticketId, userID, showTimeID, bookedSeats, purchaseTime, ticketPrice, totalAmount, paymentStatus);
+        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats);
         mDatabase.child(ticketId).setValue(ticket);
     }
 
