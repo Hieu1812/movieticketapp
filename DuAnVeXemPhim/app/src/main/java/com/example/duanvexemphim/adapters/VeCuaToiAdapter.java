@@ -46,7 +46,7 @@ public class VeCuaToiAdapter extends RecyclerView.Adapter<VeCuaToiAdapter.VeCuaT
         }
 //        holder.tvName.append(ticket.getMovie().getName());
         holder.tvTime.setText(ticket.getShowTimeID());
-        holder.tvTicketID.setText(ticket.getTicketID());
+        holder.tvTicketID.setText(ticket.getTicketId());
 //        Glide.with(context).load(ticket.getMovie().getPosterImage()).into(holder.Poster);
     }
 

@@ -4,30 +4,32 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class Ticket {
-    private String ticketID;
+    private String ticketId;
     private String userID;
     private String showTimeID;
-    private Integer ticketPrice;
+    private int ticketPrice;
     private String paymentStatus;
-    private List<String> seats;
+    private List<String> bookedSeats;
+    private String movieName; // Thêm thuộc tính movieName
 
-    public Ticket() {};
-
-    public Ticket(String ticketID, String userID, String showTimeID, Integer ticketPrice, String paymentStatus, List<String> seats) {
-        this.ticketID = ticketID;
+    // Constructor
+    public Ticket(String ticketId, String userID, String showTimeID, int ticketPrice, String paymentStatus, List<String> bookedSeats, String movieName) {
+        this.ticketId = ticketId;
         this.userID = userID;
         this.showTimeID = showTimeID;
         this.ticketPrice = ticketPrice;
         this.paymentStatus = paymentStatus;
-        this.seats = seats;
+        this.bookedSeats = bookedSeats;
+        this.movieName = movieName;
     }
 
-    public String getTicketID() {
-        return ticketID;
+    // Getters and Setters
+    public String getTicketId() {
+        return ticketId;
     }
 
-    public void setTicketID(String ticketID) {
-        this.ticketID = ticketID;
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
     }
 
     public String getUserID() {
@@ -46,7 +48,6 @@ public class Ticket {
         this.showTimeID = showTimeID;
     }
 
-
     public int getTicketPrice() {
         return ticketPrice;
     }
@@ -54,7 +55,6 @@ public class Ticket {
     public void setTicketPrice(int ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
-
 
     public String getPaymentStatus() {
         return paymentStatus;
@@ -64,15 +64,19 @@ public class Ticket {
         this.paymentStatus = paymentStatus;
     }
 
-    public void setTicketPrice(Integer ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public List<String> getBookedSeats() {
+        return bookedSeats;
     }
 
-    public List<String> getSeats() {
-        return seats;
+    public void setBookedSeats(List<String> bookedSeats) {
+        this.bookedSeats = bookedSeats;
     }
 
-    public void setSeats(List<String> seats) {
-        this.seats = seats;
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 }
