@@ -123,9 +123,6 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                 }
                             }
                         });
-                        Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
-                        startActivity(intent);
-                        finish();
                     }
                 });
 
