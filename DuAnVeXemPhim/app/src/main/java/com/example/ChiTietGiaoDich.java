@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.models.Ticket;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -163,6 +164,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
 
     private void saveTicketDataToDatabase(String userID, String movieName, String showTimeID, List<String> bookedSeats, int totalAmount, String paymentStatus) {
         String ticketId = mDatabase.push().getKey();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         LocalTime purchaseTime = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             purchaseTime = LocalTime.now();
