@@ -104,7 +104,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                                 }
                                             }).show();
                                 } else {
-                                    Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich.class);
+                                    Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
                                     intent.putExtra("movieNameNo3", movieNameNo3);
                                     intent.putExtra("gioChieu2", gioChieu2);
                                     intent.putExtra("ghe", ghe);
@@ -166,7 +166,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         }
         int ticketPrice = totalAmount / bookedSeats.size();
 
-        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats);
+        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats, movieName);
         mDatabase.child(ticketId).setValue(ticket);
     }
 

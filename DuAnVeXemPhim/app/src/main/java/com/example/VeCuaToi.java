@@ -38,7 +38,6 @@ public class VeCuaToi extends AppCompatActivity {
     String ten, poster;
     RecyclerView rcvTicket;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,54 +65,48 @@ public class VeCuaToi extends AppCompatActivity {
 
         adapter.setTickets(getTicket());
         rcvTicket.setAdapter(adapter);
-
-
     }
-    public List<Ticket> getTicket(){
+
+    public List<Ticket> getTicket() {
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Tickets");
         List<Ticket> ve = new ArrayList<>();
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     if (id.equals(dataSnapshot.child("userID").getValue(String.class))) {
-                        Toast.makeText(VeCuaToi.this,"co ve", Toast.LENGTH_SHORT).show();
-                        String movieid = dataSnapshot.child("movieID").getValue(String.class);
-//                        List<Movie> mv = new ArrayList<>();
-//                        getmovie(movieid, mv);
+                        Toast.makeText(VeCuaToi.this, "Có vé", Toast.LENGTH_SHORT).show();
+                        String movieName = dataSnapshot.child("movieName").getValue(String.class); // Lấy movieName
                         String ticketID = dataSnapshot.child("ticketID").getValue(String.class);
                         String showTimeID = dataSnapshot.child("showTimeID").getValue(String.class);
-//                        String userID = dataSnapshot.child("userID").getValue(String.class);
                         Integer ticketPrice = dataSnapshot.child("ticketPrice").getValue(Integer.class);
-                        Integer totalAmount = dataSnapshot.child("totalAmount").getValue(Integer.class);
                         String paymentStatus = dataSnapshot.child("paymentStatus").getValue(String.class);
-//                        String showtime = dataSnapshot.child("showtime").getValue(String.class);
-                        List seats = dataSnapshot.child("seats").getValue(List.class);
-                        ve.add(new Ticket(ticketID, id, showTimeID, ticketPrice, paymentStatus, seats));
+                        List<String> seats = (List<String>) dataSnapshot.child("seats").getValue();
+
+                        ve.add(new Ticket(ticketID, id, showTimeID, ticketPrice, paymentStatus, seats, movieName));
                     }
                 }
                 adapter.notifyDataSetChanged();
-
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(VeCuaToi.this, error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(VeCuaToi.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
         });
         return ve;
     }
 
-    public void getmovie(String id, List<Movie> listMovie){
+    public void getmovie(String id, List<Movie> listMovie) {
         DatabaseReference dbs = FirebaseDatabase.getInstance().getReference("Movies");
         dbs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    if (dataSnapshot.child("movieID").getValue(String.class).equals(id)){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if (dataSnapshot.child("movieID").getValue(String.class).equals(id)) {
                         String movieID = dataSnapshot.child("movieID").getValue(String.class);
-                        String name =  dataSnapshot.child("name").getValue(String.class);
+                        String name = dataSnapshot.child("name").getValue(String.class);
                         String img = dataSnapshot.child("posterImage").getValue(String.class);
                         String description = dataSnapshot.child("description").getValue(String.class);
                         String durationTime = dataSnapshot.child("durationTime").getValue(String.class);
