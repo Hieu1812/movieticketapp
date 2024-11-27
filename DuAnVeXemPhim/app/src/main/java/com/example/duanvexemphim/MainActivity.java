@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.PhimYeuThich;
-import com.example.TaiKhoanCuaToi;
+import com.example.TaiKhoanCuaToiActivity;
 import com.example.VeCuaToi;
 import com.example.duanvexemphim.adapters.PhotoAdapter;
 import com.example.duanvexemphim.adapters.TheLoaiAdapter;
@@ -32,8 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.account) {
-                    Intent intent = new Intent(MainActivity.this, TaiKhoanCuaToi.class);
+                    Intent intent = new Intent(MainActivity.this, TaiKhoanCuaToiActivity.class);
                     startActivity(intent);
                     return true;
                 }

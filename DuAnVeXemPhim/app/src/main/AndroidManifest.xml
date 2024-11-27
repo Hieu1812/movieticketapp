@@ -55,7 +55,7 @@
             android:name="com.example.PhimYeuThich"
             android:exported="false" />
         <activity
-            android:name="com.example.TaiKhoanCuaToi"
+            android:name="com.example.TaiKhoanCuaToiActivity"
             android:exported="false" />
         <activity
             android:name="com.example.VeCuaToi"
