@@ -115,12 +115,10 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                     intent.putExtra("ghe", ghe);
                                     intent.putExtra("doAn", doAn);
                                     intent.putExtra("tongTien", tongTien);
-                                    startActivity(intent);
-
                                     List<String> bookedSeats = Arrays.asList(ghe.split(","));
                                     saveTicketDataToDatabase(userID, movieNameNo3, gioChieu2, bookedSeats, tongTien, "Paid");
-
                                     updateSeatsStatus(bookedSeats);
+                                    startActivity(intent);
                                 }
                             }
                         });
