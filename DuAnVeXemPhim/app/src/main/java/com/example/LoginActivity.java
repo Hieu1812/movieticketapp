@@ -2,6 +2,7 @@ package com.example;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                                             // Nếu không phải là admin, chuyển đến MainActivity
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             intent.putExtra("email", email);
+                                            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("email", email); // Lưu email
+                                            editor.apply();
                                             startActivity(intent);
                                         }
                                         finish(); // Đóng màn hình đăng nhập

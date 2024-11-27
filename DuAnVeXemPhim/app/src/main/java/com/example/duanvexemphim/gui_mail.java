@@ -1,6 +1,7 @@
 package com.example.duanvexemphim;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +47,8 @@ public class gui_mail extends AppCompatActivity {
         String showTime = intent.getStringExtra("gioChieu3");
         String seats = intent.getStringExtra("ghe1");
         int totalAmount = intent.getIntExtra("tongTien1", 0);
-        String userEmail = "echteam04@gmail.com";
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("email", null);
 
         // Điền thông tin vào email
         String content = "Thông tin giao dịch:\n"
