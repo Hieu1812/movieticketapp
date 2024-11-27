@@ -67,7 +67,7 @@ dependencies {
     implementation("me.relex:circleindicator:2.1.6")
 
     //email
-    implementation ("com.sun.mail:android-mail:1.6.6")
+    implementation ("com.sun.mail:android-mail:1.6.7")
     implementation ("com.sun.mail:android-activation:1.6.7")
 }
 

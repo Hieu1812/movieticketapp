@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                         } else {
                                             // Nếu không phải là admin, chuyển đến MainActivity
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            intent.putExtra("email", email);
                                             startActivity(intent);
                                         }
                                         finish(); // Đóng màn hình đăng nhập

@@ -1,5 +1,6 @@
 package com.example.duanvexemphim;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,76 +34,69 @@ public class gui_mail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gui_mail);
-        //
-        edtEmailTo = findViewById(R.id.edtEmailTo);
-        edtSubject = findViewById(R.id.edtSubject);
-        edtContent = findViewById(R.id.edtContent);
+
+        edtEmailTo = findViewById(R.id.tvEmailTo);
+        edtSubject = findViewById(R.id.tvSubject);
+        edtContent = findViewById(R.id.tvContent);
         btnSend = findViewById(R.id.btnSend);
-        //
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        // Nhận dữ liệu từ Intent
+        Intent intent = getIntent();
+        String movieName = intent.getStringExtra("movieNameNo4");
+        String showTime = intent.getStringExtra("gioChieu3");
+        String seats = intent.getStringExtra("ghe1");
+        int totalAmount = intent.getIntExtra("tongTien1", 0);
+        String userEmail = "echteam04@gmail.com";
+
+        // Điền thông tin vào email
+        String content = "Thông tin giao dịch:\n"
+                + "Tên phim: " + movieName + "\n"
+                + "Suất chiếu: " + showTime + "\n"
+                + "Số ghế: " + seats + "\n"
+                + "Tổng tiền: " + totalAmount + "VNĐ";
+
+        edtEmailTo.setText(userEmail);
+        edtSubject.setText("Tiêu đề: Xác nhận giao dịch của bạn");
+        edtContent.setText(content);
+
+        btnSend.setOnClickListener(view -> {
+            String fromEmail = "didonglaptrinh@gmail.com";
+            String emailPassword = "eyhiqtwxulmevecp";
+            String toEmail = edtEmailTo.getText().toString().trim();
+            String subject = edtSubject.getText().toString().trim();
+
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(toEmail).matches()) {
+                Toast.makeText(gui_mail.this, "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Cấu hình gửi email
+            Properties properties = System.getProperties();
+            properties.put("mail.smtp.host", "smtp.gmail.com");
+            properties.put("mail.smtp.port", "465");
+            properties.put("mail.smtp.ssl.enable", "true");
+            properties.put("mail.smtp.auth", "true");
+
+            Session session = Session.getInstance(properties, new Authenticator() {
+                @Override
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, emailPassword);
+                }
+            });
+
+            new Thread(() -> {
                 try {
-                    String fromEmail = "didonglaptrinh@gmail.com";
-                    String emailPassword = "eyhiqtwxulmevecp";
-                    String toEmail = edtEmailTo.getText().toString().trim();
-                    String subject = edtSubject.getText().toString().trim();
-//                    String userID = getIntent().getStringExtra("userID");
-//                    String movieName = getIntent().getStringExtra("movieName");
-//                    String showTime = getIntent().getStringExtra("showTime");
-//                    String seats = getIntent().getStringExtra("seats");
-//                    String food = getIntent().getStringExtra("food");
-//                    int totalAmount = getIntent().getIntExtra("totalAmount", 0);
-
-                    String content = edtContent.getText().toString().trim();
-                    String host = "smtp.gmail.com";
-                    Properties properties = System.getProperties();
-                    properties.put("mail.smtp.host", host);
-                    properties.put("mail.smtp.port", "465");
-                    properties.put("mail.smtp.ssl.enable", "true");
-                    properties.put("mail.smtp.auth", "true");
-
-                    //xác thực tài khoản
-                    Session session = Session.getInstance(properties, new Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(fromEmail, emailPassword);
-                        }
-                    });
-                    //gửi nội dung đi
                     MimeMessage mimeMessage = new MimeMessage(session);
                     mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
                     mimeMessage.setSubject(subject);
                     mimeMessage.setText(content);
-                    Thread emailThread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Transport.send(mimeMessage);
-                            }catch (Exception e) {
-                                Log.d("Lỗi Thread email", e.toString());
-                                Toast.makeText(gui_mail.this, e.toString(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    emailThread.start();
-                    edtEmailTo.setText("");
-                    edtSubject.setText("");
-                    edtContent.setText("");
+                    Transport.send(mimeMessage);
 
-                    Toast.makeText(gui_mail.this,
-                            "Email đã được gửi tới " + toEmail, Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    Log.d("Lỗi gửi email", e.toString());
-                    Toast.makeText(gui_mail.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    runOnUiThread(() -> Toast.makeText(gui_mail.this, "Email đã gửi thành công!", Toast.LENGTH_LONG).show());
+                } catch (Exception e) {
+                    runOnUiThread(() -> Toast.makeText(gui_mail.this, "Gửi email thất bại: " + e.getMessage(), Toast.LENGTH_LONG).show());
                 }
-            }
-        });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+            }).start();
         });
     }
 }

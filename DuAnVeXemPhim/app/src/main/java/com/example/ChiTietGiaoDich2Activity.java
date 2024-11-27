@@ -68,6 +68,10 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 // Gửi email xác nhận giao dịch
                 Intent emailIntent = new Intent(ChiTietGiaoDich2Activity.this, gui_mail.class);
+                emailIntent.putExtra("ghe1", ghe);
+                emailIntent.putExtra("tongTien1", tongTien);
+                emailIntent.putExtra("gioChieu3", gioChieu2);
+                emailIntent.putExtra("movieNameNo4", movieNameNo3);
                 startActivity(emailIntent);
             }
         });
