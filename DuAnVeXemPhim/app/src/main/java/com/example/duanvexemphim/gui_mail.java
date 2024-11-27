@@ -28,7 +28,6 @@ import javax.mail.internet.MimeMessage;
 public class gui_mail extends AppCompatActivity {
 
     TextView edtEmailTo, edtSubject, edtContent;
-    Button btnSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class gui_mail extends AppCompatActivity {
         edtEmailTo = findViewById(R.id.tvEmailTo);
         edtSubject = findViewById(R.id.tvSubject);
         edtContent = findViewById(R.id.tvContent);
-        btnSend = findViewById(R.id.btnSend);
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
@@ -50,7 +48,7 @@ public class gui_mail extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("email", null);
 
-        // Điền thông tin vào email
+        // Thông tin vào email
         String content = "Thông tin giao dịch:\n"
                 + "Tên phim: " + movieName + "\n"
                 + "Suất chiếu: " + showTime + "\n"
@@ -58,47 +56,45 @@ public class gui_mail extends AppCompatActivity {
                 + "Tổng tiền: " + totalAmount + "VNĐ";
 
         edtEmailTo.setText(userEmail);
-        edtSubject.setText("Tiêu đề: Xác nhận giao dịch của bạn");
+        edtSubject.setText("Xác nhận giao dịch của bạn");
         edtContent.setText(content);
 
-        btnSend.setOnClickListener(view -> {
-            String fromEmail = "didonglaptrinh@gmail.com";
-            String emailPassword = "eyhiqtwxulmevecp";
-            String toEmail = edtEmailTo.getText().toString().trim();
-            String subject = edtSubject.getText().toString().trim();
+        String fromEmail = "didonglaptrinh@gmail.com";
+        String emailPassword = "eyhiqtwxulmevecp";
+        String toEmail = edtEmailTo.getText().toString().trim();
+        String subject = edtSubject.getText().toString().trim();
 
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(toEmail).matches()) {
-                Toast.makeText(gui_mail.this, "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show();
-                return;
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(toEmail).matches()) {
+            Toast.makeText(gui_mail.this, "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Cấu hình gửi email
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, emailPassword);
             }
-
-            // Cấu hình gửi email
-            Properties properties = System.getProperties();
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", "465");
-            properties.put("mail.smtp.ssl.enable", "true");
-            properties.put("mail.smtp.auth", "true");
-
-            Session session = Session.getInstance(properties, new Authenticator() {
-                @Override
-                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(fromEmail, emailPassword);
-                }
-            });
-
-            new Thread(() -> {
-                try {
-                    MimeMessage mimeMessage = new MimeMessage(session);
-                    mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-                    mimeMessage.setSubject(subject);
-                    mimeMessage.setText(content);
-                    Transport.send(mimeMessage);
-
-                    runOnUiThread(() -> Toast.makeText(gui_mail.this, "Email đã gửi thành công!", Toast.LENGTH_LONG).show());
-                } catch (Exception e) {
-                    runOnUiThread(() -> Toast.makeText(gui_mail.this, "Gửi email thất bại: " + e.getMessage(), Toast.LENGTH_LONG).show());
-                }
-            }).start();
         });
+
+        new Thread(() -> {
+            try {
+                MimeMessage mimeMessage = new MimeMessage(session);
+                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+                mimeMessage.setSubject(subject);
+                mimeMessage.setText(content);
+                Transport.send(mimeMessage);
+
+                runOnUiThread(() -> Toast.makeText(gui_mail.this, "Email đã gửi thành công!", Toast.LENGTH_LONG).show());
+            } catch (Exception e) {
+                runOnUiThread(() -> Toast.makeText(gui_mail.this, "Gửi email thất bại: " + e.getMessage(), Toast.LENGTH_LONG).show());
+            }
+        }).start();
     }
 }

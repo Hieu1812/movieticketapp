@@ -66,6 +66,7 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String gioChieu = intent.getStringExtra("GioChieu");
         String movieNameNo2 = intent.getStringExtra("movieNameNo2");
+        String tenRap = intent.getStringExtra("tenRap");
         if (gioChieu != null) {
             tvGioChieu.setText(gioChieu);
         }
@@ -89,6 +90,7 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
                     intent.putExtra("tongTien", tongTien);
                     intent.putExtra("gioChieu2", gioChieu);
                     intent.putExtra("movieNameNo3", movieNameNo2);
+                    intent.putExtra("tenRapToChiTiet1", tenRap);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LichChieuVaGheActivity.this, "Vui lòng chọn ghế ngồi", Toast.LENGTH_SHORT).show();

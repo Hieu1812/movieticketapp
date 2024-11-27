@@ -12,29 +12,55 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="5dp"
-        android:layout_marginTop="100sp">
+        android:layout_marginTop="50sp">
+        <TextView
+            android:text="Gửi đến email thành công"
+            android:textSize="30sp"
+            android:textColor="#3F51B5"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"/>
+        <TextView
+            android:text="Địa chỉ email người nhận"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"/>
         <TextView
             android:id="@+id/tvEmailTo"
-            android:hint="Nhập địa chỉ email người nhận..."
+            android:text="Địa chỉ email người nhận..."
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_view_bg"
+            android:padding="5dp"/>
+        <TextView
+            android:text="Tiêu đề thư"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"/>
         <TextView
             android:id="@+id/tvSubject"
-            android:hint="Tiêu đề thư..."
+            android:text="Tiêu đề thư..."
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50sp"
+            android:background="@drawable/search_view_bg"
+            android:padding="5dp"/>
+        <TextView
+            android:text="Nội dung thư"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"/>
         <TextView
             android:id="@+id/tvContent"
-            android:hint="Nội dung thư"
-            android:height="200dp"
+            android:text="Nội dung thư.."
             android:gravity="top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/btnSend"
-            android:text="Gửi thư"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="200sp"
+            android:background="@drawable/search_view_bg"
+            android:padding="5dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

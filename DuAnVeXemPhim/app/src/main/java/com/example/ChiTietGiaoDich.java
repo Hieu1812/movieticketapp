@@ -29,7 +29,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private DatabaseReference mSeatsDatabase;
     Button btnThoat, btnDongY;
-    TextView tvTenPhim, tvSuatChieu, tvSoGhe, tvdoan, tvTongTien;
+    TextView tvTenPhim, tvSuatChieu, tvTenRap, tvSoGhe, tvdoan, tvTongTien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         btnDongY = findViewById(R.id.btnDongY);
         tvTenPhim = findViewById(R.id.tvTenPhim);
         tvSuatChieu = findViewById(R.id.tvSuatChieu);
+        tvTenRap = findViewById(R.id.tvTenRap);
         tvdoan = findViewById(R.id.tvdoan);
         tvSoGhe = findViewById(R.id.tvSoGhe);
         tvTongTien = findViewById(R.id.tvTongTien);
@@ -51,6 +52,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         Intent intent = getIntent();
         String movieNameNo3 = intent.getStringExtra("movieNameNo3");
         String gioChieu2 = intent.getStringExtra("gioChieu2");
+        String tenRap = intent.getStringExtra("tenRapToChiTiet1");
         String ghe = intent.getStringExtra("ghe");
         String doAn = intent.getStringExtra("doAn");
         int tongTien = intent.getIntExtra("tongTien", 0);
@@ -61,6 +63,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         } else {
             tvdoan.setText("Đồ ăn: Bạn không mua đồ ăn");
         }
+        tvTenRap.setText("Tên rạp: " + tenRap);
         tvSoGhe.setText("Số ghế: " + ghe);
         tvSuatChieu.setText("Suất chiếu: " + gioChieu2);
         tvTongTien.setText("Tổng tiền: " + tongTien + " VNĐ");
@@ -72,6 +75,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("movieNameNo3", tvTenPhim.getText().toString());
                 returnIntent.putExtra("gioChieu2", tvSuatChieu.getText().toString());
+                returnIntent.putExtra("tenRapToChiTiet1", tvTenRap.getText().toString());
                 returnIntent.putExtra("ghe", tvSoGhe.getText().toString());
                 returnIntent.putExtra("doAn", tvdoan.getText().toString());
                 returnIntent.putExtra("tongTien", tvTongTien.getText().toString());
@@ -107,6 +111,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                     Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
                                     intent.putExtra("movieNameNo3", movieNameNo3);
                                     intent.putExtra("gioChieu2", gioChieu2);
+                                    intent.putExtra("tenRapToChiTiet2", tenRap);
                                     intent.putExtra("ghe", ghe);
                                     intent.putExtra("doAn", doAn);
                                     intent.putExtra("tongTien", tongTien);

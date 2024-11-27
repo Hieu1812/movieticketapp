@@ -38,7 +38,7 @@
                 android:text="Tên phim: "
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg" />
             <!-- Ngày giờ chiếu -->
             <TextView
@@ -48,8 +48,7 @@
                 android:text="Suất chiếu: "
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg"/>
 
             <!-- Tên rạp -->
@@ -60,20 +59,18 @@
                 android:text="Tên rạp: Lotte Tây Hồ"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg"/>
 
             <!-- Số ghế -->
             <TextView
                 android:id="@+id/tvSoGhe"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="90dp"
                 android:text="Số ghế: "
-                android:layout_marginTop="8dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg" />
 
             <!-- Phương thức thanh toán -->
@@ -82,10 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:text="PT thanh toán: Thanh toán bằng momo"
-                android:layout_marginTop="8dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg"/>
 
             <!-- Số tiền -->
@@ -96,29 +92,35 @@
                 android:text="Số Tiền: "
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_marginTop="8dp"
-                android:layout_margin="16dp"
+                android:layout_margin="6dp"
                 android:background="@drawable/search_view_bg"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="20dp">
+            android:gravity="center">
             <Button
                 android:id="@+id/btnTrangChu"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/home"
-                android:layout_marginLeft="30dp"
                 android:text="Trang chủ" />
-            <Button
-                android:id="@+id/btnGuiEmail"
-                android:layout_marginLeft="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/email"
-                android:text="Gửi Email" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvEmailTo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:id="@+id/tvSubject"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
         </LinearLayout>
 
     </LinearLayout>
