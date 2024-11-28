@@ -3,12 +3,14 @@ package com.example;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -33,6 +35,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
     TextView tvTenPhim, tvSuatChieu, tvTenRap, tvSoGhe, tvPTThanhToan, tvSoTien, tvEmailTo, tvSubject, tvContent;
     Button btnTrangChu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //
+
         tvTenPhim = findViewById(R.id.tvTenPhim);
         tvSuatChieu = findViewById(R.id.tvSuatChieu);
         tvTenRap = findViewById(R.id.tvTenRap);
@@ -54,14 +57,15 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
         tvEmailTo = findViewById(R.id.tvEmailTo);
         tvSubject = findViewById(R.id.tvSubject);
         tvContent = findViewById(R.id.tvContent);
-        //
+
         Intent intent = getIntent();
         String movieNameNo3 = intent.getStringExtra("movieNameNo3");
         String gioChieu2 = intent.getStringExtra("gioChieu2");
         String tenRap = intent.getStringExtra("tenRapToChiTiet2");
         String ghe = intent.getStringExtra("ghe");
+        String doAn = intent.getStringExtra("doAn");  // Nhận thêm thông tin "doAn" nếu cần hiển thị
         int tongTien = intent.getIntExtra("tongTien", 0);
-        //String userID = intent.getStringExtra("userID");
+
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("email", null);
         // Thông tin vào email
@@ -71,7 +75,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
                 + "Tên rạp: " + tenRap + "\n"
                 + "Số ghế: " + ghe + "\n"
                 + "Tổng tiền: " + tongTien + " VNĐ";
-        //
+
         tvTenPhim.setText("Tên phim: " + movieNameNo3);
         tvSuatChieu.setText("Suất chiếu: " + gioChieu2);
         tvTenRap.setText("Tên rạp: " + tenRap);
@@ -81,7 +85,6 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
         tvSubject.setText("Xác nhận giao dịch của bạn");
         tvContent.setText(content);
 
-        //
         btnTrangChu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +92,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
                 startActivity(intentTrangChu);
             }
         });
-        //
+
         String fromEmail = "didonglaptrinh@gmail.com";
         String emailPassword = "eyhiqtwxulmevecp";
         String toEmail = tvEmailTo.getText().toString().trim();
@@ -127,4 +130,5 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
             }
         }).start();
     }
+
 }

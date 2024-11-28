@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.models.Ticket;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -94,7 +95,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                 dialogDongY.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        isSeatSold(ghe, new OnSeatCheckListener() {
+                        isSeatSold(movieNameNo3, gioChieu2, Arrays.asList(ghe.split(",")), new OnSeatCheckListener() {
                             @Override
                             public void onSeatChecked(boolean isSold) {
                                 if (isSold) {
@@ -117,14 +118,11 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                     intent.putExtra("tongTien", tongTien);
                                     List<String> bookedSeats = Arrays.asList(ghe.split(","));
                                     saveTicketDataToDatabase(userID, movieNameNo3, gioChieu2, bookedSeats, tongTien, "Paid");
-                                    updateSeatsStatus(bookedSeats);
+                                    updateSeatsStatus(movieNameNo3, gioChieu2, bookedSeats);
                                     startActivity(intent);
                                 }
                             }
                         });
-                        Intent intent = new Intent(ChiTietGiaoDich.this, ChiTietGiaoDich2Activity.class);
-                        startActivity(intent);
-                        finish();
                     }
                 });
 
@@ -143,15 +141,19 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         void onSeatChecked(boolean isSold);
     }
 
-    private void isSeatSold(String ghe, OnSeatCheckListener listener) {
-        mSeatsDatabase.child(ghe).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void isSeatSold(String movieName, String showTimeID, List<String> bookedSeats, OnSeatCheckListener listener) {
+        mSeatsDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    listener.onSeatChecked(true);
-                } else {
-                    listener.onSeatChecked(false);
+                boolean isAnySeatSold = false;
+                for (String seat : bookedSeats) {
+                    String path = showTimeID + "/" + seat;
+                    if (snapshot.child(movieName).child(path).exists()) {
+                        isAnySeatSold = true;
+                        break;
+                    }
                 }
+                listener.onSeatChecked(isAnySeatSold);
             }
 
             @Override
@@ -163,6 +165,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
 
     private void saveTicketDataToDatabase(String userID, String movieName, String showTimeID, List<String> bookedSeats, int totalAmount, String paymentStatus) {
         String ticketId = mDatabase.push().getKey();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         LocalTime purchaseTime = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             purchaseTime = LocalTime.now();
@@ -171,11 +174,17 @@ public class ChiTietGiaoDich extends AppCompatActivity {
 
         Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats, movieName);
         mDatabase.child(ticketId).setValue(ticket);
+
+        for (String seat : bookedSeats) {
+            String path = showTimeID + "/" + seat;
+            mSeatsDatabase.child(movieName).child(path).setValue("sold");
+        }
     }
 
-    private void updateSeatsStatus(List<String> bookedSeats) {
+    private void updateSeatsStatus(String movieName, String showTimeID, List<String> bookedSeats) {
         for (String seat : bookedSeats) {
-            mSeatsDatabase.child(seat).setValue("sold");
+            String path = showTimeID + "/" + seat;
+            mSeatsDatabase.child(movieName).child(path).setValue("sold");
         }
     }
 }
