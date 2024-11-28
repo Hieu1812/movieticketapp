@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.PhimYeuThich;
+import com.example.PhimYeuThichActivity;
 import com.example.TaiKhoanCuaToiActivity;
 import com.example.VeCuaToi;
 import com.example.duanvexemphim.adapters.PhotoAdapter;
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.favorite) {
-                    Intent intent = new Intent(MainActivity.this, PhimYeuThich.class);
+                    Intent intent = new Intent(MainActivity.this, PhimYeuThichActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.account) {

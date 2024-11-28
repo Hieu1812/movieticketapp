@@ -3,11 +3,6 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="imageWizard">
-          <value>
-            <PersistentState />
-          </value>
-        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -23,11 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-<<<<<<< HEAD
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/add_box/baseline_add_box_24.xml" />
-=======
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/add_a_photo/baseline_add_a_photo_24.xml" />
->>>>>>> 29a558dd542028a854c085596bd77ec7c04f4b75
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/home/baseline_home_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -37,13 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-<<<<<<< HEAD
-                            <entry key="color" value="9190b2" />
-                            <entry key="outputName" value="baseline_add_box_24" />
-=======
-                            <entry key="outputName" value="photo" />
->>>>>>> 29a558dd542028a854c085596bd77ec7c04f4b75
-                            <entry key="sourceFile" value="C:\Users\hieu\Downloads\New folder\DuAnVeXemPhim (1)\DuAnVeXemPhim" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="home2" />
+                            <entry key="sourceFile" value="D:\HangHang\movieticketapp" />
                           </map>
                         </option>
                       </PersistentState>

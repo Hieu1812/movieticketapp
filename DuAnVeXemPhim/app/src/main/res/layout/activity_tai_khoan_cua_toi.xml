@@ -67,7 +67,9 @@
             <TextView
                 android:id="@+id/tvTenTK"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Tên tài khoản: "
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -75,9 +77,11 @@
                 android:background="@drawable/search_view_bg" />
             <!--Số điện thoại-->
             <TextView
-                android:id="@+id/tvSĐT"
+                android:id="@+id/tvSDT"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Số điện thoại: "
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -89,7 +93,9 @@
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Email: "
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -99,7 +105,9 @@
             <TextView
                 android:id="@+id/tvTienDaTieu"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Số tiền đã tiêu: "
                 android:textSize="17sp"
                 android:textStyle="bold"

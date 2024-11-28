@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.PhimYeuThich"
+            android:name="com.example.PhimYeuThichActivity"
             android:exported="false" />
         <activity
             android:name="com.example.TaiKhoanCuaToiActivity"
