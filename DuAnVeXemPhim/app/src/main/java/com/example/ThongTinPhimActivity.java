@@ -28,6 +28,7 @@ import com.example.duanvexemphim.adapters.ActorThongTinPhimAdapter;
 import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -116,6 +117,26 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             webViewTrailer.loadData(htmlContent, "text/html", "UTF-8");
         }
 
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(id);
+        userRef.child("likedFilms").child(movieID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.colorred));
+                    clicktym = true;
+                } else {
+                    btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.white));
+                    clicktym = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Failed to check like status: " + error.getMessage());
+            }
+        });
+
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,13 +163,12 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             @Override
             public void onClick(View view) {
                 DatabaseReference movieRef = FirebaseDatabase.getInstance().getReference("Movies").child(movieID);
-                // Lấy dữ liệu hiện tại của vote
                 movieRef.child("vote").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int currentLikes = 0;
                         if (snapshot.exists()) {
-                            currentLikes = snapshot.getValue(Integer.class); // Lấy số like hiện tại
+                            currentLikes = snapshot.getValue(Integer.class);
                         }
 
                         if (clicktym) {
@@ -156,11 +176,13 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
                             btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.white));
                             movieRef.child("vote").setValue(currentLikes - 1);
                             clicktym = false;
+                            userRef.child("likedFilms").child(movieID).removeValue();
                         } else {
                             // Người dùng thích, tăng 1 like
                             btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.colorred));
                             movieRef.child("vote").setValue(currentLikes + 1);
                             clicktym = true;
+                            userRef.child("likedFilms").child(movieID).setValue(true);
                         }
                     }
                     @Override
@@ -170,6 +192,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
                 });
             }
         });
+
     }
 
     private String extractYouTubeVideoId(String movieTrailerUrl) {
