@@ -65,7 +65,9 @@
             <TextView
                 android:id="@+id/tvTenTK"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Tên tài khoản: Admin"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -75,7 +77,9 @@
             <TextView
                 android:id="@+id/tvSĐT"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Số điện thoại: 0987654321"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -85,7 +89,9 @@
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
                 android:text="Email: admin@gmail.com"
                 android:textSize="17sp"
                 android:textStyle="bold"
