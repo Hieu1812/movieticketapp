@@ -107,6 +107,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
+                            intent.putExtra("movieID",movieID);
                             intent.putExtra("GioChieu", "9:15");
                             intent.putExtra("movieNameNo2", movieName);
                             intent.putExtra("tenRap", name);
@@ -118,6 +119,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
+                            intent.putExtra("movieID",movieID);
                             intent.putExtra("GioChieu", "13:15");
                             intent.putExtra("movieNameNo2", movieName);
                             intent.putExtra("tenRap", name);
@@ -129,6 +131,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
+                            intent.putExtra("movieID",movieID);
                             intent.putExtra("GioChieu", "16:35");
                             intent.putExtra("movieNameNo2", movieName);
                             intent.putExtra("tenRap", name);
@@ -140,6 +143,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
+                            intent.putExtra("movieID",movieID);
                             intent.putExtra("GioChieu", "20:45");
                             intent.putExtra("movieNameNo2", movieName);
                             intent.putExtra("tenRap", name);
@@ -151,6 +155,7 @@ public class RapVaLichChieuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(RapVaLichChieuActivity.this, LichChieuVaGheActivity.class);
+                            intent.putExtra("movieID",movieID);
                             intent.putExtra("GioChieu", "23:05");
                             intent.putExtra("movieNameNo2", movieName);
                             intent.putExtra("tenRap", name);

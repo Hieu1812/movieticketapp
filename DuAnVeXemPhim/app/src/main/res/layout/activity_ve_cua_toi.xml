@@ -71,8 +71,8 @@
                     android:textStyle="bold"/>
             </LinearLayout>
             <!--            hiển thị vé đã xem-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewViewed"
+            <ListView
+                android:id="@+id/lvListVe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp" />

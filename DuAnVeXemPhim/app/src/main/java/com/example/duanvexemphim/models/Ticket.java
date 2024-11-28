@@ -1,6 +1,5 @@
 package com.example.duanvexemphim.models;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public class Ticket {
@@ -10,10 +9,12 @@ public class Ticket {
     private int ticketPrice;
     private String paymentStatus;
     private List<String> bookedSeats;
-    private String movieName; // Thêm thuộc tính movieName
+    private String movieName;
+    private String movieID;
 
     // Constructor
-    public Ticket(String ticketId, String userID, String showTimeID, int ticketPrice, String paymentStatus, List<String> bookedSeats, String movieName) {
+
+    public Ticket(String ticketId, String userID, String showTimeID, int ticketPrice, String paymentStatus, List<String> bookedSeats, String movieName, String movieID) {
         this.ticketId = ticketId;
         this.userID = userID;
         this.showTimeID = showTimeID;
@@ -21,6 +22,7 @@ public class Ticket {
         this.paymentStatus = paymentStatus;
         this.bookedSeats = bookedSeats;
         this.movieName = movieName;
+        this.movieID = movieID;
     }
 
     // Getters and Setters
@@ -78,5 +80,12 @@ public class Ticket {
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
+    }
+
+    public String getMovieID() {
+        return movieID;
+    }
+    public void setMovieID(String movieID) {
+        this.movieID = movieID;
     }
 }

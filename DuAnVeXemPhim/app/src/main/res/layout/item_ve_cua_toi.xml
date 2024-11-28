@@ -8,9 +8,12 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/imgPoster"
             android:layout_width="120dp"
-            android:layout_height="170dp"/>
+            android:layout_height="170dp"
+            android:id="@+id/imgPhim">
+
+        </ImageView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,16 +22,18 @@
             android:layout_marginBottom="10dp">
 
             <TextView
-                android:id="@+id/tvTenPhim"
+                android:id="@+id/tvNamePhim"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
-                android:text="Ten phim"
+                android:text="Tên phim: "
+                android:padding="5dp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:layout_width="147dp"
@@ -36,26 +41,27 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvSoGhe"
+                        android:id="@+id/tvNumberGhe"
                         android:layout_width="match_parent"
                         android:layout_height="58dp"
-                        android:text="So ghe"
+                        android:text="Số ghế: "
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvThoiGian"
+                        android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Thoi gian chieu"
+                        android:text="Thời gian chiếu: "
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tvMaVe"
-                    android:layout_width="139dp"
+                    android:id="@+id/tvCodeVe"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:text="Mã vé: "
                     android:textStyle="bold"
-                    android:text="Ma ve"/>
+                    android:padding="5dp"/>
 
 
             </LinearLayout>

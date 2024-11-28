@@ -64,6 +64,7 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
         btnH5C = findViewById(R.id.btnH5C);
         //
         Intent intent = getIntent();
+        String movieID = intent.getStringExtra("movieID");
         String gioChieu = intent.getStringExtra("GioChieu");
         String movieNameNo2 = intent.getStringExtra("movieNameNo2");
         String tenRap = intent.getStringExtra("tenRap");
@@ -85,6 +86,7 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (gheDaChon != null && !gheDaChon.isEmpty()) {
                     Intent intent = new Intent(LichChieuVaGheActivity.this, ChiTietGiaoDich.class);
+                    intent.putExtra("movieID", movieID);
                     intent.putExtra("doAn", doAnDaChon);
                     intent.putExtra("ghe", gheDaChon);
                     intent.putExtra("tongTien", tongTien);

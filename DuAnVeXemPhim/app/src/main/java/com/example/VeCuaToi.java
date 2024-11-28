@@ -2,8 +2,10 @@ package com.example;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,8 +38,7 @@ public class VeCuaToi extends AppCompatActivity {
     ArrayList<Ticket> tickets;
     VeCuaToiAdapter adapter;
     Button btnThoat;
-    String ten, poster;
-    RecyclerView rcvTicket;
+    ListView lvVe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,71 +59,54 @@ public class VeCuaToi extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        rcvTicket = findViewById(R.id.recyclerViewViewed);
-        adapter = new VeCuaToiAdapter(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        rcvTicket.setLayoutManager(linearLayoutManager);
-
-        adapter.setTickets(getTicket());
-        rcvTicket.setAdapter(adapter);
-    }
-
-    public List<Ticket> getTicket() {
+        lvVe = findViewById(R.id.lvListVe);
+        tickets = new ArrayList<>();
+        adapter = new VeCuaToiAdapter(VeCuaToi.this, R.layout.item_ve_cua_toi, tickets);
+        lvVe.setAdapter(adapter);
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Tickets");
-        List<Ticket> ve = new ArrayList<>();
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tickets.clear();
+                Log.d("VeCuaToi", "Data snapshot: " + snapshot.getValue());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (id.equals(dataSnapshot.child("userID").getValue(String.class))) {
-                        Toast.makeText(VeCuaToi.this, "Có vé", Toast.LENGTH_SHORT).show();
+                    String curID = dataSnapshot.child("userID").getValue(String.class);
+                    if (curID.equals(id)) {
                         String movieName = dataSnapshot.child("movieName").getValue(String.class); // Lấy movieName
-                        String ticketID = dataSnapshot.child("ticketID").getValue(String.class);
+                        String ticketID = dataSnapshot.child("ticketId").getValue(String.class);
                         String showTimeID = dataSnapshot.child("showTimeID").getValue(String.class);
                         Integer ticketPrice = dataSnapshot.child("ticketPrice").getValue(Integer.class);
                         String paymentStatus = dataSnapshot.child("paymentStatus").getValue(String.class);
-                        List<String> seats = (List<String>) dataSnapshot.child("seats").getValue();
-
-                        ve.add(new Ticket(ticketID, id, showTimeID, ticketPrice, paymentStatus, seats, movieName));
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(VeCuaToi.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        return ve;
-    }
-
-    public void getmovie(String id, List<Movie> listMovie) {
-        DatabaseReference dbs = FirebaseDatabase.getInstance().getReference("Movies");
-        dbs.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (dataSnapshot.child("movieID").getValue(String.class).equals(id)) {
+                        List<String> seats = (List<String>) dataSnapshot.child("bookedSeats").getValue();
                         String movieID = dataSnapshot.child("movieID").getValue(String.class);
-                        String name = dataSnapshot.child("name").getValue(String.class);
-                        String img = dataSnapshot.child("posterImage").getValue(String.class);
-                        String description = dataSnapshot.child("description").getValue(String.class);
-                        String durationTime = dataSnapshot.child("durationTime").getValue(String.class);
-                        String genre = dataSnapshot.child("genre").getValue(String.class);
-                        String trailer = dataSnapshot.child("trailer").getValue(String.class);
-                        Double vote = dataSnapshot.child("vote").getValue(Double.class);
-                        listMovie.add(new Movie(movieID, name, img, description, genre, durationTime, new ArrayList<>(), trailer, vote, new ArrayList<>()));
+                        if (movieID!=null){
+                            DatabaseReference img = FirebaseDatabase.getInstance().getReference("Movies").child(movieID);
+                            img.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String imgpath = snapshot.child("posterImage").getValue(String.class);
+                                    Log.d("nfb", "onDataChange: " + imgpath);
+                                    tickets.add(new Ticket(ticketID, curID, showTimeID, ticketPrice, paymentStatus, seats, movieName, imgpath));
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.e("Firebase", "Error fetching movie details: " + error.getMessage());
+                                }
+                            });
+                        }
                     }
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
     }
 }

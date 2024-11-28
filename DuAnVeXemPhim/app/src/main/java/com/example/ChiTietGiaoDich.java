@@ -51,6 +51,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         tvTongTien = findViewById(R.id.tvTongTien);
 
         Intent intent = getIntent();
+        String movieID = intent.getStringExtra("movieID");
         String movieNameNo3 = intent.getStringExtra("movieNameNo3");
         String gioChieu2 = intent.getStringExtra("gioChieu2");
         String tenRap = intent.getStringExtra("tenRapToChiTiet1");
@@ -117,7 +118,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
                                     intent.putExtra("doAn", doAn);
                                     intent.putExtra("tongTien", tongTien);
                                     List<String> bookedSeats = Arrays.asList(ghe.split(","));
-                                    saveTicketDataToDatabase(userID, movieNameNo3, gioChieu2, bookedSeats, tongTien, "Paid");
+                                    saveTicketDataToDatabase(userID, movieNameNo3, gioChieu2, bookedSeats, tongTien, "Paid", movieID);
                                     updateSeatsStatus(movieNameNo3, gioChieu2, bookedSeats);
                                     startActivity(intent);
                                 }
@@ -163,7 +164,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         });
     }
 
-    private void saveTicketDataToDatabase(String userID, String movieName, String showTimeID, List<String> bookedSeats, int totalAmount, String paymentStatus) {
+    private void saveTicketDataToDatabase(String userID, String movieName, String showTimeID, List<String> bookedSeats, int totalAmount, String paymentStatus, String movieId) {
         String ticketId = mDatabase.push().getKey();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         LocalTime purchaseTime = null;
@@ -172,7 +173,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         }
         int ticketPrice = totalAmount / bookedSeats.size();
 
-        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats, movieName);
+        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats, movieName, movieId);
         mDatabase.child(ticketId).setValue(ticket);
 
         for (String seat : bookedSeats) {

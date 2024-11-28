@@ -10,60 +10,47 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.duanvexemphim.R;
+import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.models.Ticket;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class VeCuaToiAdapter extends RecyclerView.Adapter<VeCuaToiAdapter.VeCuaToiViewHolder> {
-    private Context context;
-    private List<Ticket> tickets;
-    public VeCuaToiAdapter(Context context) {
-        this.context = context;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
+public class VeCuaToiAdapter extends ArrayAdapter {
+    Context context;
+    int resource;
+    ArrayList<Ticket> tickets;
+    public VeCuaToiAdapter(Context ctx, int res, ArrayList<Ticket> tickets) {
+        super(ctx, res);
+        this.context = ctx;
+        this.resource = res;
         this.tickets = tickets;
-        notifyDataSetChanged();
     }
 
+    @Override
+    public int getCount() {
+        return this.tickets.size();
+    }
     @NonNull
     @Override
-    public VeCuaToiAdapter.VeCuaToiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ve_cua_toi, parent, false);
-        return new VeCuaToiViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull VeCuaToiAdapter.VeCuaToiViewHolder holder, int position) {
-        Ticket ticket = tickets.get(position);
-        if (ticket == null){
-            return;
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View customView = layoutInflater.inflate(resource, null);
+        TextView tvNamePhim = customView.findViewById(R.id.tvNamePhim);
+        TextView tvNumberGhe = customView.findViewById(R.id.tvNumberGhe);
+        TextView tvTime = customView.findViewById(R.id.tvTime);
+        TextView tvCodeVe = customView.findViewById(R.id.tvCodeVe);
+        ImageView imgPhim = customView.findViewById(R.id.imgPhim);
+        Ticket pticket = tickets.get(position);
+        if(pticket != null){
+            tvNamePhim.append(pticket.getMovieName());
+            tvNumberGhe.append(pticket.getBookedSeats().toString());
+            tvTime.append(pticket.getShowTimeID());
+            tvCodeVe.append(pticket.getTicketId());
+            Glide.with(this.getContext()).load(pticket.getMovieID()).into(imgPhim);
         }
-//        holder.tvName.append(ticket.getMovie().getName());
-        holder.tvTime.setText(ticket.getShowTimeID());
-        holder.tvTicketID.setText(ticket.getTicketId());
-//        Glide.with(context).load(ticket.getMovie().getPosterImage()).into(holder.Poster);
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-    public class VeCuaToiViewHolder extends RecyclerView.ViewHolder {
-        ImageView Poster;
-        TextView tvName,tvSoGhe,tvTime,tvTicketID;
-        public VeCuaToiViewHolder(@NonNull View itemView) {
-            super(itemView);
-            Poster = itemView.findViewById(R.id.imgPoster);
-            tvName = itemView.findViewById(R.id.tvTenPhim);
-            tvSoGhe = itemView.findViewById(R.id.tvSoGhe);
-            tvTime = itemView.findViewById(R.id.tvThoiGian);
-            tvTicketID = itemView.findViewById(R.id.tvMaVe);
-        }
+        return customView;
     }
 }
