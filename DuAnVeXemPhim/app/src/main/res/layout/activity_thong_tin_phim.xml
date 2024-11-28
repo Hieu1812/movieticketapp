@@ -109,8 +109,8 @@
                         <Button
                             android:id="@+id/btnThich"
                             android:layout_width="100dp"
-                            android:layout_height="68dp"
-                            android:layout_marginTop="18dp"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginLeft="10dp"
                             android:gravity="center"
                             android:backgroundTint="#FFFFFF"
