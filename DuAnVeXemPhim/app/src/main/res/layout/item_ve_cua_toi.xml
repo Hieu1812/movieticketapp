@@ -55,13 +55,24 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvCodeVe"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Mã vé: "
-                    android:textStyle="bold"
-                    android:padding="5dp"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvCodeVe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mã vé: "
+                        android:textStyle="bold"
+                        android:padding="3dp"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/ivQR">
+
+                    </ImageView>
+                </LinearLayout>
 
 
             </LinearLayout>

@@ -69,6 +69,9 @@ dependencies {
     //email
     implementation ("com.sun.mail:android-mail:1.6.7")
     implementation ("com.sun.mail:android-activation:1.6.7")
+    // qr code
+    implementation ("com.google.zxing:core:3.4.0")
+    implementation ("com.journeyapps:zxing-android-embedded:4.1.0")
 }
 
 fun Packaging.extracted() {
