@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -143,15 +144,20 @@ public class ChiTietGiaoDich extends AppCompatActivity {
     }
 
     private void isSeatSold(String movieName, String showTimeID, List<String> bookedSeats, OnSeatCheckListener listener) {
-        mSeatsDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mSeatsDatabase.child(movieName).child(showTimeID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isAnySeatSold = false;
                 for (String seat : bookedSeats) {
-                    String path = showTimeID + "/" + seat;
-                    if (snapshot.child(movieName).child(path).exists()) {
-                        isAnySeatSold = true;
-                        break;
+                    if (seat != null && !seat.trim().isEmpty()) {
+                        Log.d("ChiTietGiaoDich", "Checking seat: " + seat);
+                        if (snapshot.child(seat).exists() && "sold".equals(snapshot.child(seat).getValue(String.class))) {
+                            isAnySeatSold = true;
+                            Log.d("ChiTietGiaoDich", "Seat " + seat + " is already sold.");
+                            break;
+                        }
+                    } else {
+                        Log.d("ChiTietGiaoDich", "Invalid seat: " + seat);
                     }
                 }
                 listener.onSeatChecked(isAnySeatSold);
@@ -159,6 +165,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ChiTietGiaoDich", "Error checking seat status: ", error.toException());
                 listener.onSeatChecked(false);
             }
         });
@@ -177,15 +184,23 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         mDatabase.child(ticketId).setValue(ticket);
 
         for (String seat : bookedSeats) {
-            String path = showTimeID + "/" + seat;
-            mSeatsDatabase.child(movieName).child(path).setValue("sold");
+            if (seat != null && !seat.trim().isEmpty()) {
+                mSeatsDatabase.child(movieName).child(showTimeID).child(seat).setValue("sold");
+                Log.d("ChiTietGiaoDich", "Seat " + seat + " set as sold for showTimeID " + showTimeID + " and movie " + movieName);
+            } else {
+                Log.d("ChiTietGiaoDich", "Invalid seat: " + seat);
+            }
         }
     }
 
     private void updateSeatsStatus(String movieName, String showTimeID, List<String> bookedSeats) {
         for (String seat : bookedSeats) {
-            String path = showTimeID + "/" + seat;
-            mSeatsDatabase.child(movieName).child(path).setValue("sold");
+            if (seat != null && !seat.trim().isEmpty()) {
+                mSeatsDatabase.child(movieName).child(showTimeID).child(seat).setValue("sold");
+                Log.d("ChiTietGiaoDich", "Seat " + seat + " updated as sold for showTimeID " + showTimeID + " and movie " + movieName);
+            } else {
+                Log.d("ChiTietGiaoDich", "Invalid seat: " + seat);
+            }
         }
     }
 }
