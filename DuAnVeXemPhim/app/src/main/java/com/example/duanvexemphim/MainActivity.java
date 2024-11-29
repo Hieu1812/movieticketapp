@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -22,6 +26,7 @@ import com.example.TaiKhoanCuaToiActivity;
 import com.example.VeCuaToi;
 import com.example.duanvexemphim.adapters.PhotoAdapter;
 import com.example.duanvexemphim.adapters.TheLoaiAdapter;
+import com.example.duanvexemphim.adapters.TimKiemPhimAdapter;
 import com.example.duanvexemphim.models.Actor;
 import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.models.Photo;
@@ -46,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvTheLoai;
     private TheLoaiAdapter theLoaiAdapter;
     private PhotoAdapter photoAdapter;
+    private TimKiemPhimAdapter phimAdapter;
+    private ListView lvfind;
+    private EditText edtTim;
+    private ArrayList<Movie> movies;
     BottomNavigationView bottomNavigationView;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -137,9 +146,56 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        edtTim = findViewById(R.id.edtTim);
+        lvfind = findViewById(R.id.lvSearch);
+        movies = new ArrayList<>();
+        phimAdapter = new TimKiemPhimAdapter(MainActivity.this, R.layout.lv_phim_yeu_thich, movies);
+        lvfind.setAdapter(phimAdapter);
+        edtTim.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filterTickets(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
     }
+    private void filterTickets(String query) {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");
+        movies.clear();
+        if (query.isEmpty()) {
+            lvfind.setVisibility(View.GONE);
+        } else {
+            lvfind.setVisibility(View.VISIBLE);
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()) {
+                        if (dataSnapshot.child("name").getValue(String.class).toLowerCase().contains(query.toLowerCase())){
+                            movies.add(dataSnapshot.getValue(Movie.class));
+                            phimAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
 
     private List<TheLoai> getListTheLoai(){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Movies");

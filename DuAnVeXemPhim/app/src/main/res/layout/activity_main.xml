@@ -23,7 +23,7 @@
             android:padding="5dp">
             <!--            tìm kiếm phim-->
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/edtTim"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_margin="10dp"
@@ -34,6 +34,12 @@
                 android:ems="10"
                 android:hint="Tìm kiếm phim"
                 android:inputType="text" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lvSearch"
+                android:visibility="gone">
+            </ListView>
             <!--            Phim sắp chiếu-->
             <TextView
                 android:id="@+id/tvPhimSapChieu"
