@@ -86,12 +86,9 @@ public class VeCuaToi extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String imgpath = snapshot.child("posterImage").getValue(String.class);
-                                    Log.d("nfb", "onDataChange: " + imgpath);
                                     tickets.add(new Ticket(ticketID, curID, showTimeID, ticketPrice, paymentStatus, seats, movieName, imgpath));
                                     adapter.notifyDataSetChanged();
-
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     Log.e("Firebase", "Error fetching movie details: " + error.getMessage());
