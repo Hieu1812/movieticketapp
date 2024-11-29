@@ -2,6 +2,7 @@
 package com.example;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,18 +19,28 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.duanvexemphim.R;
 import com.example.ThongTinPhimActivity;
 import com.example.RapVaLichChieuActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LichChieuVaGheActivity extends AppCompatActivity {
 
     TextView tvGioChieu;
-    Button btnThoat, btnThanhToan;
-    Button  btnNuocCam, btnPepsi, btnBong, btnH1A, btnH1B, btnH1C, btnH2A, btnH2B,
+    Button btnThoat, btnThanhToan, btnNuocCam, btnPepsi, btnBong;
+    private Button  btnH1A, btnH1B, btnH1C, btnH2A, btnH2B,
             btnH2C, btnH3A, btnH3B, btnH3C, btnH4A, btnH4B, btnH4C, btnH5A, btnH5B, btnH5C;
     private boolean clickH1A, clickH1B, clickH1C, clickH2A, clickH2B, clickH2C, clickH3A, clickH3B, clickH3C,
             clickH4A, clickH4B, clickH4C, clickH5A, clickH5B, clickH5C, clickNuocCam, clickPepsi, clickBong = false;
     String doAnDaChon = "";
     String gheDaChon = "";
     int tongTien = 0;
+    private String movieNameNo2, gioChieu;
+    private DatabaseReference mSeatsDatabase = FirebaseDatabase.getInstance().getReference("Seats");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +52,6 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         tvGioChieu = findViewById(R.id.tvGioChieu);
         btnThoat = findViewById(R.id.btnThoat);
         btnThanhToan = findViewById(R.id.btnThanhToan);
@@ -64,14 +75,14 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
         btnH5C = findViewById(R.id.btnH5C);
         //
         Intent intent = getIntent();
-        String movieID = intent.getStringExtra("movieID");
-        String gioChieu = intent.getStringExtra("GioChieu");
-        String movieNameNo2 = intent.getStringExtra("movieNameNo2");
+        gioChieu = intent.getStringExtra("GioChieu");
+        movieNameNo2 = intent.getStringExtra("movieNameNo2");
         String tenRap = intent.getStringExtra("tenRap");
+        // Lấy danh sách ghế đã đặt từ Firebase và cập nhật giao diện
+        xuLyGheDaBan(gioChieu);
         if (gioChieu != null) {
             tvGioChieu.setText(gioChieu);
         }
-        //
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +97,6 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (gheDaChon != null && !gheDaChon.isEmpty()) {
                     Intent intent = new Intent(LichChieuVaGheActivity.this, ChiTietGiaoDich.class);
-                    intent.putExtra("movieID", movieID);
                     intent.putExtra("doAn", doAnDaChon);
                     intent.putExtra("ghe", gheDaChon);
                     intent.putExtra("tongTien", tongTien);
@@ -406,7 +416,6 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
                 }
             }
         });
-
         btnBong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -425,5 +434,56 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void xuLyGheDaBan(String showTimeID) {
+        mSeatsDatabase.child(movieNameNo2).child(showTimeID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> bookedSeats = new ArrayList<>();
+                for (DataSnapshot seatSnapshot : snapshot.getChildren()) {
+                    String seat = seatSnapshot.getKey();
+                    String seatStatus = seatSnapshot.getValue(String.class);
+                    if ("sold".equals(seatStatus)) {
+                        bookedSeats.add(seat);
+                    }
+                }
+                capNhatThayDoi(bookedSeats);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+
+    private void capNhatThayDoi(List<String> bookedSeats) {
+        for (String seat : bookedSeats) {
+            voHieuHoa(seat);  // Thay đổi màu và vô hiệu hóa ghế đã bán
+        }
+    }
+    private void voHieuHoa(String seat) {
+        Button seatButton = getSeatButton(seat);
+        if (seatButton != null) {
+            seatButton.setBackgroundColor(Color.RED);
+            seatButton.setEnabled(false);  // Vô hiệu hóa ghế đã bán
+        }
+    }
+    private Button getSeatButton(String seat) {
+        switch (seat) {
+            case "H1A": return btnH1A;
+            case "H1B": return btnH1B;
+            case "H1C": return btnH1C;
+            case "H2A": return btnH2A;
+            case "H2B": return btnH2B;
+            case "H2C": return btnH2C;
+            case "H3A": return btnH3A;
+            case "H3B": return btnH3B;
+            case "H3C": return btnH3C;
+            case "H4A": return btnH4A;
+            case "H4B": return btnH4B;
+            case "H4C": return btnH4C;
+            case "H5A": return btnH5A;
+            case "H5B": return btnH5B;
+            case "H5C": return btnH5C;
+            default: return null;
+        }
     }
 }
