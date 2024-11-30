@@ -40,7 +40,7 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     Button btnThoat, btnDangXuat;
-    TextView tvTenTK, tvSdt, tvEmail, tvTienDaTieu;
+    TextView tvTenTK, tvSdt, tvEmail;
     ImageView imgAvatar;
     private Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -58,7 +58,6 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
         tvTenTK = findViewById(R.id.tvTenTK);
         tvSdt = findViewById(R.id.tvSDT);
         tvEmail = findViewById(R.id.tvEmail);
-        tvTienDaTieu = findViewById(R.id.tvTienDaTieu);
         imgAvatar = findViewById(R.id.imgAvatar);
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
