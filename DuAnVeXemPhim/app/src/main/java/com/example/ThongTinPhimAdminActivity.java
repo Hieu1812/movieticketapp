@@ -3,6 +3,7 @@ package com.example;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -25,6 +27,11 @@ import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.adapters.ActorAdapter;
 import com.example.duanvexemphim.adapters.ActorThongTinPhimAdapter;
 import com.example.duanvexemphim.models.Actor;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +39,7 @@ import java.util.List;
 public class ThongTinPhimAdminActivity extends AppCompatActivity {
 
     Button btnThoat;
-    TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvND, tvActorList;
+    TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvND, tvTinhTrang, tvActorList;
     ImageView imgPoster;
     WebView webViewTrailer;
     ActorThongTinPhimAdapter actorThongTinPhimAdapter;
@@ -55,6 +62,7 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         tvTheLoai = findViewById(R.id.tvTheLoai);
         tvThoiLuong = findViewById(R.id.tvThoiLuong);
         tvND = findViewById(R.id.tvND);
+        tvTinhTrang = findViewById(R.id.tvTinhTrang);
         imgPoster = findViewById(R.id.imgCam);
         webViewTrailer = findViewById(R.id.webViewTrailer);
         rvActors = findViewById(R.id.rvActors);
@@ -104,6 +112,42 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
             // Đưa nội dung HTML vào WebView
             webViewTrailer.loadData(htmlContent, "text/html", "UTF-8");
         }
+
+        DatabaseReference seatRef = FirebaseDatabase.getInstance().getReference("Seats");
+        seatRef.child(movieName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int countTime = 0;
+                boolean allSold = true;
+                for (DataSnapshot timeSnapshot : snapshot.getChildren()) {
+                    int count = 0;
+                    for (DataSnapshot seatSnapshot : timeSnapshot.getChildren()) {
+                        String seatStatus = seatSnapshot.getValue(String.class);
+                        if (seatStatus.equals("sold")) {
+                            count ++;
+                            if(count == 15) {
+                                break;
+                            } else {
+                                allSold = false;
+                            }
+                        }
+                    }
+                    countTime ++;
+                    if(countTime == 5) {
+                        allSold = true;
+                    } else {
+                        allSold = false;
+                    }
+                }
+                String tinhTrang = allSold ? "Hết vé" : "Còn vé";
+                tvTinhTrang.setText("Tình trạng: " + tinhTrang);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Lỗi khi truy vấn dữ liệu: " + error.getMessage());
+            }
+        });
+
         //
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override

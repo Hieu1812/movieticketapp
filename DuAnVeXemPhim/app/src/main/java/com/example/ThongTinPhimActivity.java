@@ -43,7 +43,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
     RecyclerView rvActors;
     Movie movie;
     ImageView imgPoster, imgActor;
-    TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvNDPhim, tvActorName;
+    TextView tvTenPhim, tvTheLoai, tvThoiLuong, tvNDPhim, tvTinhTrang;
     Button btnThoat, btnDatVe, btnThich;
     WebView webViewTrailer;
     private boolean clicktym = false;
@@ -62,6 +62,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         tvTenPhim = findViewById(R.id.tvTenPhim);
         tvTheLoai = findViewById(R.id.tvTheLoai);
         tvNDPhim = findViewById(R.id.tvNDPhim);
+        tvTinhTrang = findViewById(R.id.tvTinhTrang);
         tvThoiLuong = findViewById(R.id.tvThoiLuong);
         btnThoat = findViewById(R.id.btnThoat);
         btnDatVe = findViewById(R.id.btnDatVe);
@@ -116,6 +117,41 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
             // Đưa nội dung HTML vào WebView
             webViewTrailer.loadData(htmlContent, "text/html", "UTF-8");
         }
+
+        DatabaseReference seatRef = FirebaseDatabase.getInstance().getReference("Seats");
+        seatRef.child(movieName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int countTime = 0;
+                    boolean allSold = true;
+                    for (DataSnapshot timeSnapshot : snapshot.getChildren()) {
+                        int count = 0;
+                        for (DataSnapshot seatSnapshot : timeSnapshot.getChildren()) {
+                            String seatStatus = seatSnapshot.getValue(String.class);
+                            if (seatStatus.equals("sold")) {
+                                count ++;
+                                if(count == 15) {
+                                    break;
+                                } else {
+                                    allSold = false;
+                                }
+                            }
+                        }
+                        countTime ++;
+                        if(countTime == 5) {
+                            allSold = true;
+                        } else {
+                            allSold = false;
+                        }
+                    }
+                    String tinhTrang = allSold ? "Hết vé" : "Còn vé";
+                    tvTinhTrang.setText("Tình trạng: " + tinhTrang);
+                }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Lỗi khi truy vấn dữ liệu: " + error.getMessage());
+            }
+        });
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(id);

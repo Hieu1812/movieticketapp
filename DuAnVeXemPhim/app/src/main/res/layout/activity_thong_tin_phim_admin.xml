@@ -116,7 +116,6 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:gravity="center"
-                            android:text="Tình trạng: Đã chiếu"
                             android:textStyle="bold"
                             android:textSize="16dp"
                             android:textColor="#fc0313"/>
