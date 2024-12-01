@@ -117,28 +117,18 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         seatRef.child(movieName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int countTime = 0;
+                int totalSeats = 60;
+                int countSold = 0;
                 boolean allSold = true;
                 for (DataSnapshot timeSnapshot : snapshot.getChildren()) {
-                    int count = 0;
                     for (DataSnapshot seatSnapshot : timeSnapshot.getChildren()) {
                         String seatStatus = seatSnapshot.getValue(String.class);
-                        if (seatStatus.equals("sold")) {
-                            count ++;
-                            if(count == 15) {
-                                break;
-                            } else {
-                                allSold = false;
-                            }
+                        if ("sold".equals(seatStatus)) {
+                            countSold ++;
                         }
                     }
-                    countTime ++;
-                    if(countTime == 5) {
-                        allSold = true;
-                    } else {
-                        allSold = false;
-                    }
                 }
+                allSold = countSold < totalSeats ? false : true;
                 String tinhTrang = allSold ? "Hết vé" : "Còn vé";
                 tvTinhTrang.setText("Tình trạng: " + tinhTrang);
             }

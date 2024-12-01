@@ -122,31 +122,21 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         seatRef.child(movieName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    int countTime = 0;
-                    boolean allSold = true;
-                    for (DataSnapshot timeSnapshot : snapshot.getChildren()) {
-                        int count = 0;
-                        for (DataSnapshot seatSnapshot : timeSnapshot.getChildren()) {
-                            String seatStatus = seatSnapshot.getValue(String.class);
-                            if (seatStatus.equals("sold")) {
-                                count ++;
-                                if(count == 15) {
-                                    break;
-                                } else {
-                                    allSold = false;
-                                }
-                            }
-                        }
-                        countTime ++;
-                        if(countTime == 5) {
-                            allSold = true;
-                        } else {
-                            allSold = false;
+                int totalSeats = 60;
+                int countSold = 0;
+                boolean allSold = true;
+                for (DataSnapshot timeSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot seatSnapshot : timeSnapshot.getChildren()) {
+                        String seatStatus = seatSnapshot.getValue(String.class);
+                        if ("sold".equals(seatStatus)) {
+                            countSold ++;
                         }
                     }
-                    String tinhTrang = allSold ? "Hết vé" : "Còn vé";
-                    tvTinhTrang.setText("Tình trạng: " + tinhTrang);
                 }
+                allSold = countSold < totalSeats ? false : true;
+                String tinhTrang = allSold ? "Hết vé" : "Còn vé";
+                tvTinhTrang.setText("Tình trạng: " + tinhTrang);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Lỗi khi truy vấn dữ liệu: " + error.getMessage());
