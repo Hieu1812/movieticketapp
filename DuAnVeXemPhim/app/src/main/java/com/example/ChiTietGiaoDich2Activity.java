@@ -3,14 +3,12 @@ package com.example;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.gui_mail;
 
 import java.util.Properties;
 
@@ -63,18 +60,87 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
         String gioChieu2 = intent.getStringExtra("gioChieu2");
         String tenRap = intent.getStringExtra("tenRapToChiTiet2");
         String ghe = intent.getStringExtra("ghe");
-        String doAn = intent.getStringExtra("doAn");  // Nhận thêm thông tin "doAn" nếu cần hiển thị
+        String doAn = intent.getStringExtra("doAn");// Nhận thêm thông tin "doAn" nếu cần hiển thị
         int tongTien = intent.getIntExtra("tongTien", 0);
-
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("email", null);
         // Thông tin vào email
-        String content = "Thông tin giao dịch:\n"
-                + "Tên phim: " + movieNameNo3 + "\n"
-                + "Suất chiếu: " + gioChieu2 + "\n"
-                + "Tên rạp: " + tenRap + "\n"
-                + "Số ghế: " + ghe + "\n"
-                + "Tổng tiền: " + tongTien + " VNĐ";
+        String content = "<!DOCTYPE html>" +
+                "<html lang= en>" +
+                "<head>" +
+                "    <meta charset=UTF-8>" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "    <title>Movie Ticket Bill</title>" +
+                "    <style>" +
+                "        body {" +
+                "            font-family: Arial, sans-serif;" +
+                "            line-height: 1.6;" +
+                "            max-width: 600px;" +
+                "            margin: 0 auto;" +
+                "            padding: 20px;" +
+                "            background-color: #f4f4f4;" +
+                "        }" +
+                "        .ticket {" +
+                "            background-color: white;" +
+                "            border-radius: 10px;" +
+                "            box-shadow: 0 4px 6px rgba(0,0,0,0.1);" +
+                "            padding: 20px;" +
+                "            text-align: center;" +
+                "        }" +
+                "        .ticket-header {" +
+                "            background-color: #333;" +
+                "            color: white;" +
+                "            padding: 10px;" +
+                "            border-radius: 5px 5px 0 0;" +
+                "        }" +
+                "        .ticket-details {" +
+                "            display: flex;" +
+                "            justify-content: space-between;" +
+                "            margin: 20px 0;" +
+                "        }" +
+                "        .qr-code {" +
+                "            max-width: 150px;" +
+                "            margin: 20px auto;" +
+                "        }" +
+                "        .ticket-footer {" +
+                "            background-color: #f1f1f1;" +
+                "            padding: 10px;" +
+                "            border-radius: 0 0 5px 5px;" +
+                "        }" +
+                "        @media only screen and (max-width: 600px) {" +
+                "            .ticket-details {" +
+                "                flex-direction: column;" +
+                "            }" +
+                "        }" +
+                "    </style>" +
+                "</head>" +
+                "<body>" +
+                "    <div class=\"ticket\">" +
+                "        <div class=\"ticket-header\">" +
+                "            <h1>Vé Xem Phim</h1>" +
+                "        </div>" +
+                "        " +
+                "        <div class=\"ticket-details\">" +
+                "            <div>" +
+                "                <h2>Tên phim: " + movieNameNo3 + "</h2>" +
+                "                <p>Giờ chiếu: " + gioChieu2 +"</p>" +
+                "            </div>" +
+                "            <div>" +
+                "                <p>Ghế: "+ ghe+"</p>" +
+                "                <p>Rạp: "+tenRap+"</p>" +
+                "                <p>Tổng tiền: "+tongTien+" VND"+"</p>" +
+                "            </div>" +
+                "        </div>" +
+                "" +
+                "" +
+                "        <div class=\"ticket-footer\">" +
+                "            <b> Trân trọng cảm ơn Quý khách đã tin tưởng sử dụng dịch vụ!\n</b>" +
+                "            <p> Thank you for using our service!</p>" +
+                "        </div>" +
+                "    </div>" +
+                "</body>" +
+                "</html>";
+        
 
         tvTenPhim.setText("Tên phim: " + movieNameNo3);
         tvSuatChieu.setText("Suất chiếu: " + gioChieu2);
@@ -122,7 +188,7 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
                 MimeMessage mimeMessage = new MimeMessage(session);
                 mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
                 mimeMessage.setSubject(subject);
-                mimeMessage.setText(content);
+                mimeMessage.setContent(content, "text/html; charset=utf-8");
                 Transport.send(mimeMessage);
                 runOnUiThread(() -> Toast.makeText(ChiTietGiaoDich2Activity.this, "Email đã gửi thành công!", Toast.LENGTH_LONG).show());
             } catch (Exception e) {

@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtTim;
     private ArrayList<Movie> movies;
     BottomNavigationView bottomNavigationView;
+    // tk admin: admin@gmail.com
+    // pass: 123456
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable = new Runnable() {
@@ -257,6 +259,25 @@ public class MainActivity extends AppCompatActivity {
         filter("Tình cảm", listMovie4);
 
         listTheLoai.add(new TheLoai("Phim tình cảm", listMovie4));
+        //phim hoạt hình
+        List<Movie> listMovie5 = new ArrayList<>();
+        filter("Hoạt hình", listMovie5);
+        listTheLoai.add(new TheLoai("Phim hoạt hình", listMovie5));
+
+        //phim phiêu lưu
+        List<Movie> listMovie6 = new ArrayList<>();
+        filter("Phiêu lưu", listMovie6);
+        listTheLoai.add(new TheLoai("Phim phiêu lưu", listMovie6));
+
+        //khoa học viễn tưởng
+        List<Movie> listMovie7 = new ArrayList<>();
+        filter("Khoa học viễn tưởng", listMovie7);
+        listTheLoai.add(new TheLoai("Phim khoa học viễn tưởng", listMovie7));
+
+        //phim hài
+        List<Movie> listMovie8 = new ArrayList<>();
+        filter("Hài", listMovie8);
+        listTheLoai.add(new TheLoai("Phim hài", listMovie8));
 
         return listTheLoai;
     }
