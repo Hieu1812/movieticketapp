@@ -143,8 +143,8 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         void onSeatChecked(boolean isSold);
     }
 
-    private void isSeatSold(String movieName, String showTimeID, List<String> bookedSeats, OnSeatCheckListener listener) {
-        mSeatsDatabase.child(movieName).child(showTimeID).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void isSeatSold(String movieName, String showTime, List<String> bookedSeats, OnSeatCheckListener listener) {
+        mSeatsDatabase.child(movieName).child(showTime).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isAnySeatSold = false;
@@ -171,7 +171,7 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         });
     }
 
-    private void saveTicketDataToDatabase(String userID, String movieName, String showTimeID, List<String> bookedSeats, int totalAmount, String paymentStatus, String movieId) {
+    private void saveTicketDataToDatabase(String userID, String movieName, String showTime, List<String> bookedSeats, int totalAmount, String paymentStatus, String movieId) {
         String ticketId = mDatabase.push().getKey();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         LocalTime purchaseTime = null;
@@ -180,24 +180,24 @@ public class ChiTietGiaoDich extends AppCompatActivity {
         }
         int ticketPrice = totalAmount / bookedSeats.size();
 
-        Ticket ticket = new Ticket(ticketId, userID, showTimeID, ticketPrice, paymentStatus, bookedSeats, movieName, movieId);
+        Ticket ticket = new Ticket(ticketId, userID, showTime, ticketPrice, paymentStatus, bookedSeats, movieName, movieId);
         mDatabase.child(ticketId).setValue(ticket);
 
         for (String seat : bookedSeats) {
             if (seat != null && !seat.trim().isEmpty()) {
-                mSeatsDatabase.child(movieName).child(showTimeID).child(seat).setValue("sold");
-                Log.d("ChiTietGiaoDich", "Seat " + seat + " set as sold for showTimeID " + showTimeID + " and movie " + movieName);
+                mSeatsDatabase.child(movieName).child(showTime).child(seat).setValue("sold");
+                Log.d("ChiTietGiaoDich", "Seat " + seat + " set as sold for showTime " + showTime + " and movie " + movieName);
             } else {
                 Log.d("ChiTietGiaoDich", "Invalid seat: " + seat);
             }
         }
     }
 
-    private void updateSeatsStatus(String movieName, String showTimeID, List<String> bookedSeats) {
+    private void updateSeatsStatus(String movieName, String showTime, List<String> bookedSeats) {
         for (String seat : bookedSeats) {
             if (seat != null && !seat.trim().isEmpty()) {
-                mSeatsDatabase.child(movieName).child(showTimeID).child(seat).setValue("sold");
-                Log.d("ChiTietGiaoDich", "Seat " + seat + " updated as sold for showTimeID " + showTimeID + " and movie " + movieName);
+                mSeatsDatabase.child(movieName).child(showTime).child(seat).setValue("sold");
+                Log.d("ChiTietGiaoDich", "Seat " + seat + " updated as sold for showTime " + showTime + " and movie " + movieName);
             } else {
                 Log.d("ChiTietGiaoDich", "Invalid seat: " + seat);
             }

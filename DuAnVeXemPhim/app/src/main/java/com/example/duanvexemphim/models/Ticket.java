@@ -5,7 +5,7 @@ import java.util.List;
 public class Ticket {
     private String ticketId;
     private String userID;
-    private String showTimeID;
+    private String showTime;
     private int ticketPrice;
     private String paymentStatus;
     private List<String> bookedSeats;
@@ -14,10 +14,10 @@ public class Ticket {
 
     // Constructor
 
-    public Ticket(String ticketId, String userID, String showTimeID, int ticketPrice, String paymentStatus, List<String> bookedSeats, String movieName, String movieID) {
+    public Ticket(String ticketId, String userID, String showTime, int ticketPrice, String paymentStatus, List<String> bookedSeats, String movieName, String movieID) {
         this.ticketId = ticketId;
         this.userID = userID;
-        this.showTimeID = showTimeID;
+        this.showTime = showTime;
         this.ticketPrice = ticketPrice;
         this.paymentStatus = paymentStatus;
         this.bookedSeats = bookedSeats;
@@ -42,12 +42,12 @@ public class Ticket {
         this.userID = userID;
     }
 
-    public String getShowTimeID() {
-        return showTimeID;
+    public String getshowTime() {
+        return showTime;
     }
 
-    public void setShowTimeID(String showTimeID) {
-        this.showTimeID = showTimeID;
+    public void setshowTime(String showTime) {
+        this.showTime = showTime;
     }
 
     public int getTicketPrice() {

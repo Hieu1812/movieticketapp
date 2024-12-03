@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.duanvexemphim.R;
-import com.example.duanvexemphim.models.Movie;
 import com.example.duanvexemphim.models.Ticket;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -51,7 +50,7 @@ public class VeCuaToiAdapter extends ArrayAdapter {
         if(pticket != null){
             tvNamePhim.append(pticket.getMovieName());
             tvNumberGhe.append(pticket.getBookedSeats().toString());
-            tvTime.append(pticket.getShowTimeID());
+            tvTime.append(pticket.getshowTime());
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             try {
                 Bitmap bitmap = barcodeEncoder.encodeBitmap(pticket.getTicketId(), BarcodeFormat.QR_CODE, 400, 400);

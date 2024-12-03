@@ -17,8 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.duanvexemphim.R;
-import com.example.ThongTinPhimActivity;
-import com.example.RapVaLichChieuActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -437,8 +435,8 @@ public class LichChieuVaGheActivity extends AppCompatActivity {
             }
         });
     }
-    private void xuLyGheDaBan(String showTimeID) {
-        mSeatsDatabase.child(movieNameNo2).child(showTimeID).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void xuLyGheDaBan(String showTime) {
+        mSeatsDatabase.child(movieNameNo2).child(showTime).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> bookedSeats = new ArrayList<>();

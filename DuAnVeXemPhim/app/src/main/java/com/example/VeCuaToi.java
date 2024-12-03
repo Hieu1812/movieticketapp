@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,13 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
 import com.example.duanvexemphim.adapters.VeCuaToiAdapter;
-import com.example.duanvexemphim.models.Movie;
+
 import com.example.duanvexemphim.models.Ticket;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,9 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+
 
 public class VeCuaToi extends AppCompatActivity {
     ArrayList<Ticket> tickets;
@@ -75,7 +73,7 @@ public class VeCuaToi extends AppCompatActivity {
                     if (curID.equals(id)) {
                         String movieName = dataSnapshot.child("movieName").getValue(String.class); // Lấy movieName
                         String ticketID = dataSnapshot.child("ticketId").getValue(String.class);
-                        String showTimeID = dataSnapshot.child("showTimeID").getValue(String.class);
+                        String showTime = dataSnapshot.child("showTime").getValue(String.class);
                         Integer ticketPrice = dataSnapshot.child("ticketPrice").getValue(Integer.class);
                         String paymentStatus = dataSnapshot.child("paymentStatus").getValue(String.class);
                         List<String> seats = (List<String>) dataSnapshot.child("bookedSeats").getValue();
@@ -86,7 +84,7 @@ public class VeCuaToi extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String imgpath = snapshot.child("posterImage").getValue(String.class);
-                                    tickets.add(new Ticket(ticketID, curID, showTimeID, ticketPrice, paymentStatus, seats, movieName, imgpath));
+                                    tickets.add(new Ticket(ticketID, curID, showTime, ticketPrice, paymentStatus, seats, movieName, imgpath));
                                     adapter.notifyDataSetChanged();
                                 }
                                 @Override
