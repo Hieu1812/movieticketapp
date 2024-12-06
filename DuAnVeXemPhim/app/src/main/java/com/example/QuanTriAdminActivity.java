@@ -55,7 +55,6 @@ public class QuanTriAdminActivity extends AppCompatActivity {
 
         moviesRef = FirebaseDatabase.getInstance().getReference("Movies");
 
-        // Tải dữ liệu từ Firebase
         loadMoviesFromFirebase();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

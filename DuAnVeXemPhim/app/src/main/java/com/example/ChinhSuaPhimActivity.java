@@ -63,8 +63,6 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
         spinnerTheLoai = findViewById(R.id.spinnerTheLoai);
         imgPhim = findViewById(R.id.imgPhim);
         tvAn = findViewById(R.id.tvAn);
-
-        // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         movieId = intent.getStringExtra("movieId");
         movieName = intent.getStringExtra("movieName");
@@ -73,23 +71,16 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
         movieDescription = intent.getStringExtra("movieDescription");
         movieTrailer = intent.getStringExtra("movieTrailer");
         moviePoster = intent.getStringExtra("moviePoster");
-
-        // Hiển thị dữ liệu vào các trường nhập liệu
         edtTenPhim.setText(movieName);
         edtThoiLuong.setText(movieDuration);
         edtNDPhim.setText(movieDescription);
         edtTrailerLink.setText(movieTrailer);
-        // Set hình ảnh cho ImageView (sử dụng Glide để tải ảnh từ URL)
         Glide.with(this).load(moviePoster).into(imgPhim);
-
-        // Cài đặt Spinner với các thể loại từ resources
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.the_loai_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTheLoai.setAdapter(adapter);
         int genrePosition = adapter.getPosition(movieGenre);
         spinnerTheLoai.setSelection(genrePosition);
-
-        // Hàm thay đổi chiều cao của TextView tvAn
         View.OnFocusChangeListener focusChangeListener = (view, hasFocus) -> {
             if (hasFocus) {
                 tvAn.getLayoutParams().height = (int) getResources().getDisplayMetrics().density * 600;
@@ -102,13 +93,11 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
         edtTrailerLink.setOnFocusChangeListener(focusChangeListener);
 
 
-        // Xử lý nút Thoát
         btnThoat.setOnClickListener(view -> {
             Intent exitIntent = new Intent(ChinhSuaPhimActivity.this, QuanTriAdminActivity.class);
             startActivity(exitIntent);
         });
 
-        // Xử lý nút Cập nhật
         btnCapNhat.setOnClickListener(view -> {
             String updatedName = edtTenPhim.getText().toString();
             String updatedDuration = edtThoiLuong.getText().toString();
@@ -121,10 +110,9 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
                 return;
             }
 
-            // Lấy reference tới phim trong Firebase
+
             movieRef = FirebaseDatabase.getInstance().getReference("Movies").child(movieId);
 
-            // Cập nhật dữ liệu lên Firebase
             movieRef.child("name").setValue(updatedName);
             movieRef.child("genre").setValue(updatedGenre);
             movieRef.child("durationTime").setValue(updatedDuration);
@@ -132,7 +120,6 @@ public class ChinhSuaPhimActivity extends AppCompatActivity {
             movieRef.child("trailer").setValue(updatedTrailer)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Hiển thị thông báo thành công
                             Toast.makeText(ChinhSuaPhimActivity.this, "Cập nhật phim thành công!", Toast.LENGTH_SHORT).show();
                             Intent intenta = new Intent(ChinhSuaPhimActivity.this, QuanTriAdminActivity.class);
                             startActivity(intenta);

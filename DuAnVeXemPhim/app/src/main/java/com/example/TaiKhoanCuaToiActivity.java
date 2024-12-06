@@ -82,7 +82,7 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
             }
         });
 
-//        Hiển thị tên
+
         db.child("Users").child(id).child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,7 +96,6 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
             }
         });
 
-        // Hiển thị email
         db.child("Users").child(id).child("email").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,7 +108,6 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
 
             }
         });
-        // Hiển thị sdt
         db.child("Users").child(id).child("phonenumber").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -134,7 +132,6 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
             }
         });
 
-        // Sự kiện click cho nút Đăng Xuất
         btnDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

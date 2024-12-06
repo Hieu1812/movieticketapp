@@ -60,7 +60,6 @@ public class TimKiemPhimAdapter extends ArrayAdapter {
             intent.putExtra("movieDescription", movie.getDescription());
             intent.putExtra("movieTrailer", movie.getTrailer());
             intent.putExtra("moviePoster", movie.getPosterImage());
-            // Gửi thông tin các diễn viên qua Intent
             ArrayList<Actor> actorArrayList = new ArrayList<>();
             for (Actor actor : movie.getActorList()) {
                 actorArrayList.add(new Actor(actor.getActorName(), actor.getActorImage()));

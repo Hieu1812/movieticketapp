@@ -60,11 +60,10 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
         String gioChieu2 = intent.getStringExtra("gioChieu2");
         String tenRap = intent.getStringExtra("tenRapToChiTiet2");
         String ghe = intent.getStringExtra("ghe");
-        String doAn = intent.getStringExtra("doAn");// Nhận thêm thông tin "doAn" nếu cần hiển thị
+        String doAn = intent.getStringExtra("doAn");
         int tongTien = intent.getIntExtra("tongTien", 0);
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("email", null);
-        // Thông tin vào email
         String content = "<!DOCTYPE html>" +
                 "<html lang= en>" +
                 "<head>" +
@@ -169,7 +168,6 @@ public class ChiTietGiaoDich2Activity extends AppCompatActivity {
             return;
         }
 
-        // Cấu hình gửi email
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "465");

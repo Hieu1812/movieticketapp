@@ -32,8 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         database = firebaseDatabase.getReference("Users");
@@ -51,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Xử lý sự kiện khi nhấn nút Đăng Ký
         btnRegister.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
@@ -67,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            // Thực hiện đăng ký người dùng với Firebase
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

@@ -55,8 +55,7 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //
-        // Ánh xạ các View trong layout
+
         btnThoat = findViewById(R.id.btnThoat);
         tvTenPhim = findViewById(R.id.tvTenPhim);
         tvTheLoai = findViewById(R.id.tvTheLoai);
@@ -67,18 +66,12 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         webViewTrailer = findViewById(R.id.webViewTrailer);
         rvActors = findViewById(R.id.rvActors);
 
-        // Bật JavaScript trong WebView
         webViewTrailer.getSettings().setJavaScriptEnabled(true);
-        // Cho phép truy cập từ file URL
         webViewTrailer.getSettings().setAllowUniversalAccessFromFileURLs(true);
-        // Cho phép phát video mà không cần yêu cầu hành động từ người dùng
         webViewTrailer.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        // Bật DOM Storage
         webViewTrailer.getSettings().setDomStorageEnabled(true);
-        // Cho phép WebView tải dữ liệu qua HTTP
         webViewTrailer.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
-        // Nhận thông tin từ Intent
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
         String movieGenre = intent.getStringExtra("movieGenre");
@@ -92,24 +85,22 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         rvActors.setLayoutManager(gridLayoutManager);
         rvActors.setAdapter(actorThongTinPhimAdapter);
 
-        // Hiển thị các thông tin phim lên giao diện
         tvTenPhim.setText("Phim: " + movieName);
         tvTheLoai.setText("Thể loại: " + movieGenre);
         tvThoiLuong.setText("Thời lượng: " + movieDuration);
         tvND.setText(movieDescription);
 
-        // Dùng Glide để tải ảnh từ URL vào ImageView
         Glide.with(this)
                 .load(moviePoster)
                 .into(imgPoster);
 
-        // Trailer trong WebView
+
         if (movieTrailerUrl != null && !movieTrailerUrl.isEmpty()) {
             String youtubeEmbedUrl = "https://www.youtube.com/embed/" + extractYouTubeVideoId(movieTrailerUrl);
             String htmlContent = "<html><body style='margin:0; padding:0;'>" +
                     "<iframe width='100%' height='100%' src='" + youtubeEmbedUrl + "' frameborder='0' allowfullscreen></iframe>" +
                     "</body></html>";
-            // Đưa nội dung HTML vào WebView
+
             webViewTrailer.loadData(htmlContent, "text/html", "UTF-8");
         }
 
@@ -153,14 +144,10 @@ public class ThongTinPhimAdminActivity extends AppCompatActivity {
         String videoId = "";
         if (movieTrailerUrl != null && !movieTrailerUrl.isEmpty()) {
             if (movieTrailerUrl.contains("youtu.be/")) {
-                // Trích xuất video ID sau "youtu.be/"
                 String[] parts = movieTrailerUrl.split("youtu.be/");
-                // Lấy phần video ID trước dấu "?"
                 videoId = parts[1].split("\\?")[0];
             } else if (movieTrailerUrl.contains("youtube.com/watch?v=")) {
-                // Trường hợp URL youtube thông thường (https://www.youtube.com/watch?v=ID)
                 String[] parts = movieTrailerUrl.split("v=");
-                // Lấy video ID trước dấu "&"
                 videoId = parts[1].split("&")[0];
             }
         }

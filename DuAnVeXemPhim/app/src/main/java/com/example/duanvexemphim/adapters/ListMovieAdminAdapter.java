@@ -65,15 +65,12 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
         Button btnXoa = customView.findViewById(R.id.btnXoa);
         Movie movie = listMovies.get(position);
 
-//        tvName.setText("Phim: " + movie.getName());
-//        tvTheLoai.setText("Thể loại: " + movie.getGenre());
-//        tvGia.setText("Giá: 50.000 VNĐ");
         if (movie != null) {
             tvName.setText("Phim: " + movie.getName());
             tvTheLoai.setText("Thể loại: " + movie.getGenre());
             tvGia.setText("Giá: 50.000 VNĐ");
 
-            // Xử lý nút Xem
+
             btnXem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,12 +90,12 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                         actorArrayList.add(new Actor(actor.getActorName(), actor.getActorImage()));
                     }
                     intent.putExtra("actorList", actorArrayList);
-                    // Gửi các thông tin về bộ phim qua Intent
+
                     context.startActivity(intent);
                 }
             });
 
-            // Xử lý nút Sửa
+
             btnSua.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -128,7 +125,6 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                             DatabaseReference movieRef = FirebaseDatabase.getInstance()
                                     .getReference("Movies")
                                     .child(movie.getMovieID());
-                            // Lấy tham chiếu đến Firebase Storage
                             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance("gs://movieticketapp-d1248.firebasestorage.app");
                             StorageReference storageRef = firebaseStorage.getReference();
                             // Xóa ảnh poster
@@ -146,8 +142,6 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                             for (Actor actor : movie.getActorList()) {
                                 String actorImagePath = "actorImages/" + getFileNameFromUri(Uri.parse(actor.getActorImage()));
                                 StorageReference actorImageRef = storageRef.child(actorImagePath);
-
-                                // Xóa ảnh diễn viên
                                 actorImageRef.delete()
                                         .addOnSuccessListener(unused -> {
                                             Toast.makeText(context, "Đã xóa ảnh diễn viên: " + actor.getActorName(), Toast.LENGTH_SHORT).show();
@@ -159,9 +153,7 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                             // Xóa dữ liệu phim
                             movieRef.removeValue()
                                     .addOnSuccessListener(unused -> {
-                                        // Hiển thị thông báo thành công
                                         Toast.makeText(context, "Phim đã được xóa thành công!", Toast.LENGTH_SHORT).show();
-                                        // Cập nhật danh sách phim trên giao diện
                                         listMovies.remove(position);
                                         notifyDataSetChanged();
                                     })
@@ -174,7 +166,7 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                     builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss(); // Đóng hộp thoại
+                            dialog.dismiss();
                         }
                     });
                     builder.create().show();
@@ -186,7 +178,6 @@ public class ListMovieAdminAdapter extends ArrayAdapter {
                 .into(imgPoster);
         return customView;
     }
-    // Hàm lấy tên tệp từ URI
     private String getFileNameFromUri(Uri uri) {
         String fileName = "";
         String path = uri.getPath();

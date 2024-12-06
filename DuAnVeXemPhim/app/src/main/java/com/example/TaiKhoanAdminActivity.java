@@ -41,7 +41,6 @@ public class TaiKhoanAdminActivity extends AppCompatActivity {
             }
         });
 
-        // Sự kiện click cho nút Đăng Xuất
         btnDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +51,6 @@ public class TaiKhoanAdminActivity extends AppCompatActivity {
                 dialogDangXuat.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Chuyển hướng về trang đăng nhập (LoginActivity)
                         Intent intent = new Intent(TaiKhoanAdminActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Xóa ngăn xếp
                         startActivity(intent);
@@ -63,7 +61,7 @@ public class TaiKhoanAdminActivity extends AppCompatActivity {
                 dialogDangXuat.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel(); // Đóng dialog
+                        dialog.cancel();
                     }
                 });
 
