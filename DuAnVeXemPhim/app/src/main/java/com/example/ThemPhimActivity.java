@@ -121,7 +121,6 @@ public class ThemPhimActivity extends AppCompatActivity {
             String description = etNDPhim.getText().toString().trim();
             String trailer = etTrailerLink.getText().toString().trim();
 
-            // Kiểm tra các trường thông tin bắt buộc
             if (name.isEmpty() || durationTime.isEmpty() || description.isEmpty()) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
@@ -146,8 +145,6 @@ public class ThemPhimActivity extends AppCompatActivity {
 
                             // Tải lên ảnh cho từng diễn viên
                             for (Actor actor : actorList) {
-//                                String actorID = movieRef.child("actors").push().getKey();
-//                                StorageReference actorImageRef = storageReference.child("actorImages/" + actorID + ".jpg");
                                 // Lấy tên gốc của ảnh diễn viên từ URI
                                 String actorImageName = getFileNameFromUri(Uri.parse(actor.getActorImage()));
                                 StorageReference actorImageRef = storageReference.child("actorImages/" + actorImageName + ".jpg");
@@ -162,7 +159,6 @@ public class ThemPhimActivity extends AppCompatActivity {
 
                                             // Kiểm tra nếu đã tải xong tất cả ảnh diễn viên
                                             if (updatedActorList.size() == actorList.size()) {
-                                                // Tạo đối tượng Movies và lưu vào Firebase
                                                 Movie movie = new Movie(movieID, name, posterUrl, description, genre, durationTime, new ArrayList<>(), trailer, 0, updatedActorList);
                                                 listMovies.add(movie);
                                                 movieRef.child(movieID).setValue(movie).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -220,16 +216,14 @@ public class ThemPhimActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Xử lý chọn ảnh poster cho phim
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();  // Lấy URI ảnh poster
-            imgPhim.setImageURI(imageUri);  // Hiển thị ảnh vào ImageView imgPhim
+            imageUri = data.getData();
+            imgPhim.setImageURI(imageUri);
         }
-        // Xử lý chọn ảnh cho diễn viên
         if (requestCode == PICK_IMAGE_REQUEST_ACTOR && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            actorImageUri = data.getData();  // Lấy URI ảnh diễn viên
+            actorImageUri = data.getData();
             if (imgDialogActor != null) {
-                imgDialogActor.setImageURI(actorImageUri); // Cập nhật ảnh vào imgDialogActor
+                imgDialogActor.setImageURI(actorImageUri);
             }
         }
     }

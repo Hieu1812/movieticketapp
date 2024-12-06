@@ -38,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         database = firebaseDatabase.getReference("Users");
 
-        // Khởi tạo các thành phần UI
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
@@ -47,9 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.tvLogin);
 
-        // Khi nhấn vào TextView Đăng Nhập
         tvLogin.setOnClickListener(v -> {
-            // Chuyển sang màn hình đăng nhập
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         });
@@ -61,12 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
             String sdt = etPhoneNumber.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
             String confirmPassword = etConfirmPassword.getText().toString().trim();
-            // Kiểm tra thông tin đăng ký
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || sdt.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             if (!password.equals(confirmPassword)) {
                 Toast.makeText(RegisterActivity.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                 return;
@@ -76,18 +71,16 @@ public class RegisterActivity extends AppCompatActivity {
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = auth.getCurrentUser(); // Lấy người dùng vừa tạo
-                            String userID = firebaseUser.getUid(); // Lấy UID của người dùng
+                            FirebaseUser firebaseUser = auth.getCurrentUser();
+                            String userID = firebaseUser.getUid();
 
-                            // Tạo đối tượng User và lưu vào Realtime Database
                             User newUser = new User(userID, username, "", email, "user", 0, sdt, new ArrayList<>());
-                            database.child(userID).setValue(newUser) // Lưu thông tin người dùng
+                            database.child(userID).setValue(newUser)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                                        // Chuyển sang màn hình đăng nhập
                                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent);
-                                        finish();// Đóng màn hình đăng ký
+                                        finish();
                                         });
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {

@@ -97,13 +97,10 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         rvActors.setLayoutManager(gridLayoutManager);
         rvActors.setAdapter(actorThongTinPhimAdapter);
 
-        // Hiển thị các thông tin phim lên giao diện
         tvTenPhim.setText("Phim: " + movieName);
         tvTheLoai.setText("Thể loại: " + movieGenre);
         tvThoiLuong.setText("Thời lượng: " + movieDuration);
         tvNDPhim.setText(movieDescription);
-
-        // Dùng Glide để tải ảnh từ URL vào ImageView
         Glide.with(this)
                 .load(moviePoster)
                 .into(imgPoster);
@@ -198,13 +195,11 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
                         }
 
                         if (clicktym) {
-                            // Người dùng bỏ thích, giảm 1 like
                             btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.white));
                             movieRef.child("vote").setValue(currentLikes - 1);
                             clicktym = false;
                             userRef.child("likedFilms").child(movieID).removeValue();
                         } else {
-                            // Người dùng thích, tăng 1 like
                             btnThich.setBackgroundTintList(getResources().getColorStateList(R.color.colorred));
                             movieRef.child("vote").setValue(currentLikes + 1);
                             clicktym = true;
