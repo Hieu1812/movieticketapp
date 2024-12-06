@@ -93,9 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                                 });
                             } else {
                                 // Xử lý các loại lỗi cụ thể
-                                if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                                    Toast.makeText(LoginActivity.this, "Email chưa được đăng ký!", Toast.LENGTH_SHORT).show();
-                                } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                     Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác hoặc thông tin xác thực không hợp lệ!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
