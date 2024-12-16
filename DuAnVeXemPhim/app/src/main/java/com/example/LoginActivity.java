@@ -11,10 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.duanvexemphim.MainActivity;
 import com.example.duanvexemphim.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -45,9 +49,12 @@ public class LoginActivity extends AppCompatActivity {
         password_input = findViewById(R.id.password_input);
 
         // Khi nhấn vào TextView Đăng Ký
-        tvRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -62,47 +69,49 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 // Thực hiện đăng nhập người dùng với Firebase
                 auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                FirebaseUser firebaseUser = auth.getCurrentUser();
-                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                                String userId = firebaseUser.getUid();
-                                Log.d("UserID", "Current user ID: " + userId);
-                                database.child(userId).child("role").get().addOnCompleteListener(roleTask -> {
-                                    if (roleTask.isSuccessful()) {
-                                        DataSnapshot dataSnapshot = roleTask.getResult();
-                                        String role = dataSnapshot.getValue(String.class);
-                                        if ("admin".equals(role)) {
-                                            // Nếu là admin, chuyển đến trang Admin
-                                            Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
-                                            startActivity(intent);
+                                    String userId = firebaseUser.getUid();
+                                    Log.d("UserID", "Current user ID: " + userId);
+                                    database.child(userId).child("role").get().addOnCompleteListener(roleTask -> {
+                                        if (roleTask.isSuccessful()) {
+                                            DataSnapshot dataSnapshot = roleTask.getResult();
+                                            String role = dataSnapshot.getValue(String.class);
+                                            if ("admin".equals(role)) {
+                                                // Nếu là admin, chuyển đến trang Admin
+                                                Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.putExtra("email", email);
+                                                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("email", email);
+                                                editor.apply();
+                                                startActivity(intent);
+                                            }
+                                            finish();
                                         } else {
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.putExtra("email", email);
-                                            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putString("email", email);
-                                            editor.apply();
-                                            startActivity(intent);
+                                            Toast.makeText(LoginActivity.this, "Không thể lấy vai trò người dùng!", Toast.LENGTH_SHORT).show();
                                         }
-                                        finish();
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Không thể lấy vai trò người dùng!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                // Xử lý các loại lỗi cụ thể
-                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                    Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác hoặc thông tin xác thực không hợp lệ!", Toast.LENGTH_SHORT).show();
+                                    });
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    // Xử lý các loại lỗi cụ thể
+                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                        Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác hoặc thông tin xác thực không hợp lệ!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                    Log.e("LoginError", "Error: ", task.getException());
                                 }
-                                Log.e("LoginError", "Error: ", task.getException());
                             }
                         });
             }
         });
-
     }
 }
