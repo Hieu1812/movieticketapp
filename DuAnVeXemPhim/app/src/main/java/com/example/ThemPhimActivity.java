@@ -1,5 +1,6 @@
 package com.example;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,44 +74,64 @@ public class ThemPhimActivity extends AppCompatActivity {
         storageReference = firebaseStorage.getReference();
         movieRef = FirebaseDatabase.getInstance().getReference("Movies");
 
-        imgPhim.setOnClickListener(view -> openPosterImageChooser());
-
-        btnThoat.setOnClickListener(view -> {
-            Intent intentThoat = new Intent(ThemPhimActivity.this, QuanTriAdminActivity.class);
-            startActivity(intentThoat);
+        imgPhim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPosterImageChooser();
+            }
         });
 
-        btnThemDienVien.setOnClickListener(v -> {
-            // Tạo dialog để thêm diễn viên
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemPhimActivity.this);
-            View view = getLayoutInflater().inflate(R.layout.dialog_add_actor, null);
-
-            etDialogActorName = view.findViewById(R.id.etDialogActorName);
-            imgDialogActor = view.findViewById(R.id.imgDialogActor);
-
-            builder.setView(view)
-                    .setPositiveButton("Thêm", (dialog, id) -> {
-                        String actorName = etDialogActorName.getText().toString().trim();
-
-                        // Kiểm tra nếu tên diễn viên và ảnh không rỗng
-                        if (actorName.isEmpty() || actorImageUri == null) {
-                            Toast.makeText(ThemPhimActivity.this, "Vui lòng nhập tên diễn viên và chọn ảnh diễn viên", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Tạo một Actor mới và thêm vào danh sách
-                            Actor newActor = new Actor(actorName, actorImageUri.toString());
-                            actorList.add(newActor);
-                            actorAdapter.notifyDataSetChanged();
-                        }
-                    })
-                    .setNegativeButton("Hủy", (dialog, id) -> dialog.dismiss());
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-            // Xử lý sự kiện nhấn vào ImageView để chọn ảnh
-            imgDialogActor.setOnClickListener(v1 -> openActorImageChooser());
+        btnThoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentThoat = new Intent(ThemPhimActivity.this, QuanTriAdminActivity.class);
+                startActivity(intentThoat);
+            }
         });
 
+        btnThemDienVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ThemPhimActivity.this);
+                view = getLayoutInflater().inflate(R.layout.dialog_add_actor, null);
+
+                etDialogActorName = view.findViewById(R.id.etDialogActorName);
+                imgDialogActor = view.findViewById(R.id.imgDialogActor);
+
+                builder.setView(view)
+                        .setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String actorName = etDialogActorName.getText().toString().trim();
+
+                                // Kiểm tra nếu tên diễn viên và ảnh không rỗng
+                                if (actorName.isEmpty() || actorImageUri == null) {
+                                    Toast.makeText(ThemPhimActivity.this, "Vui lòng nhập tên diễn viên và chọn ảnh diễn viên", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Actor newActor = new Actor(actorName, actorImageUri.toString());
+                                    actorList.add(newActor);
+                                    actorAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                imgDialogActor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openActorImageChooser();
+                    }
+                });
+            }
+        });
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
