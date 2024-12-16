@@ -111,74 +111,77 @@ public class ThemPhimActivity extends AppCompatActivity {
             imgDialogActor.setOnClickListener(v1 -> openActorImageChooser());
         });
 
-        btnLuu.setOnClickListener(view -> {
-            String movieID = movieRef.push().getKey();
-            String name = etTenPhim.getText().toString().trim();
-            String genre = spinnerTheLoai.getSelectedItem().toString();
-            String durationTime = etThoiLuong.getText().toString().trim();
-            String description = etNDPhim.getText().toString().trim();
-            String trailer = etTrailerLink.getText().toString().trim();
+        btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String movieID = movieRef.push().getKey();
+                String name = etTenPhim.getText().toString().trim();
+                String genre = spinnerTheLoai.getSelectedItem().toString();
+                String durationTime = etThoiLuong.getText().toString().trim();
+                String description = etNDPhim.getText().toString().trim();
+                String trailer = etTrailerLink.getText().toString().trim();
 
-            if (name.isEmpty() || durationTime.isEmpty() || description.isEmpty()) {
-                Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(genre.equals("Chọn thể loại")) {
-                Toast.makeText(this, "Vui lòng chọn thể loại!", Toast.LENGTH_SHORT).show();
-            }
-            if (imageUri == null || actorList.isEmpty()) {
-                Toast.makeText(this, "Phim phải có ảnh poster và diễn viên!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            StorageReference posterImageRef = storageReference.child("posterImages/" + movieID + ".jpg");
-            // Tải ảnh poster phim lên Firebase Storage
-            posterImageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    posterImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String posterUrl = uri.toString();
-                            ArrayList<Actor> updatedActorList = new ArrayList<>();
-
-                            // Tải lên ảnh cho từng diễn viên
-                            for (Actor actor : actorList) {
-                                // Lấy tên gốc của ảnh diễn viên từ URI
-                                String actorImageName = getFileNameFromUri(Uri.parse(actor.getActorImage()));
-                                StorageReference actorImageRef = storageReference.child("actorImages/" + actorImageName + ".jpg");
-
-                                // Tải ảnh diễn viên lên Firebase Storage
-                                actorImageRef.putFile(Uri.parse(actor.getActorImage())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        actorImageRef.getDownloadUrl().addOnSuccessListener(actorUri -> {
-                                            Actor updatedActor = new Actor(actor.getActorName(), actorUri.toString());
-                                            updatedActorList.add(updatedActor);
-
-                                            // Kiểm tra nếu đã tải xong tất cả ảnh diễn viên
-                                            if (updatedActorList.size() == actorList.size()) {
-                                                Movie movie = new Movie(movieID, name, posterUrl, description, genre, durationTime, new ArrayList<>(), trailer, 0, updatedActorList);
-                                                movieRef.child(movieID).setValue(movie).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        Toast.makeText(ThemPhimActivity.this, "Phim đã lưu thành công!", Toast.LENGTH_SHORT).show();
-                                                        finish();
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(ThemPhimActivity.this, "Lỗi khi lưu phim: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                    });
+                if (name.isEmpty() || durationTime.isEmpty() || description.isEmpty()) {
+                    Toast.makeText(ThemPhimActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-            });
+                if(genre.equals("Chọn thể loại")) {
+                    Toast.makeText(ThemPhimActivity.this, "Vui lòng chọn thể loại!", Toast.LENGTH_SHORT).show();
+                }
+                if (imageUri == null || actorList.isEmpty()) {
+                    Toast.makeText(ThemPhimActivity.this, "Phim phải có ảnh poster và diễn viên!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                StorageReference posterImageRef = storageReference.child("posterImages/" + movieID + ".jpg");
+                // Tải ảnh poster phim lên Firebase Storage
+                posterImageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        posterImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String posterUrl = uri.toString();
+                                ArrayList<Actor> updatedActorList = new ArrayList<>();
+
+                                // Tải lên ảnh cho từng diễn viên
+                                for (Actor actor : actorList) {
+                                    // Lấy tên gốc của ảnh diễn viên từ URI
+                                    String actorImageName = getFileNameFromUri(Uri.parse(actor.getActorImage()));
+                                    StorageReference actorImageRef = storageReference.child("actorImages/" + actorImageName + ".jpg");
+
+                                    // Tải ảnh diễn viên lên Firebase Storage
+                                    actorImageRef.putFile(Uri.parse(actor.getActorImage())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            actorImageRef.getDownloadUrl().addOnSuccessListener(actorUri -> {
+                                                Actor updatedActor = new Actor(actor.getActorName(), actorUri.toString());
+                                                updatedActorList.add(updatedActor);
+
+                                                // Kiểm tra nếu đã tải xong tất cả ảnh diễn viên
+                                                if (updatedActorList.size() == actorList.size()) {
+                                                    Movie movie = new Movie(movieID, name, posterUrl, description, genre, durationTime, new ArrayList<>(), trailer, 0, updatedActorList);
+                                                    movieRef.child(movieID).setValue(movie).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(ThemPhimActivity.this, "Phim đã lưu thành công!", Toast.LENGTH_SHORT).show();
+                                                            finish();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(ThemPhimActivity.this, "Lỗi khi lưu phim: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            }
         });
     }
 
