@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText email_input, password_input;
     private FirebaseAuth auth;
-    private DatabaseReference database;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference("Users");
+        userRef = FirebaseDatabase.getInstance().getReference("Users");
         tvRegister = findViewById(R.id.tvRegister);
         btnLogin = findViewById(R.id.btnLogin);
         email_input = findViewById(R.id.email_input);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     String userId = firebaseUser.getUid();
                                     Log.d("UserID", "Current user ID: " + userId);
-                                    database.child(userId).child("role").get().addOnCompleteListener(roleTask -> {
+                                    userRef.child(userId).child("role").get().addOnCompleteListener(roleTask -> {
                                         if (roleTask.isSuccessful()) {
                                             DataSnapshot dataSnapshot = roleTask.getResult();
                                             String role = dataSnapshot.getValue(String.class);
