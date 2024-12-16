@@ -78,26 +78,29 @@ public class LoginActivity extends AppCompatActivity {
 
                                     String userId = firebaseUser.getUid();
                                     Log.d("UserID", "Current user ID: " + userId);
-                                    userRef.child(userId).child("role").get().addOnCompleteListener(roleTask -> {
-                                        if (roleTask.isSuccessful()) {
-                                            DataSnapshot dataSnapshot = roleTask.getResult();
-                                            String role = dataSnapshot.getValue(String.class);
-                                            if ("admin".equals(role)) {
-                                                // Nếu là admin, chuyển đến trang Admin
-                                                Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
-                                                startActivity(intent);
+                                    userRef.child(userId).child("role").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DataSnapshot dataSnapshot = task.getResult();
+                                                String role = dataSnapshot.getValue(String.class);
+                                                if ("admin".equals(role)) {
+                                                    // Nếu là admin, chuyển đến trang Admin
+                                                    Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
+                                                    startActivity(intent);
+                                                } else {
+                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    intent.putExtra("email", email);
+                                                    SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putString("email", email);
+                                                    editor.apply();
+                                                    startActivity(intent);
+                                                }
+                                                finish();
                                             } else {
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                intent.putExtra("email", email);
-                                                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                editor.putString("email", email);
-                                                editor.apply();
-                                                startActivity(intent);
+                                                Toast.makeText(LoginActivity.this, "Không thể lấy vai trò người dùng!", Toast.LENGTH_SHORT).show();
                                             }
-                                            finish();
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Không thể lấy vai trò người dùng!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 } else {
