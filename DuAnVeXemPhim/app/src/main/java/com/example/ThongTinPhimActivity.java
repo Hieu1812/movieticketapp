@@ -83,7 +83,6 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
 
         webViewTrailer.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
-        // Nhận thông tin từ Intent
         String movieID = intent.getStringExtra("movieID");
         String movieName = intent.getStringExtra("movieName");
         String movieGenre = intent.getStringExtra("movieGenre");

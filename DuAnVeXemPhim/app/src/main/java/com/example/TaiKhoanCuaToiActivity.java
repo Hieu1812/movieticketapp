@@ -170,7 +170,6 @@ public class TaiKhoanCuaToiActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Xử lý chọn ảnh poster cho phim
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             imgAvatar.setImageURI(imageUri);

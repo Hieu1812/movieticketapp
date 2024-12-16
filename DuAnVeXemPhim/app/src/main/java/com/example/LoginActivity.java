@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference("Users");
         tvRegister = findViewById(R.id.tvRegister);
@@ -48,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         email_input = findViewById(R.id.email_input);
         password_input = findViewById(R.id.password_input);
 
-        // Khi nhấn vào TextView Đăng Ký
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Thực hiện đăng nhập người dùng với Firebase
+
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -85,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 DataSnapshot dataSnapshot = task.getResult();
                                                 String role = dataSnapshot.getValue(String.class);
                                                 if ("admin".equals(role)) {
-                                                    // Nếu là admin, chuyển đến trang Admin
                                                     Intent intent = new Intent(LoginActivity.this, QuanTriAdminActivity.class);
                                                     startActivity(intent);
                                                 } else {
@@ -104,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else {
-                                    // Xử lý các loại lỗi cụ thể
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                         Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác hoặc thông tin xác thực không hợp lệ!", Toast.LENGTH_SHORT).show();
                                     } else {
