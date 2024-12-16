@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView tvLogin;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference database;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Khởi tạo FirebaseAuth
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        database = firebaseDatabase.getReference("Users");
+        userRef = firebaseDatabase.getReference("Users");
 
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     String userID = firebaseUser.getUid();
 
                                     User newUser = new User(userID, username, "", email, "user", sdt, new ArrayList<>());
-                                    database.child(userID).setValue(newUser)
+                                    userRef.child(userID).setValue(newUser)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
