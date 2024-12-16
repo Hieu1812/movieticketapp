@@ -93,8 +93,7 @@ public class ThongTinPhimActivity extends AppCompatActivity implements Serializa
         String movieTrailerUrl = intent.getStringExtra("movieTrailer");
         ArrayList<Actor> actorArrayList = (ArrayList<Actor>) getIntent().getSerializableExtra("actorList");
         actorThongTinPhimAdapter = new ActorThongTinPhimAdapter(this, actorArrayList);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-        rvActors.setLayoutManager(gridLayoutManager);
+        rvActors.setLayoutManager(new GridLayoutManager(this, 3));
         rvActors.setAdapter(actorThongTinPhimAdapter);
 
         tvTenPhim.setText("Phim: " + movieName);

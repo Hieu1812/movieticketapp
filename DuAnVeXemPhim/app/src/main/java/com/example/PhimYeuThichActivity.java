@@ -79,7 +79,7 @@ public class PhimYeuThichActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("Firebase", error.getMessage());
             }
         });
         btnThoat.setOnClickListener(new View.OnClickListener() {

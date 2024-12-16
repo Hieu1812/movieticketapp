@@ -53,6 +53,7 @@ public class ThemPhimActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_phim);
 
+        // Khởi tạo các thành phần
         imgPhim = findViewById(R.id.imgPhim);
         etTenPhim = findViewById(R.id.etTenPhim);
         spinnerTheLoai = findViewById(R.id.spinnerTheLoai);
@@ -82,6 +83,7 @@ public class ThemPhimActivity extends AppCompatActivity {
         });
 
         btnThemDienVien.setOnClickListener(v -> {
+            // Tạo dialog để thêm diễn viên
             AlertDialog.Builder builder = new AlertDialog.Builder(ThemPhimActivity.this);
             View view = getLayoutInflater().inflate(R.layout.dialog_add_actor, null);
 
@@ -92,9 +94,11 @@ public class ThemPhimActivity extends AppCompatActivity {
                     .setPositiveButton("Thêm", (dialog, id) -> {
                         String actorName = etDialogActorName.getText().toString().trim();
 
+                        // Kiểm tra nếu tên diễn viên và ảnh không rỗng
                         if (actorName.isEmpty() || actorImageUri == null) {
                             Toast.makeText(ThemPhimActivity.this, "Vui lòng nhập tên diễn viên và chọn ảnh diễn viên", Toast.LENGTH_SHORT).show();
                         } else {
+                            // Tạo một Actor mới và thêm vào danh sách
                             Actor newActor = new Actor(actorName, actorImageUri.toString());
                             actorList.add(newActor);
                             actorAdapter.notifyDataSetChanged();
@@ -105,7 +109,7 @@ public class ThemPhimActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
 
-
+            // Xử lý sự kiện nhấn vào ImageView để chọn ảnh
             imgDialogActor.setOnClickListener(v1 -> openActorImageChooser());
         });
 
@@ -129,6 +133,7 @@ public class ThemPhimActivity extends AppCompatActivity {
                 return;
             }
             StorageReference posterImageRef = storageReference.child("posterImages/" + movieID + ".jpg");
+            // Tải ảnh poster phim lên Firebase Storage
             posterImageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -138,15 +143,21 @@ public class ThemPhimActivity extends AppCompatActivity {
                             String posterUrl = uri.toString();
                             ArrayList<Actor> updatedActorList = new ArrayList<>();
 
+                            // Tải lên ảnh cho từng diễn viên
                             for (Actor actor : actorList) {
+                                // Lấy tên gốc của ảnh diễn viên từ URI
                                 String actorImageName = getFileNameFromUri(Uri.parse(actor.getActorImage()));
                                 StorageReference actorImageRef = storageReference.child("actorImages/" + actorImageName + ".jpg");
+
+                                // Tải ảnh diễn viên lên Firebase Storage
                                 actorImageRef.putFile(Uri.parse(actor.getActorImage())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         actorImageRef.getDownloadUrl().addOnSuccessListener(actorUri -> {
                                             Actor updatedActor = new Actor(actor.getActorName(), actorUri.toString());
                                             updatedActorList.add(updatedActor);
+
+                                            // Kiểm tra nếu đã tải xong tất cả ảnh diễn viên
                                             if (updatedActorList.size() == actorList.size()) {
                                                 Movie movie = new Movie(movieID, name, posterUrl, description, genre, durationTime, new ArrayList<>(), trailer, 0, updatedActorList);
                                                 listMovies.add(movie);
@@ -174,6 +185,7 @@ public class ThemPhimActivity extends AppCompatActivity {
         });
     }
 
+    // Hàm giúp lấy tên tệp từ URI
     private String getFileNameFromUri(Uri uri) {
         String fileName = "";
         String path = uri.getPath();
@@ -183,7 +195,7 @@ public class ThemPhimActivity extends AppCompatActivity {
                 fileName = path.substring(lastSlash + 1);
             }
         }
-        return fileName;
+        return fileName; // trả về tên tệp gốc
     }
 
     private void openPosterImageChooser() {
