@@ -37,7 +37,6 @@ public class ThemPhimActivity extends AppCompatActivity {
     private RecyclerView dienVienRecyclerView;
     private Button btnLuu, btnThoat, btnThemDienVien;
     private ArrayList<Actor> actorList;
-    private ArrayList<Movie> listMovies;
     private ActorAdapter actorAdapter;
     private Uri imageUri;
     private Uri actorImageUri;
@@ -65,7 +64,6 @@ public class ThemPhimActivity extends AppCompatActivity {
         btnThoat = findViewById(R.id.btnThoat);
         btnThemDienVien = findViewById(R.id.btnThemDienVien);
 
-        listMovies = new ArrayList<>();
         actorList = new ArrayList<>();
         actorAdapter = new ActorAdapter(this, actorList);
         dienVienRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -160,7 +158,6 @@ public class ThemPhimActivity extends AppCompatActivity {
                                             // Kiểm tra nếu đã tải xong tất cả ảnh diễn viên
                                             if (updatedActorList.size() == actorList.size()) {
                                                 Movie movie = new Movie(movieID, name, posterUrl, description, genre, durationTime, new ArrayList<>(), trailer, 0, updatedActorList);
-                                                listMovies.add(movie);
                                                 movieRef.child(movieID).setValue(movie).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
