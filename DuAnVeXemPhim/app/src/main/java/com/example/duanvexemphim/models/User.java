@@ -8,20 +8,18 @@ public class User {
     private String avatar;
     private String email;
     private String role;
-    private int wallet;
     private String phonenumber;
     private List<String> likeFilms;
 
     public User() {}
 
 
-    public User(String userID, String name, String avatar, String email, String role, int wallet, String phonenumber, List<String> likeFilms) {
+    public User(String userID, String name, String avatar, String email, String role, String phonenumber, List<String> likeFilms) {
         this.userID = userID;
         this.name = name;
         this.avatar = avatar;
         this.email = email;
         this.role = role;
-        this.wallet = wallet;
         this.phonenumber = phonenumber;
         this.likeFilms = likeFilms;
     }
@@ -46,10 +44,6 @@ public class User {
         return role;
     }
 
-    public int getWallet() {
-        return wallet;
-    }
-
     public List<String> getLikeFilms() {
         return likeFilms;
     }
@@ -72,10 +66,6 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public void setWallet(int wallet) {
-        this.wallet = wallet;
     }
 
     public void setLikeFilms(List<String> likeFilms) {
